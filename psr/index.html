@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR   PHP 标准规范 - PHP编码规范</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/hljs_default.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHPFIG Blog Feed" />
+
+    <meta name="og:title" content="PSR   PHP 标准规范 - PHP编码规范" />
+
+    <meta name="twitter:title" content="PSR   PHP 标准规范 - PHP编码规范" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="/img/social-banner.png" />
+    <meta property="og:image" content="/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法">
+    <meta name="twitter:description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法" />
+    <meta name="og:description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法" />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PSR中文网</span>
+            <span class="site_logo__long_name">PSR   PHP 标准规范 - PHP编码规范</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">菜单</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">首页</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">博客</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">标准规范（PSRs）</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">编码规范（PERs）</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">成员</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">章程</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">常见问题</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">参与</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PHP标准规范(PSRs)
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="markdown">
+        <h1>PHP标准规范<a id="php-standard-recommendations" href="#php-standard-recommendations" name="php-standard-recommendations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>根据 <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/002-psr-workflow.md">PSR 工作流章程</a>，每个PSR在工作时都有一个状态。一旦一项提案通过了进入投票，它将在这里被列为“草案”。除非PSR标记为“接受”，否则它可能会更改。草案可能会发生剧烈变化，但“审查”只会有一些微小的变化.</p>
+<p>正如 <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/002-psr-workflow.md">PSR 工作流章程</a>. 中所描述的那样。提案的编辑基本上是主要的贡献者和作者，他们得到两名有表决权的成员的支持。这些有表决权的成员是负责管理审查阶段和投票的协调员；以及第二个主办者.</p>
+<h2>按状态索引<a id="index-by-status" href="#index-by-status" name="index-by-status" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>接受<a id="accepted" href="#accepted" name="accepted" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th>标题</th>
+<th>维护</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td><a href="/psr/psr-1">基本编码标准（Basic Coding Standard）</a></td>
+<td><em>vacant</em></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td><a href="/psr/psr-3">日志接口（Logger Interface）</a></td>
+<td>Jordi Boggiano</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td><a href="/psr/psr-4">自动加载标准（Autoloading Standard）</a></td>
+<td><em>vacant</em></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td><a href="/psr/psr-6">缓存接口（Caching Interface）</a></td>
+<td>Larry Garfield</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td><a href="/psr/psr-7">HTTP消息接口（HTTP Message Interface）</a></td>
+<td>Matthew Weier O'Phinney</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td><a href="/psr/psr-11">容器接口（Container Interface）</a></td>
+<td>Matthieu Napoli, David Négrier</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td><a href="/psr/psr-12">扩展编码风格指南（Extended Coding Style Guide）</a></td>
+<td>Korvin Szanto</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td><a href="/psr/psr-13">超媒体链接（Hypermedia Links）</a></td>
+<td>Larry Garfield</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td><a href="/psr/psr-14">事件调度器（Event Dispatcher）</a></td>
+<td>Larry Garfield</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td><a href="/psr/psr-15">HTTP处理程序（HTTP Handlers）</a></td>
+<td>Woody Gilk</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td><a href="/psr/psr-16">简单缓存（Simple Cache）</a></td>
+<td>Paul Dragoonis</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td><a href="/psr/psr-17">HTTP工厂（HTTP Factories）</a></td>
+<td>Woody Gilk</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td><a href="/psr/psr-18">HTTP客户端（HTTP Client）</a></td>
+<td>Tobias Nyholm</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td><a href="/psr/psr-20">时间（Clock）</a></td>
+<td>Chris Seufert</td>
+</tr>
+</tbody>
+</table>
+<h3>草案<a id="draft" href="#draft" name="draft" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th>标题</th>
+<th>编辑</th>
+<th>赞助商</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">5</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md">PHPDoc 标准（PHPDoc Standard）</a></td>
+<td>Chuck Burgess</td>
+<td>Michael Cullum</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc-tags.md">PHPDoc 标签（PHPDoc tags）</a></td>
+<td>Chuck Burgess</td>
+<td>Michael Cullum</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/internationalization.md">国际化（Internationalization）</a></td>
+<td>Navarr Barnier</td>
+<td>Larry Garfield</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/tracing.md">应用分析（Application Tracing）</a></td>
+<td>Adam Allport</td>
+<td>Alessandro Chitolina</td>
+</tr>
+</tbody>
+</table>
+<h3>废弃<a id="abandoned" href="#abandoned" name="abandoned" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th>标题</th>
+<th>编辑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">8</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/psr-8-hug/">Huggable 接口（Huggable Interface）</a></td>
+<td>Larry Garfield</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-disclosure-publication.md">安全建议（Security Advisories）</a></td>
+<td>Michael Hess</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-reporting-process.md">安全报告流程（Security Reporting Process）</a></td>
+<td>Michael Hess</td>
+</tr>
+</tbody>
+</table>
+<h3>弃用<a id="deprecated" href="#deprecated" name="deprecated" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th>标题</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td><a href="/psr/psr-0">自动加载标准（Autoloading Standard）</a></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td><a href="/psr/psr-2">编码风格指南（Coding Style Guide）</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>数字索引<a id="numerical-index" href="#numerical-index" name="numerical-index" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th>标题</th>
+<th>编辑 / 维护</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td><a href="/psr/psr-0">Autoloading Standard</a></td>
+<td></td>
+<td>Deprecated</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td><a href="/psr/psr-1">Basic Coding Standard</a></td>
+<td><em>vacant</em></td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td><a href="/psr/psr-2">Coding Style Guide</a></td>
+<td></td>
+<td>Deprecated</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td><a href="/psr/psr-3">Logger Interface</a></td>
+<td>Jordi Boggiano</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td><a href="/psr/psr-4">Autoloading Standard</a></td>
+<td><em>vacant</em></td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md">PHPDoc Standard</a></td>
+<td>Chuck Burgess</td>
+<td>Draft</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td><a href="/psr/psr-6">Caching Interface</a></td>
+<td>Larry Garfield</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td><a href="/psr/psr-7">HTTP Message Interface</a></td>
+<td>Matthew Weier O'Phinney</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/psr-8-hug/">Huggable Interface</a></td>
+<td>Larry Garfield</td>
+<td>Abandoned</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-disclosure-publication.md">Security Advisories</a></td>
+<td>Michael Hess</td>
+<td>Abandoned</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-reporting-process.md">Security Reporting Process</a></td>
+<td>Michael Hess</td>
+<td>Abandoned</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td><a href="/psr/psr-11">Container Interface</a></td>
+<td>Matthieu Napoli, David Négrier</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td><a href="/psr/psr-12">Extended Coding Style Guide</a></td>
+<td>Korvin Szanto</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td><a href="/psr/psr-13">Hypermedia Links</a></td>
+<td>Larry Garfield</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td><a href="/psr/psr-14">Event Dispatcher</a></td>
+<td>Larry Garfield</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td><a href="/psr/psr-15">HTTP Handlers</a></td>
+<td>Woody Gilk</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td><a href="/psr/psr-16">Simple Cache</a></td>
+<td>Paul Dragoonis</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td><a href="/psr/psr-17">HTTP Factories</a></td>
+<td>Woody Gilk</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td><a href="/psr/psr-18">HTTP Client</a></td>
+<td>Tobias Nyholm</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc-tags.md">PHPDoc tags</a></td>
+<td>Chuck Burgess</td>
+<td>Draft</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td><a href="/psr/psr-20">Clock</a></td>
+<td>Chris Seufert</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/internationalization.md">Internationalization</a></td>
+<td>Navarr Barnier</td>
+<td>Draft</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/tracing.md">Application Tracing</a></td>
+<td>Adam Allport</td>
+<td>Draft</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/phpfig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/phpfig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/phpfig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="阿里云" href="https://www.aliyun.com" target="_blank"><img class="platformsh-logo" src="https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-212-48.png" alt="aliyun.com logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://www.aliyun.com" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+</script>
+
+</body>
+</html>

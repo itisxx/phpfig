@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>PHP-FIG Blog Feed</title>
+    <link href="https://www.php-fig.org/atom.xml" rel="self"/>
+    <link href="https://www.php-fig.org/"/>
+    <author>
+        <name>PHP-FIG</name>
+    </author>
+    <updated>2024-01-21T05:34:03+00:00</updated>
+    <id>https://www.php-fig.org/</id>
+
+            <entry>
+            <title type="html"><![CDATA[Announcing the new PHP-FIG Discord server]]></title>
+            <link href="https://www.php-fig.org/blog/2020/12/announcing-new-discord-server"/>
+            <updated>2020-12-21T00:00:00+00:00</updated>
+            <id>https://www.php-fig.org/blog/2020/12/announcing-new-discord-server</id>
+            <content type="html"><![CDATA[<p>Greetings, PHP-FIG!</p>
+
+<p>With regards to the recent thread about migrating from a mailing list to some other medium, there has been some internal discussion off-list of late on that topic that I'd like to share.</p>
+
+<p>First of all, no, the mailing list is not going to go away. The list is and will remain the official location for voting, discussion, reports, reviews, etc. Aside from the decade-plus history it already has available and searchable, mailing lists, for all their faults, remain the most widely available, most widely compatible, most robust, and least proprietary communication tool available today. While one could argue that is a rather harsh condemnation of the current state of affairs (and I would do so myself), it is the situation we're in 2020. Asynchronous communication also has the value of slowing down a discussion, allowing people to catch it later, and encouraging longer, more thoughtful commentary, all of which are benefits in a group like this. The list is not going anywhere.</p>
+
+<p>Second, there has been a Secretary-maintained PHP-FIG Slack channel for some time, although it's only of marginal use. Mostly it has been a resource made available to Working Groups, who are free to communicate within the Working Group however they feel like. (Slack, IRC, GitHub issues, Google Hangouts, carrier pidgeon, smoke signals, etc.) Some have used it, some haven't. It doesn't do a great deal otherwise.</p>
+
+<p>However, we do realize the value of real-time, <em>informal</em> communication, not just for working groups but for FIG in general. Slack, sadly, is a fairly poor tool for that due to its well-documented challenges for open source projects (limited history, poor access control, convoluted invite/joining mechanism, etc.) That's one of the reasons it's never been publicized except for working groups.</p>
+
+<p>We have therefore decided to <em>open a public PHP-FIG Discord server</em> for such informal real-time chat. It's more or less set up now, although we'll likely be fiddling with settings for some time. (Such is the nature of Discord.) All interested parties are welcome to join using the link below:</p>
+
+<p><a href="https://discord.gg/php-fig">https://discord.gg/php-fig</a></p>
+
+<p>It's also listed on Disboard here:</p>
+
+<p><a href="https://disboard.org/server/788815898948665366">https://disboard.org/server/788815898948665366</a></p>
+
+
+
+<p>There are channels setup for general PHP-FIG talk and general PHP talk; more channels will undoubtedly be added over time. In particular, Working Groups are free to request both public or private channels for their work as needed. The Secretaries have admin control over the server, although they can appoint other moderators as well.</p>
+
+<h2 id="why-discord-and-not-x%3F">Why Discord and not X?</h2>
+
+<p>We discussed a number of options, and all had their limitations:</p>
+
+<ul>
+<li>Slack is too inflexible and its access control is paltry.</li>
+<li>There has been a PHP-FIG IRC channel for almost a decade. You probably didn't know that. 'nuff said.</li>
+<li>While we had an offer of server space to host our own Mattermost chat server or similar, that would require managing a Mattermost server. We didn't want that additional hassle.</li>
+</ul>
+
+<h2 id="why-not-migrate-to-x-tool-instead-of-the-list%3F">Why not migrate to X tool instead of the list?</h2>
+
+<p>Because that doesn't solve an actual problem. What's missing from the mailing list is the ability to have real-time synchronous discussions when needed. That's what a chat service (Discord) offers. Most other alternatives would offer no real benefit over a mailing list in terms of the communication it enables; it just moves it from a low-maintenance, universal tool (email) to a high-maintenance (if self-hosted) or proprietary (if a feature of GitHub or similar) tool, usually with fewer (useful) features than email has.</p>
+
+<h2 id="that%27s-stupid%2C-i-refuse-to-use-email-in-the-2020s%2C-i%27m-not-going-to-deal-with-php-fig%21">That's stupid, I refuse to use email in the 2020s, I'm not going to deal with PHP-FIG!</h2>
+
+<p>Have a nice day.</p>
+
+<h2 id="who-has-what-power-on-the-discord-server%3F">Who has what power on the Discord server?</h2>
+
+<ul>
+<li>All Secretaries have Administration access, and can do basically anything.</li>
+<li>The Secretaries can name additional Moderators who have limited access to moderate discussion generally.</li>
+<li>The Core Committee and Project Representatives have their own private channels if needed.</li>
+<li>Most everything can and should happen in one of the two public rooms (#fig-general and #php-general).</li>
+<li>Anyone who feels like joining may join.</li>
+</ul>
+
+<h2 id="what-will-happen-to-the-old-slack-group%3F">What will happen to the old Slack group?</h2>
+
+<p>Undecided, although it will most likely get shut down at some point. There's little point in maintaining it anymore.</p>
+
+<h2 id="what-should-be-discussed-on-the-list-vs-in-discord%3F">What should be discussed on the list vs in Discord?</h2>
+
+<p>Formal proposals, votes, and status updates from working groups should happen on list. Public feedback on a PSR in Draft should happen mostly on list.</p>
+
+<p>Discussion about a PSR in progress, kicking around ideas, brainstorming, implementation nitty-gritty, etc. can all happen in Discord, although summaries of any significant discussions or decisions (by working groups or for PHP-FIG generally) should get posted to the list.</p>
+
+<p>May your 2021 be better than your 2020.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Larry Garfield]]></name>
+                <uri>https://www.php-fig.org/authors/crell</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[New bylaw approved and next election cycle]]></title>
+            <link href="https://www.php-fig.org/blog/2019/12/new-bylaw-and-next-election-cycle"/>
+            <updated>2019-12-20T23:40:00+00:00</updated>
+            <id>https://www.php-fig.org/blog/2019/12/new-bylaw-and-next-election-cycle</id>
+            <content type="html"><![CDATA[<p>So here we are, just before the festivities, with a few bits of good news!</p>
+
+<h2 id="a-new-bylaw%3A-psr-evolution">A new bylaw: PSR evolution</h2>
+
+<p>In the <a href="https://www.php-fig.org/blog/2019/10/upgrading-psr-interfaces/">previous blog post</a>, we were discussing how to push forward the PSR interfaces, to keep up with all the new features that PHP is giving us, version after version. I proposed <a href="https://www.php-fig.org/bylaws/psr-evolution/">a new bylaw</a> which went through <a href="https://www.php-fig.org/bylaws/psr-evolution/">a long discussion and many revisions on GitHub</a>, but which is now approved and in effect!</p>
+
+<p>Larry Garfield has already started working on <a href="https://groups.google.com/d/topic/php-fig/tm1WLPUflCY/discussion">using it on PSR-13</a>, as a testbed for this approach. We're confident in it, since it's being used by other big libraries, like Symfony (with <a href="https://symfony.com/blog/symfony-type-declarations-return-types-and-phpunit-compatibility?amp#added-php-type-declarations">version 5</a>) and Doctrine (with the <a href="https://medium.com/@alcaeus/how-to-break-an-entire-ecosystem-by-publishing-a-release-b6aaab2b8aaa">next majors of its sub-libraries</a>).</p>
+
+<h2 id="a-new-election-cycle">A new election cycle</h2>
+
+<p>As always for us, every 8 months we need to start a new election cycle. This is due to <a href="https://www.php-fig.org/bylaws/elections-and-vacancies/">our bylaws</a>, and it helps us to have new people in our ranks, without shuffling all of them at the same time.</p>
+
+<p>We have one secretary and four Core Committee positions up for election. The terms that are ending are currently held by:</p>
+
+<ul>
+<li>Ian Littman (secretary)</li>
+<li>Chris Tankersley (CC)</li>
+<li>Korvin Szanto (CC)</li>
+<li>Stefano Torresi (CC)</li>
+<li>Michael Cullum (CC)</li>
+</ul>
+
+<p>The <strong>nominations period</strong>, due to the holidays, will be a bit long, and it will be open <strong>from December 20th 2019 to January 9th 2020</strong>. The <strong>elections</strong> will be held immediately after, <strong>from January 10th to January 23rd</strong>. You can find the full announcement on <a href="">our mailing list</a>.</p>
+
+<p>If you are interested in helping and joining us, please reach out to us, through <a href="https://groups.google.com/forum/#!forum/php-fig">our mailing list</a> or contacting any sitting secretary.</p>
+
+<h3 id="elections-faqs">Elections FAQs</h3>
+
+<h4 id="what-does-the-role-of-a-cc-member-entail%3F">What does the role of a CC member entail?</h4>
+
+<p>To quote the Bylaws:</p>
+
+<blockquote>
+  <p>“The Core Committee is a twelve (12) member board of individuals recognized for their technical skill and expertise. The Core Committee is responsible for final decisions regarding what specifications PHP-FIG will consider and those that are approved. The Core Committee is responsible for ensuring a high level of quality and consistency amongst all published specifications, and that all relevant perspectives and use cases are given due consideration.”</p>
+</blockquote>
+
+<p>The core committee acts as a steering group and handles all entrance votes and, after being completed by working groups, has the final acceptance vote on new PSRs and is responsible for making sure specifications meet the technical direction of the PHP-FIG, are of good quality, and have taken relevant stakeholders into account. The Core Committee is expected to be able to keep an eye on what is going on in the PHP-FIG. While this doesn't mean reading every mailing list post or every GitHub issue, this does mean having a general awareness of what is going on and regular activity is expected (e.g. they should be voting on every core committee two-week vote unless there are particular circumstances preventing them from doing so).</p>
+
+<h3 id="what-does-the-role-of-a-secretary-entail%3F">What does the role of a Secretary entail?</h3>
+
+<p>The full role can be read from the bylaws here: <a href="http://www.php-fig.org/bylaws/mission-and-structure/#secretaries">http://www.php-fig.org/bylaws/mission-and-structure/#secretaries</a></p>
+
+<p>Between the three secretaries they handle all the administration that goes on with the FIG such as votes, the website, GitHub as well as also being responsible for moderation of FIG mediums and representing the PHP-FIG to the wider PHP community. Feel free to reach out to any of the sitting Secretaries if you would like to know more about the role.</p>
+
+<h3 id="what-does-a-core-committee-member-look-like%3F">What does a Core Committee member look like?</h3>
+
+<p>The idea of the core committee is that it should reflect a cross section of the PHP ecosystem and community.</p>
+
+<p>This means it's important to have a range of people including (but not requiring or limited to) those with experience relating to things such as:
+  - Large &amp; small framework maintenance
+  - Library maintenance
+  - Consumer package maintenance (by consumer package I mean CMSes, blogs, forums, etc.)
+  - HTTP and non-HTTP based PHP
+  - Legacy and modern projects
+  - PHP internals
+  - Specific topics such as Async and Security</p>
+
+<p>However, it is important to note that you are voting for people, not projects, so please do not vote in people because they are the lead on 'Project X'; but rather you might vote for them because they have experience as a framework maintainer or legacy project maintainer and therefore have a different view on things. CC members should be representing the opinion of the wider PHP ecosystem and community as CC members, not of projects they are affiliated with, and some will likely not be affiliated with any project at all. Furthermore, this should not become a popularity contest of "who is the most well known", but rather who would make the most well-balanced core committee that accurately represents the interests of you, the member projects and wider PHP community.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Upgrading PSR interface]]></title>
+            <link href="https://www.php-fig.org/blog/2019/10/upgrading-psr-interfaces"/>
+            <updated>2019-10-04T00:00:00+00:00</updated>
+            <id>https://www.php-fig.org/blog/2019/10/upgrading-psr-interfaces</id>
+            <content type="html"><![CDATA[<h2 id="php-fig-wants-your-help-to-modernize-psrs%21">PHP-FIG wants your help to modernize PSRs!</h2>
+
+<p>Greetings, PHP. The PHP Framework Interoperability Group is actively looking for feedback on a way to safely update and modernize several existing PSRs. We think this is a workable approach, but before embarking on it we want to get feedback from the broader community. That means you.</p>
+
+<h3 id="the-problem">The problem</h3>
+
+<p>PHP-FIG has been publishing PHP interface specifications for years now, from the original <a href="https://github.com/php-fig/log">PSR-3 logger interface</a> in 2012 to the latest, the <a href="https://github.com/php-fig/event-dispatcher">PSR-14 Event Dispatcher interfaces</a> this last spring. All of them are, naturally, a product of their time. That is, they were written for the version of PHP that was current at the time they were released.</p>
+
+<p>PHP doesn't stand still, of course, and has added a host of new features in the last several years that could impact specifications. Most notable is the introduction of scalar types and return types in PHP 7.0, and of the <code>object</code>, <code>iterable</code>, and <code>void</code> types since then. (As of this writing it seems likely that we'll get union types in PHP 8, which is squeeeee!)</p>
+
+<p>It would be lovely to be able to include those new types in PHP-FIG interfaces, as that wouldn't change the semantics of the specs at all (they generally are already very specific about what parameter and return types they use) but would make writing a conformant implementation easier and make using a PSR-implementing library easier for everyone.</p>
+
+<p>The challenge, of course, is that technically adding types to an interface is a backward-compatibility (BC) break. That means doing so would immediately require implementers to make a BC break of their own to implement a new typed version of a PSR. While they certainly can, it also then means that an end user then cannot use one library that has adopted the new typed version of a spec and another that uses the old untyped version, because they're incompatible. And since they would share the same class name, a project could not have both installed at the same time. It's an all-or-nothing change, and those tend to be very not-fun. Which means they just wouldn't get used.</p>
+
+<h3 id="what-won%27t-work">What won't work</h3>
+
+<p>Ignoring the internal PHP-FIG process questions for now (as those are largely irrelevant to this discussion), there have been a few ways to go about upgrading specs that have largely been rejected over the years.</p>
+
+<ol>
+<li>Just do it: The sledgehammer approach, this would mean ignoring the backward compatibility issues and just releasing a 2.x tag of the interface specs with type hints and a higher PHP minimum version and calling it a day. While certainly the simplest for PHP-FIG, it's not the most viable for the community at large for the reasons described above.</li>
+<li>Use an alternate namespace: Another proposal has been to version the namespace for upgraded PSRs. For example, the Logger specification (PSR-3) currently uses the <code>\Psr\Log</code> namespace. So a fully type-enabled new version would be something like <code>\Psr\Log\V2</code>. That has the advantage that it would allow both the old and new version to be installed at the same time. However, it has the disadvantage that a library could not easily support both old and new at the same time, at least not without some tricky bridge-interface inheritance dance. It's doubtful that this would make the upgrade process any easier.</li>
+<li>The third proposal was recently pushed forward by Stefano Torresi, one of the members of our Core Committee, and it can be summarized in appending a revision number to the PSRs which would match the versions of the corresponding interfaces package, in a way that recalls SemVer; the downside of this approach is that it would change drastically how the PHP-FIG packages are released. You can read about the complete proposal <a href="https://groups.google.com/d/msg/php-fig/OyC3plRYhqg/u03zLMv0BQAJ">in Stefano's email to our ML</a>.</li>
+</ol>
+
+<h3 id="what-we-think-will-work">What we think will work</h3>
+
+<p>Recently, Alessandro Lai and Nicolas Grekas pointed out that if we target PHP 7.2 and higher only, we get a new loophole. Here's the huge Twitter thread that sparked a new proposal:</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Any plans to tag v2 of all PSRs <a href="https://twitter.com/phpfig?ref_src=twsrc%5Etfw">@phpfig</a>, with added type declarations + <a href="https://twitter.com/hashtag/PHP?src=hash&amp;ref_src=twsrc%5Etfw">#PHP</a> &gt;= 7.2? Not having types there is lagging us behind...</p>&mdash; Nicolas Grekas (@nicolasgrekas) <a href="https://twitter.com/nicolasgrekas/status/1174290079105392645?ref_src=twsrc%5Etfw">September 18, 2019</a></blockquote>
+
+
+
+<p><a href="https://wiki.php.net/rfc/parameter-no-type-variance">PHP 7.2 introduced limited covariance and contravariance</a>. In plan terms, it means that, as of PHP 7.2, it's legal to have a class implement an interface and remove type declarations from method parameters (making them "wider", or more permissive) and to add a return type to a method if it doesn't have one defined (making it "narrower", or restricting what can be returned). That opens up the possibility of a two-step upgrade process. The idea would work like this:</p>
+
+<ul>
+<li>For some existing untyped spec, PHP-FIG releases a v2 of the package that adds parameter type declarations and only parameter type declarations. That version of the package requires PHP 7.2 at minimum.</li>
+<li>PHP-FIG also releases, at the same time, a v3 of the package that adds return types as well.</li>
+<li>An implementing library, in its current version, is automatically compatible with the current v1 of the spec as well as v2, as long as it's running on PHP 7.2 or later. That's because it can safely "drop" the type hints and still be syntactically valid.</li>
+<li>At its leisure, the implementing library can release its own new version, that adds both parameter <em>and</em> return types. The v2 of the library is compatible with both v2 and v3 of the spec, because it can safely add a return type relative to the v2 version.</li>
+<li>Alternatively, a library can issue its own two-step release, with a v2 that adds just return types (and thus is compatible with v1 and v2 of the spec) and then later a v3 that adds parameter types as well (and thus is compatible with v2 and v3 of the spec).</li>
+</ul>
+
+<p>This approach preserves the namespace, and provides a transitional period such that existing code can always be compatible with multiple versions of the PSR package. That makes it possible to mix and match the v1 and v2 releases of different libraries that depend on the same PSR, and to mix and match v2 and v3 releases of different libraries that depend on the same PSR. While not a perfect migration path, it's still a far smoother process than any other proposal to date.</p>
+
+<p>It's not a perfect approach, of course. There is still the potential for issues with a library that uses v1 of the spec and has no types that is simply never updated; that library would later on not be able to be used with the v3 of the spec or a v3 version of an implementing library. It also requires libraries to declare a minimum PHP version of 7.2. That said, libraries that are simply never updated at all are called "abandoned" and PHP 7.2 is already the legacy release and will be going into security-only mode in less than 10 weeks, so neither of these seem like major issues.</p>
+
+<p>There is also the fact that even as described the upgrade would not be perfect. Adding explicit types may still have subtle behavioral changes, especially around error handling. We will likely want to fold any interface-impacting errata into the new package versions, which, while they shouldn't have any significant impact, may have subtle edge cases we can't spot in advance. At the same time, this would not allow for any changes to the spec itself; no adding or removing or renaming methods, no matter how much someone may argue for it.</p>
+
+<p>There's also a process question of whether or not these new releases warrant a new PSR number or if we need to define some other process for updating them, but that's "just" a process question and we know that part can be resolved if we're confident in the technical approach.</p>
+
+<h3 id="will-this-work-for-you%3F">Will this work for you?</h3>
+
+<p>Before we proceed, we want to put a call out to developers that are implementing existing PSRs, either as implementers of them or consumers. Would this approach work for you? Are there reasons why it would crash and burn? Would you take a 1-release or 2-release approach yourself? (The 2 release approach has a bit more effort but greater cross-compatibility.)</p>
+
+<p>We have set up a short <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9q_cdsY00WSZ6fSia9Qq9ErDIeexNzNeEFsfRHd8pTFYF4g/viewform">Google Form to collect feedback</a>. While input from any PHP developer is welcome, feedback from those directly leveraging PSR interfaces is of the most interest. If that's you, please take a few moments to weigh in on this proposal. Thank you for helping to make PHP better!</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Larry Garfield]]></name>
+                <uri>https://www.php-fig.org/authors/crell</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[New blog, PSR-12 approval and Upgrading PSRs]]></title>
+            <link href="https://www.php-fig.org/blog/2019/09/new-blog-psr-12-approval"/>
+            <updated>2019-09-30T15:40:00+00:00</updated>
+            <id>https://www.php-fig.org/blog/2019/09/new-blog-psr-12-approval</id>
+            <content type="html"><![CDATA[<p>After a long hiatus, we're back with a new round of updates from the PHP-FIG.</p>
+
+<h2 id="new-blog">New Blog</h2>
+
+<p>As you may have noticed, <strong>we're now on a different platform</strong>. We've chosen to migrate away from the previous proprietary platform and to <strong>host directly our posts inside our site</strong>, directly under our control. We will add links at the top of all our older posts to the new copies here; if anyone still stumbles upon our posts on the previous platform, they will know where to find us from now on.</p>
+
+<h2 id="psr-12-has-been%C2%A0approved">PSR-12 has been approved</h2>
+
+<p>Since the last update, we’ve seen <strong>the approval of PSR-12, the <a href="https://www.php-fig.org/psr/psr-12/">Extended Coding Style</a></strong>. This PSR supersedes the old dear PSR-2, adapting it to all the new language features that we've got in the last years, and cleaning up a few inconsistencies. It was a long time coming, since the working group had some troubles along the line, but we finally published it.</p>
+
+<p>You will find that many libraries have already PSR-12 compliant releases, like <a href="https://github.com/squizlabs/PHP_CodeSniffer/releases/tag/3.5.0">PHP_CodeSniffer</a> and <a href="https://www.tomasvotruba.cz/blog/2018/04/09/try-psr-12-on-your-code-today/">EasyCodingStandard</a>, while others are following suit, like <a href="https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/4502">PHP-CS-Fixer</a>.</p>
+
+<h2 id="pushing-psr-interfaces-forward">Pushing PSR interfaces forward</h2>
+
+<p>In the meantime, we're discussing a difficult matter in our mailing list: <a href="https://groups.google.com/d/topic/php-fig/OyC3plRYhqg/discussion">how to upgrade PSRs</a>.</p>
+
+<p>This is an argument that made the round inside the PHP-FIG many times in the past, and still needs a proper solution. Stay tuned to hear more from us on this regard!</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updates from the PHP-FIG: up until the May elections]]></title>
+            <link href="https://www.php-fig.org/blog/2019/05/updates-from-the-php-fig-up-until-the-may-elections"/>
+            <updated>2019-05-24T14:11:13+00:00</updated>
+            <id>https://www.php-fig.org/blog/2019/05/updates-from-the-php-fig-up-until-the-may-elections</id>
+            <content type="html"><![CDATA[<p>And we’re back with another update on what’s going on in the PHP-FIG! This time we have just two news, but big ones!</p>
+
+<h3 id="psr-14-has-been%C2%A0approved">PSR-14 has been approved</h3>
+
+<p>Since the last update, we’ve seen the approval of PSR-14, the <a href="https://www.php-fig.org/psr/psr-14/">Event Dispatcher standard</a>. This new PSR allows packages to rely on a generic interface to dispatch events, without having to write framework-specific code to hook into them.</p>
+
+<p><img src="/img/blog/1__UOKKShOLSuzmTHJg9sVR3g.png" alt="The PSR-14 page on our site" />
+The PSR-14 page on our site</p>
+
+<p>Apart from reading the spec, you can delve deeper following a fantastic blog series published by the spec’s editor, Larry Garfield:</p>
+
+<ul>
+<li><a href="https://steemit.com/php/@crell/psr-14-a-major-event-in-php">A major event in PHP</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-all-about-events">All about Events</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-being-a-good-provider">Being a good Provider</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-advanced-providers">Advanced Providers</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-compound-providers">Compound Providers</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-example-access-voting">Example — Access voting</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-example-plugin-registration">Example — Plugin registration</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-example-delayed-events-queues-and-asynchronicity">Example — Delayed Events, Queues, and Asynchronicity</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-in-a-non-blocking-application-server">Example — PSR-14 in a non-blocking application server</a></li>
+<li><a href="https://steemit.com/php/@crell/psr-14-example-layered-caching">Example — layered caching</a></li>
+</ul>
+
+<h3 id="the-may-elections">The May elections</h3>
+
+<p>During May we held a <a href="https://groups.google.com/forum/#!topic/php-fig/NJDmPq5fQOs">new cycle of elections</a>, as per our bylaws. As in every election there were four Core Committee seats and one Secretary position up for election, plus one additional Core Committee seat due to Lukas Kahwe Smith stepping down early.</p>
+
+<p>At the end of the election, the final result is that we have Asmir Mustafic (<a href="https://twitter.com/goetas_asmir">@goetas&#95;asmir</a>) as a new secretary, Woody Gilk (<a href="https://twitter.com/shadowhand">@shadowhand</a>) and Matteo Beccati (<a href="https://twitter.com/mbeccati">@mbeccati</a>) as new CC members, and three renewed CC positions (Beau Simensen (<a href="https://twitter.com/beausimensen">@beausimensen</a>), Larry Garfield (<a href="https://twitter.com/Crell">@Crell</a>) and Matthew Weier O’Phinney (<a href="https://twitter.com/mwop">@mwop</a>)). Congratulations to all of them!</p>
+
+<p>I would also take the occasion to thank the three stepping down members, Margret Staples (<a href="https://twitter.com/dead_lugosi">@dead&#95;lugosi</a>), Sara Golemon (<a href="https://twitter.com/SaraMG">@SaraMG</a>) and Lukas Kahwe Smith (<a href="https://twitter.com/lsmith">@lsmith</a>): thank you for all your contributions during these years!</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updates from the PHP-FIG: November, December &amp; January]]></title>
+            <link href="https://www.php-fig.org/blog/2019/02/updates-from-the-php-fig-november-december-january"/>
+            <updated>2019-02-14T15:59:51+00:00</updated>
+            <id>https://www.php-fig.org/blog/2019/02/updates-from-the-php-fig-november-december-january</id>
+            <content type="html"><![CDATA[<p>This time I waited a bit longer before drafting a new update post, because a few new things where moving under the hood… Now it’s time to wrap it up!</p>
+
+<h4 id="brace-yourselves%2C-elections-are%C2%A0coming%21">Brace yourselves, elections are coming!</h4>
+
+<p>If you take a look at out <a href="https://www.php-fig.org/personnel/">personnel page</a>, you’ll see that we have <strong>4 Core Committee Members and a Secretary</strong> whose terms are ending this spring. This means that we will hold a new election this May, to elect for new terms.</p>
+
+<p>Our recent call to action on Twitter</p>
+
+<p>This is the point where <strong>we want your help</strong>! Anyone can hold those positions, the only strict requirement is the willingness to do it, and that someone nominates you. If you want to know more what those figures do, I can summarize that in a few words: <strong>the</strong> <a href="https://www.php-fig.org/bylaws/mission-and-structure/#the-core-committee"><strong>Core Committee</strong></a> <strong>is in charge of evaluating the drafted PSRs</strong>, so they need technical skills to thoroughly read, evaluate and vote on PSR proposals or approval; <strong>a</strong> <a href="https://www.php-fig.org/bylaws/mission-and-structure/#secretaries"><strong>Secretary</strong></a> <strong>instead is an “administrative role”</strong>, they just handle the practical stuff, keep track of votes and ensure that all the pieces of the PHP-FIG can work correctly and following the bylaws. If this explanation isn’t enough, you can read more clicking on the roles name, it will take you to our “Mission and Structure” page, at the appropriate paragraph.</p>
+
+<p>So, if you’re interested, please reach out to any Secretary, to the public PHP-FIG twitter or at info@php-fig.org.</p>
+
+<h4 id="two-prss-in-review%C2%A0phase">Two PRSs in review phase</h4>
+
+<p>The other big news this time is that we have two different PSR that went on review! Both <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/extended-coding-style-guide.md">PSR-12 (code style)</a> and <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/event-dispatcher.md">PSR-14 (event dispatcher)</a> underwent a Working Group vote and they passed it unanimously!</p>
+
+<p><img src="/img/blog/1__Ufg1dVWWg__GvM8OYwQtj3g.png" alt="A partial screenshot of the PSR index on our site" />
+A partial screenshot of the PSR index on our site</p>
+
+<p>This means that the specs should be nearly ready for approval. Please read through it and, especially if you have any implementation that could be impacted by them, try to thinker with it to test it, and report back to us!</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PSR-18: The PHP standard for HTTP clients]]></title>
+            <link href="https://www.php-fig.org/blog/2018/11/psr-18-the-php-standard-for-http-clients"/>
+            <updated>2018-11-17T11:54:02+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/11/psr-18-the-php-standard-for-http-clients</id>
+            <content type="html"><![CDATA[<p>A couple of days ago, the PHP Framework Interoperability Group (PHP-FIG) approved the PSR-18 “HTTP Client” standard. This standard was the last missing piece to build applications that need to send HTTP requests to a server in an HTTP client agnostic way.</p>
+
+<p>First, <a href="https://www.php-fig.org/psr/psr-7/">PSR-7 “HTTP message interfaces”</a> defined how HTTP requests and responses are represented. For server applications that need to handle incoming requests and send a response, this was generally enough. The application bootstrap creates the request instance with a PSR-7 implementation and passes it into the application, which in turn can return any instance of a PSR-7 response. Middleware and other libraries can be reused as long as they rely on the PSR-7 interfaces.</p>
+
+<p>However, sometimes an application needs to send a request to another server. Be that a storage backend that uses HTTP to communicate like ElasticSearch, or some third party service like Twitter, Instagram or weather. Public third party services often provide common client libraries. Since <a href="https://www.php-fig.org/psr/psr-17/">PSR-17 “HTTP Factories”</a>, this code does not need to bind itself to a specific implementation of PSR-7 but can use the factory to create requests.</p>
+
+<p>Even with the request factory, libraries still had to depend on a concrete HTTP client implementation like Guzzle to actually send the request. (They can also do things themselves very low-level with <code>curl</code> calls, but this basically means implementing an own HTTP client.) Using a specific implementation of an HTTP client is not ideal. It becomes a problem when your application uses a client as well, or you start combining more than one client and they use different clients - or even more when needing different major versions of the same client. For example, Guzzle had to change its namespace from Guzzle to GuzzleHttp when switching from version 3 to 4 to allow both versions to be installed in parallel.</p>
+
+<p>Libraries should not care about the implementation of the HTTP client, as long as they are able to send requests and receive responses. A group of people around Márk Sági-Kazár started defining an interface for the HTTP client, branded <a href="http://httplug.io/">HTTPlug</a>. Various libraries like Mailgun, Geocoder or Payum adopted their HTTP request handling to HTTPlug. Tobias Nyholm, Mark and myself proposed the HTTPlug interface to the PHP-FIG and it has been adopted as <a href="https://www.php-fig.org/psr/psr-18/">PSR-18 “HTTP Client”</a> in October 2018. The interfaces are compatible from a consumer perspective. HTTPlug 2 implements PSR-18, while staying compatible to HTTPlug 1 for consumers. Consumers can upgrade from HTTPlug 1 to 2 seamlessly and then start transforming their code to the PSR interfaces. Eventually, HTTPlug should become obsolete and be replaced by the PSR-18 interfaces and HTTP clients directly implementing those interfaces.</p>
+
+<p>PSR-18 defines a very small interface for sending HTTP requess and receiving the response. It also defines how the HTTP client implementation has to behave in regard to error handling and exceptions, redirections and similar things, so that consumers can rely on a reproducable behaviour. Bootstrapping the client with the necessary set up parameters is done in the application, and then inject the client to the consumer:</p>
+
+<pre><code>use Psr\Http\Client\ClientInterface;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+class WebConsumer
+{
+    /**
+     * @var ClientInterface
+     */
+    private $httpClient;
+    /**
+     * @var RequestFactoryInterface
+     */
+    private $httpRequestFactory;
+    public function __construct(
+        ClientInterface $httpClient,
+        RequestFactoryInterface $httpRequestFactory
+    ) {
+        $this-&gt;httpClient = $httpClient;
+        $this-&gt;httpRequestFactory = $httpRequestFactory;
+    }
+    public function fetchInfo()
+    {
+        $request = $this-&gt;httpRequestFactory-&gt;createRequest('GET', 'https://www.liip.ch/');
+        try {
+            $response = $this-&gt;httpClient-&gt;sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            throw new DomainException($e);
+        }
+        $response-&gt;...
+    }
+}
+</code></pre>
+
+<p>The dependencies of this class in the “use” statements are only the PSR interfaces, no need for specific implementations anymore.<br />
+ Already, there is a release of <code>php-http/guzzle-adapter</code> that makes Guzzle available as PSR-18 client.</p>
+
+<h3 id="outlook">Outlook</h3>
+
+<p>PSR-18 does not cover asynchronous requests. Sending requests asynchronous allows to send several HTTP requests in parallel or to continue with other work, then wait for the result. This can be more efficient and helps to reduce response times. Asynchronous requests return a “promise” that can be checked if the response has been received or waited on, to block until the response has arrived. The main reason PSR-18 does not cover asynchronous requests is that there is no PSR for promises. It would be wrong for a HTTP PSR to define the much broader concept of promises.</p>
+
+<p>If you want to send asynchronous requests, you can use the <a href="http://docs.php-http.org/en/latest/components/promise.html">HTTPlug Promise component</a> together with the HTTPlug <code>HttpAsyncClient</code>. The guzzle adapter mentioned above also provides this interface. When a PSR for promises has been ratified, we hope to do an additional PSR for asynchronous HTTP requests.</p>
+
+<p><img src="/img/blog/1__yBqdI__HdOKpNDkkd7jNjrw.png" alt="HTTPlug Logo" />
+HTTPlug Logo</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[David Buchmann]]></name>
+                <uri>https://www.php-fig.org/authors/davidbu</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updates from PHP-FIG: September &amp; October]]></title>
+            <link href="https://www.php-fig.org/blog/2018/11/updates-from-php-fig-september-october"/>
+            <updated>2018-11-06T15:22:50+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/11/updates-from-php-fig-september-october</id>
+            <content type="html"><![CDATA[<p>Another two months are passed, and here we are with a new recap of what happened inside the PHP-FIG. Let’s dive in!</p>
+
+<h4 id="psr-18%3A-http%C2%A0client">PSR-18: HTTP client</h4>
+
+<p>At the last moment of October, <strong>a new PSR has been accepted</strong>! This time it’s <a href="https://www.php-fig.org/psr/psr-18/">PSR-18</a>, which is about HTTP clients! With this PSR we have now <a href="https://github.com/php-fig/http-client/blob/master/src/ClientInterface.php">a common interface</a> for classes that send HTTP requests, which will make a lot easier writing libraries agnostic to which client is used underneath.</p>
+
+<p>We also took advantage of this change to refresh the homepage of our site, splitting the list of PSRs in a new group dedicated to HTTP, which now counts four different standard recommendations: 7, 15, 17 &amp; 18. Take a look!</p>
+
+<p><img src="/img/blog/1__8gQ2YWWgZik6Mb7EIwj13g.png" alt="Http message interfaces" /></p>
+
+<h4 id="phpdoc-back-on%C2%A0track">PHPDoc back on track</h4>
+
+<p>Finally we were able to recover PSR-5 from the <em>abandoned</em> state; <strong>Chuck Burgess</strong> took over as editor, and decided to push for splitting PSR-5 in two: the <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc-tags.md">new PSR-19</a> will be a tag catalog, to list all the valid tags that the PHP-FIG will recognize and standardize, and the old <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md">PSR-5</a> will take care only of PHPDoc format, not content.</p>
+
+<p>With an <a href="https://groups.google.com/d/topic/php-fig/5Yd0XGd349Q/discussion">unanimous entrance vote</a> we formed a dedicated working group, and since then they’ve <a href="https://github.com/php-fig/fig-standards/pulls?q=is%3Apr+is%3Aopen+label%3A%22PSR-5+%2B+PSR-19%3A+PHPDoc%22">already started working</a> on pulling back changes from past work and creating a baseline from which start from scratch. Good luck to them!</p>
+
+<h4 id="psr-14-proceeds">PSR-14 proceeds</h4>
+
+<p>In the meantime, the working group of the Event Manager PSR is still tinkering on their proposal; in the latest weeks they got a ton of feedback, in particular from <a href="https://groups.google.com/d/topic/php-fig/YdqZsagmLqU/discussion">Symfony’s Core Contributor Nikolas Grekas</a>. They are probably nearing the review period, and just trying to mediate the different suggestions from future adopters of PSR-14.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Summer updates from PHP-FIG: June, July &amp; August]]></title>
+            <link href="https://www.php-fig.org/blog/2018/09/summer-updates-from-php-fig-june-july-august"/>
+            <updated>2018-09-05T16:03:48+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/09/summer-updates-from-php-fig-june-july-august</id>
+            <content type="html"><![CDATA[<p>This time we have waited a bit longer before publishing a recap of the recent news from PHP-FIG, but we have a lot to share; let’s start!</p>
+
+<p><img src="/img/blog/1__8xZ8Nbd____IOnDMZKwyvRwA.png" alt="The new official page for PSR-17" />
+The new official page for PSR-17</p>
+
+<h4 id="psr-17%3A-message-factories">PSR-17: message factories</h4>
+
+<p>During this three months period, PSR-17 went from draft to <strong>approved</strong>! This new standard recommendation is related to the HTTP messages world, and it constitutes “a common standard for <strong>factories</strong> that create <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> compliant HTTP objects”. This is another piece of the puzzle to increase interoperability between HTTP clients and/or frameworks in the PHP world; the spec is now published on Packagist, and already has a <a href="https://packagist.org/packages/psr/http-factory/dependents">non-trivial number of implementors</a>.</p>
+
+<h4 id="psr-18%3A-http%C2%A0client">PSR-18: HTTP client</h4>
+
+<p>Another HTTP-related PSR which is in the works is PSR-18, which is about HTTP clients. Tobias talked about it in <a href="https://medium.com/php-fig/the-http-client-psr-9c2535132980">our previous story</a>, and in the meantime the working group has pushed for a readiness vote, and <a href="https://groups.google.com/d/topic/php-fig/dV9zIaOooZ4/discussion">now the spec is on the review phase</a>.</p>
+
+<h4 id="election-results">Election results</h4>
+
+<p>The most recent piece of news is the August election, since we had two Secretaries and four Core Committee seats to be filled or renewed.</p>
+
+<p>For the secretaries, I (<strong>Alessandro Lai</strong>) got confirmed for another term, and we got onboard a new one, <strong>Ian Littman</strong>; for the CCs, the three standing members (<strong>Cees-Jan Kiewiet</strong>, <strong>Lukas Kahwe Smith</strong>, <strong>Samantha Quiñones</strong>) got confirmed, and the vacant seat has been filled by <strong>Chuck Burgess</strong>. Congratulations to you all!</p>
+
+<h4 id="psr-14%3A-event-dispatcher">PSR-14: event dispatcher</h4>
+
+<p>Last but not least, one of the most active working group right now is the PSR-14 one, which revolves around event dispatching.</p>
+
+<p>The group is working at a great pace on the spec, and Larry Garfield (the editor) has posted numerous times on our mailing list with <a href="https://groups.google.com/d/topic/php-fig/mcSml-oIbGk/discussion">recaps of their work</a>. The spec has already taken form <a href="https://github.com/php-fig/event-dispatcher">on GitHub</a>, and the group’s members have produced a few working implementation to flesh it out.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PSR-18: The HTTP client PSR]]></title>
+            <link href="https://www.php-fig.org/blog/2018/07/the-http-client-psr"/>
+            <updated>2018-07-16T18:36:49+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/07/the-http-client-psr</id>
+            <content type="html"><![CDATA[<p>The process of creating a PSR for HTTP clients is coming to an end. I would like to encourage you to review it and raise your concerns or thoughts. But it’s obviously a real hard thing to do without knowing any background or decisions made earlier in the process. In order to ease your review I will give you the history, process and future of the current state of the HTTP client PSR.</p>
+
+<p>You can read the current state of the PSR at <a href="https://github.com/php-fig/fig-standards/tree/master/proposed/http-client">Github</a>.</p>
+
+<h3 id="history">History</h3>
+
+<p>A long long time ago there was some heavy development on the HTTP message PSR (<a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a>). Many saw the great potential of these HTTP message interfaces and were trying to make adapters for HTTP clients to support the new interfaces. A small team of young software developers made something they called <a href="http://httplug.io/">HTTPlug</a>. See their history in <a href="https://sagikazarmark.hu/blog/2016/12/11/a-year-of-httplug/">this blog post by Mark Sagi-Kazar</a>.</p>
+
+<p>The idea of HTTPlug was to create an abstraction over the HTTP client. Using an abstraction would avoid the issue with Guzzle5/Guzzle6 that the PHP community experienced in 2015 and 2016. Guzzle released 3 major versions in 18 months. Each major version had many backwards compatibility breaking changes. Because so many libraries depended on Guzzle, you had a dependency hell with many conflicting versions. With years of HTTPlug testing and trying to find a solution to the Guzzle5/Guzzle6 issue they finally had a solid foundation of interfaces for both synchronous HTTP requests and asynchronous. Let’s have a quick look at the synchronous HTTP client interface:</p>
+
+<p><img src="/img/blog/0__sNwRH1CfEEAwp__mu.jpg" alt="Http client code screenshot" /></p>
+
+<p>With such a super simple interface and the argument that depending on an implementation is wrong (the &#91;<a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion principle</a>), it was easy to see the community adoption of HTTPlug. As the end of January 2018 the interface celebrated 2 years and 3.5 million downloads. Many major libraries are now using the interface and Symfony has accepted HTTPlug in their official repository for <a href="http://fabien.potencier.org/symfony4-demo.html">Flex recipes</a>.</p>
+
+<p>The small team of young software developers were now a large team of not-so-young software developers. They decided to bring HTTPlug to the PHP-FIG as a proof of concept and saying:</p>
+
+<blockquote>
+  <p>Look, the community think this is great and the interfaces really work. Should we make a PSR of this?</p>
+</blockquote>
+
+<h3 id="writing-the%C2%A0psr">Writing the PSR</h3>
+
+<p>When the PHP-FIG accepted the proposal of a HTTP client PSR, the working group consisting of representatives of well-known HTTP clients began their work. It should have been really easy: just make some small modifications to HTTPlug and copy the interfaces to a <a href="https://github.com/php-fig/http-client">new repository</a>.</p>
+
+<h4 id="promises-to-the-community">Promises to the community</h4>
+
+<p>One major goal of the PSR was that it should be compatible with HTTPlug. Libraries that uses the HTTPlug interface should have a real smooth upgrade path. It should be possible to execute this upgrade path in a minor version.</p>
+
+<p>This seems like a real fair deal since we do not want to create a “PSR vs HTTPlug” situation similar to Guzzle 5/Guzzle6.</p>
+
+<p>At the same time, we want to make it optional to use the PSR, if some libraries still want to use HTTPlug they should still be able to do so.</p>
+
+<h4 id="the-issue">The issue</h4>
+
+<p>Everything so far has been a real dance on roses. Then someone suggested to drop support for PHP5. After some discussions on the <a href="https://groups.google.com/forum/#!topic/php-fig/DknNTZumojM">PHP-FIG mailing list</a> it was decided to drop PHP5 and do the interfaces with PHP7 only.</p>
+
+<p>A great feature of PHP7 is return type declaration. A new PSR interface that is created for PHP7 only should naturally use return type interfaces. But that made it non compatible with HTTPlug.</p>
+
+<p>Consider the signature of HTTPlug:</p>
+
+<blockquote>
+  <p><strong><em>HttpClient::sendRequest(RequestInterface $request);</em></strong></p>
+</blockquote>
+
+<p>That is not compatible with the PSR</p>
+
+<blockquote>
+  <p><strong><em>ClientInterface::sendRequest(RequestInterface $request): ResponseInterface;</em></strong></p>
+</blockquote>
+
+<p>The HTTPlug interface cannot extend the PSR interface as originally planned. That would have been a real smooth upgrade path for both libraries consuming HTTPlug and for libraries implementing HTTPlug.</p>
+
+<p>The work on the PSR stalled here for a few months while trying to come up with a solution that kept the promise to the community.</p>
+
+<h3 id="possible-solutions">Possible solutions</h3>
+
+<p>Let me list some possible solutions of the issue and highlight the drawbacks of each. The list of drawback may not be complete or accurate. So please make a comment if you think I’m wrong.</p>
+
+<p>This list also reflects our thought process.</p>
+
+<h4 id="a-rename-psr%C2%A0function">A) Rename PSR function</h4>
+
+<p>To rename the “sendRequest” function in the PSR interface to something like “sendHttpRequest” would be an okey solution but with an ugly name. This would require implementing libraries to create an “adapter function” that mapped one method to another. Consuming libraries would have problems supporting both the PSR and HTTPlug at the same time.</p>
+
+<h4 id="b-let-consuming-libraries-require-both-interfaces">B) Let consuming libraries require both interfaces</h4>
+
+<p>Since the two interfaces are so similar one could without issues use both interfaces interchangeably. An implementing library just implements them both. The HTTPlug interface is fine with any return type. A consuming library could just assume any of the interfaces like:</p>
+
+<p><img src="/img/blog/0__3WDJwk6D5fiZQVzT.jpg" alt="fetch url method code" /></p>
+
+<p>In a time where PHP move towards more type annotations it might be weird to check the type manually like this…, and yes. It is weird.</p>
+
+<p>Another problem with this solution is that it could force consuming libraries to break backwards compatibility in order to use the new PSR.</p>
+
+<h4 id="c-create-a-httplug-version%C2%A02.0">C) Create a HTTPlug version 2.0</h4>
+
+<p>HTTPlug could create a new major version to add the return types and be compatible with the PSR. Your first reaction may be that this is insane and it would lead to many more issues like Guzzle5/Guzze6.</p>
+
+<p>This is actually quite similar to solution B. If HTTPlug was dropping PHP5 support, extend the PSR and released version 2.0.0, it will all work. A consuming library could update their dependencies to require <strong>php-http/httplug:^1.0||^2.0</strong>. No other change is required. They will still support PHP5 if they want to and they will still type hint for HttpClient.</p>
+
+<p>All the existing PHP5 clients that are using HTTPlug will obviously need to release a major version to add the type hint in their sendRequest implementation. For PHP7 clients there is no issue implementing both HTTPlug 1, HTTPlug 2 and the PSR, as adding the return type declaration to the method does not violate the interface of verison 1 that is missing the type declaration.</p>
+
+<h3 id="the-current-state-of-the%C2%A0psr">The current state of the PSR</h3>
+
+<p>To have a smooth upgrade path for the community the solution C is preferred. That would mean minimal change for consuming libraries. If consuming libraries would like to release a major version they could use the PSR directly instead of indirectly via HTTPlug.</p>
+
+<h4 id="will-it-be-a-guzzle5%2Fguzzle6-issue%3F">Will it be a Guzzle5/Guzzle6 issue?</h4>
+
+<p>No, there were <a href="https://github.com/guzzle/guzzle/blob/master/UPGRADING.md#50-to-60">quite a few things</a> you needed to do to upgrade from Guzzle 5 to Guzzle 6. When it comes to HTTPlug 1 and HTTPlug 2 there is <strong>nothing</strong>. All libraries that are consuming HTTPlug 1 could upgrade to support HTTPlug v2 in a heartbeat.</p>
+
+<p>There are two rules though:</p>
+
+<ul>
+<li>Every consuming library should depend on <strong><em>php-http/httplug: ^1.0||^2.0</em></strong></li>
+<li>Every implementing library should depend on <strong><em>php-http/httplug: ^1.0||^2.0</em></strong></li>
+</ul>
+
+<h3 id="future">Future</h3>
+
+<p>As the time of writing, the PSR is not finalized yet. Which means that you may have plenty of comments or suggestions. Make sure to read the <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/http-client/http-client-meta.md">meta document</a> which shows some of our previous discussions.</p>
+
+<h4 id="future-of%C2%A0httplug">Future of HTTPlug</h4>
+
+<p>HTTPlug will still exist and push out great features like Symfony bundles, loads of plugins packed with features and most importantly: Support for asynchronous clients.</p>
+
+<p>After the acceptance of the PSR there will be some work to make the <em>php-http clients/adapters</em> PHP7 only and to make sure they support the PSR and HTTPlug 2.0. The HTTPlugBundle will also be updated to support PSR clients.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Tobias Nyholm]]></name>
+                <uri>https://www.php-fig.org/authors/tobiasnyholm</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updates from PHP-FIG: April and May]]></title>
+            <link href="https://www.php-fig.org/blog/2018/06/updates-from-php-fig-april-and-may"/>
+            <updated>2018-06-06T16:50:10+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/06/updates-from-php-fig-april-and-may</id>
+            <content type="html"><![CDATA[<p>Here we are again, with another bi-monthly update about the state of the affairs here at PHP-FIG. In the last two months, two PHP-FIG meetups where held, during the <a href="https://2018.phpday.it/">PHPDay (Verona, Italy)</a> and <a href="https://tek.phparch.com/">PHP&#91;tek&#93; (Atlanta, US)</a> conferences.</p>
+
+<p><img src="/img/blog/1__RTnGfyj7sZVVHFhmhga7OQ.jpeg" alt="PHP-FIG stickers, shared at the PHPDay front desk" />
+PHP-FIG stickers, shared at the PHPDay front desk</p>
+
+<h4 id="vacant-seat-as-secretary">Vacant seat as secretary</h4>
+
+<p>Unfortunately, Mark Railton recently <a href="https://groups.google.com/forum/#!topic/php-fig/bpSHS0EMUD0">announced his decision</a> to step down from his role as secretary of the PHP-FIG, due to insufficient time to perform his duties.</p>
+
+<p>Next elections will be held this August, so we ask that anyone willing to help step forward and ask for a nomination in those elections. Don’t worry, it’s an easy task!</p>
+
+<p>Please reach out to the <a href="https://www.php-fig.org/personnel/">active secretaries or to any PHP-FIG Core Committee member</a> to inquire further.</p>
+
+<h4 id="psr-5%3A-changes-in%C2%A0progress">PSR-5: changes in progress</h4>
+
+<p>There is still preparation work in progress on the PHPDoc PSR. We haven’t held the entrance vote yet, because the forming working group has <a href="https://github.com/php-fig/fig-standards/pull/1038">decided to split the scope into two separate PSRs</a>. They will be creating a new one as a “tag catalog”, and the original PSR-5 will focus on format only.</p>
+
+<h4 id="psr-9-and-psr-10%3A-security%2C-revamped">PSR-9 and PSR-10: security, revamped</h4>
+
+<p>In the meantime, two other abandoned PSRs about security practices are being recovered: PSR-9, which is about <strong>security advisories</strong> of vulnerable packages, and PSR-10, which is about standardizing the <strong>security vulnerabilities reporting</strong> process.</p>
+
+<p>The effort is led by Michael Cullum as the new editor of both PSRs. <a href="https://groups.google.com/forum/#!topic/php-fig/OgLlv9QEjqk">His call to action</a> has attracted many professionals with “skin in the game” of securing PHP web applications. If you are a security professional, security lead or other security figure and are wanting to get involved, reach out to Michael about joining the working group.</p>
+
+<h4 id="addressing-feedback-about%C2%A0psr-12">Addressing feedback about PSR-12</h4>
+
+<p>PSR-12, the updated coding style guide, is in progress too.The working group has decided to go back to the draft stage to <strong>address the concerns</strong> rasied during review, and apply some changes to the spec. Once that’s complete, the PSR will be back in the review phase.</p>
+
+<p><img src="/img/blog/1__Ogviiaz4JPUBLJA7SZhBIA.jpeg" alt="The PHP-FIG meetup at PHPDay 2018" />
+The PHP-FIG meetup at PHPDay 2018</p>
+
+<h4 id="drafting-psr-14%3A-event-dispatcher">Drafting PSR-14: Event Dispatcher</h4>
+
+<p>Another PSR which is under heavy development is PSR-14, the Event Dispatcher one. The working group is proceeding with PRs and trying to shape a few prototypes to see if the spec holds up when put down in code.</p>
+
+<p>The draft for now looks vaguely like the Symfony event manager, but they are also looking at Node for some elements that could be helpful in developing a complete spec.</p>
+
+<h4 id="http-specs%3A-psr-17-factories-and-psr-18-clients">HTTP specs: PSR-17 (factories) and PSR-18 (clients)</h4>
+
+<p>Both PSR-17 and PSR-18 are <strong>almost ready to progress into the review phase</strong>.</p>
+
+<p>The <strong>factories</strong> spec has been cleaned up and <a href="https://github.com/php-fig/fig-standards/pull/1036">removed inheritance from the proposed interfaces</a>; the working group decided to address developer experience issues later in a -util package that would accompany the spec at the release; the spec is currently <a href="https://groups.google.com/forum/#!topic/php-fig/2EjKzE-7Yn8">under vote to reach the review phase</a>.</p>
+
+<p><strong>PSR-18</strong> is held back by a possible issue in interface inheritance that has a strange behavior at the language level, but it will be addresses as soon as possible. This PSR should be ready to reach the review phase immediately after.</p>
+
+<p>PSRs references:</p>
+
+<ul>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md">PSR-5: PHPDoc</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-reporting-process.md">PSR-9: security reporting process</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/security-disclosure-publication.md">PSR-10: security disclosure publication</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/extended-coding-style-guide.md">PSR-12: Extended Coding Style Guide</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/event-dispatcher.md">PSR-14: Event Dispatcher</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/http-factory/http-factory.md">PSR-17: HTTP factories</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/proposed/http-client/http-client.md">PSR-18: HTTP clients</a></li>
+</ul>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updates from PHP-FIG: February and March]]></title>
+            <link href="https://www.php-fig.org/blog/2018/04/updates-from-php-fig-february-and-march"/>
+            <updated>2018-04-03T13:07:50+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/04/updates-from-php-fig-february-and-march</id>
+            <content type="html"><![CDATA[<p><img src="/img/blog/1__NX38BGDhuoRqXuCDLQnGYA.png" alt="The PSR-6 amendment pull request" /></p>
+
+<p>Continuing in our habit of frequent posts to update the community, here we are to see what happened inside the PHP-FIG in the last two months.</p>
+
+<h3 id="psr-5%3A-phpdoc-take%C2%A0two">PSR-5: PHPDoc take two</h3>
+
+<p>As we said in the last update, we are in the process of recovering <a href="https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md">PSR-5</a>, the proposed standard for PHPDoc. Chuck Burgess is willing to act as the editor, and Gary Hockin already volunteered as a CC sponsor. We still need a few other persons to create the Working Group, so please reach out to Chuck or to one of the secretaries if you are interested!</p>
+
+<h3 id="psr-6-amendment">PSR-6 amendment</h3>
+
+<p>Since a long time ago, <a href="https://github.com/php-fig/fig-standards/pull/915/files">a PR was opened</a> to fix a small issue in the Caching Interface standard, PSR-6. Since the topic was a bit controversial, that remained blocked, but we finally reached consensus and voted the amendment in! Thanks to Larry Garfield for pushing this through the finish line.</p>
+
+<h3 id="http-message-standards-are-still-worked%C2%A0on">HTTP message standards are still worked on</h3>
+
+<p>Following the approval of <a href="https://www.php-fig.org/psr/psr-15/">PSR-15</a>, the standard recommendation for HTTP Server Request Handlers, Matthew Weier O’Phinney started a vote to get <strong>PSR-17 back on track and in the draft stage</strong>; the standard is about <a href="https://github.com/php-fig/fig-standards/tree/master/proposed/http-factory/">HTTP Factories</a>.</p>
+
+<p>T<a href="https://groups.google.com/forum/?fromgroups#!topic/php-fig/A5mZYTn5Jm8">he vote was unanimously in favor</a>, he will be acting as a sponsor, the editor of the PSR will be Woody Gilk, and the rest of the Working Group will be composed by Stefano Torresi, Matthieu Napoli, Korvin Szanto, Glenn Eggleton, Oscar Otero, and Tobias Nyholm.</p>
+
+<p>In the meantime, <a href="https://github.com/php-fig/fig-standards/tree/master/proposed/http-client/">PSR-18 (HTTP clients)</a> is also in the draft stage and currently worked on. The working group is evaluating the upgrade path for HTTPlug to this standard, since it’s one of the most used abstraction library for HTTP Clients in PHP, and it would make a great test for the spec.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Alessandro Lai]]></name>
+                <uri>https://www.php-fig.org/authors/alessandro</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[A month of PHP-FIG #2–4: November 2017 to January 2018]]></title>
+            <link href="https://www.php-fig.org/blog/2018/02/a-month-of-php-fig-2-4-november-2017-to-january-2018"/>
+            <updated>2018-02-02T20:46:14+00:00</updated>
+            <id>https://www.php-fig.org/blog/2018/02/a-month-of-php-fig-2-4-november-2017-to-january-2018</id>
+            <content type="html"><![CDATA[<p>Back in October 2017, Michael Cullum started a new series on the PHP-FIG blog, ‘A month of PHP-FIG’. Unfortunately as things go, the momentum for this didn’t quite get maintained, but fear not, I’m going to do a recap of the comings and goings of the PHP-FIG for the past 3 months.</p>
+
+<h3 id="%2A%2Adiscussion-%2F-psr%C2%A0updates%2A%2A"><strong>Discussion / PSR Updates</strong></h3>
+
+<ul>
+<li><a href="https://groups.google.com/forum/#!topic/php-fig/J_d85lMDf2k">PSR-12</a> Entered the review stage at the start of November.</li>
+<li><a href="https://www.php-fig.org/psr/psr-15/">PSR-15</a> was unanimously accepted by the core committee and <a href="https://groups.google.com/forum/#!msg/php-fig/f5lL_QNIrgI/SmYZVw_5AwAJ">passed on January 22nd</a>. Woody Gilk, the editor of PSR-15, has created <a href="http://shadowhand.me/announcing-psr-15/">this blog post</a> and Matthew Weier O’Phinney who was the sponsor created <a href="https://mwop.net/blog/2018-01-23-psr-15.html?utm_source=dlvr.it&amp;utm_medium=phpfig-blog">this post</a>.</li>
+<li>The end of January seen some more activity for PSR-5 with Chuck Burgess stepping up as editor and requesting members for a new working group with Gary Hockin as core committee sponsor.</li>
+</ul>
+
+<h3 id="secretaries">Secretaries</h3>
+
+<ul>
+<li>November seen both Margaret Staples and Allesandro Lai elected as secretaries to fill 2 vacant slots.</li>
+<li>In January Michael Cullum’s term expired and I (Mark Railton) was elected to fill that vacancy</li>
+</ul>
+
+<h3 id="core-committee">Core Committee</h3>
+
+<ul>
+<li>Terms for Chris Tankersley, Graham Hoefer, Korvin Szanto &amp; Stefano Torresi all expired. With the exception of Graham, all stood for re-election and Michael Cullum was elected for the 4th position.</li>
+</ul>
+
+<h3 id="php-fig-website">PHP-FIG Website</h3>
+
+<p>Thanks to a lot of work from core committee member <a href="https://twitter.com/storresi">Stefano Torresi</a>, the website at <a href="https://www.php-fig.org">www.php-fig.org</a> has been migrated to a PHP build using <a href="https://sculpin.io/">sculpin</a> and content has been added for PSR-15 as well as an updated member list.</p>
+
+<p>Going forward, the plan is to keep this blog updated on a monthly basis as a quick overview of what’s going on within PHP-FIG. If you’d like to see more or maybe even get involved, then head over to the <a href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">mailing list.</a></p>
+
+<p>Thanks,</p>
+
+<p>PHP-FIG Secretaries.</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Mark Railton]]></name>
+                <uri>https://www.php-fig.org/authors/railto</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[A month of PHP-FIG #1: October 2017]]></title>
+            <link href="https://www.php-fig.org/blog/2017/10/a-month-of-php-fig-1-october-2017"/>
+            <updated>2017-10-30T14:52:59+00:00</updated>
+            <id>https://www.php-fig.org/blog/2017/10/a-month-of-php-fig-1-october-2017</id>
+            <content type="html"><![CDATA[<p>As part of the effort to communicate better what’s going on within the PHP-FIG we’re starting a new series of ‘A month of PHP-FIG’ articles to be released towards the end of each month, each being a 2 minute read or less.</p>
+
+<p><img src="/img/blog/1__Zi1MOUQmtRXs3y7mhCLnGA.png" alt="Github screenshot" /></p>
+
+<p>This month has been a busy month for the PHP-FIG. We’ve kickstarted a couple of PSRs with PSR-12¹ being <a href="https://groups.google.com/forum/#!topic/php-fig/Luk-F3x6T2g">formally re-introduced into the draft stage</a>; internally we’ve started the voting for the <a href="https://groups.google.com/forum/#!topic/php-fig/KwarBrWfsSs">secretary elections</a> for two secretary posts; and lots of ideas have been flowing to try and get a number of PSRs moving again.</p>
+
+<h3 id="discussion-%2F-psr%C2%A0updates">Discussion / PSR Updates</h3>
+
+<ul>
+<li>PSR-12¹ has come forward for an entrance vote as a matter of formality as is nearing completion but needs a formal Working Group post-FIG 3.0 transition. <a href="https://groups.google.com/forum/#!topic/php-fig/Luk-F3x6T2g">Link</a></li>
+<li>There was a discussion as to whether or not new PSRs should require PHP 7 or PHP 5 still. The consensus was it should be based on individual circumstances of a PSR. <a href="https://groups.google.com/forum/#!topic/php-fig/DknNTZumojM">Link</a></li>
+<li>It was agreed that PSR-18² will not cater to async http client requests due to the lack of a Promise PSR standard. <a href="https://github.com/php-fig/fig-standards/pull/942">Link</a></li>
+<li>Some solid ideas have come up for how PSR-9³ and PSR-10⁴ could be used by Composer.</li>
+</ul>
+
+<h3 id="new-psr%C2%A0ideas">New PSR Ideas</h3>
+
+<p>This month, due to a number of discussions, particularly some person at SymfonyLive San Francisco, there have been a huge number of new PSR ideas being floated.</p>
+
+<ul>
+<li><strong>Internationalisation</strong> (<a href="https://medium.com/@misteroom">Oscar Otero</a>)<br />
+An interface to be able to use the same translations in different libraries e.g template engines. This will likely hit the mailing list to form a WG within a few days.</li>
+<li><strong>Cache Tagging</strong> (<a href="https://medium.com/@tobias.nyholm">Tobias Nyholm</a> &amp; <a href="https://medium.com/@nicolas.grekas">Nicolas Grekas</a>)<br />
+An interface for interacting with PSR-6⁵/16⁶ cache items’ tags.</li>
+<li><strong>Interface for State Resettable classes</strong> (<a href="https://medium.com/@nicolas.grekas">Nicolas Grekas</a>)<br />
+The ability to reset the state on classes and having an interfaced method that can be called to provide this functionality</li>
+<li><strong>Deprecations</strong> (<a href="https://medium.com/@nicolas.grekas">Nicolas Grekas</a>)<br />
+For handling deprecations of classes and methods to trigger errors/notifications</li>
+<li><strong>Auto-updates</strong> (@mlh407 — Michael Hess)<br />
+A number of ideas have surfaced relating to the automatic updates space relating to the signing/verification of tags &amp; releases.</li>
+<li><strong>Container &amp; Dependency Injections Future PSRs</strong>(<a href="https://medium.com/@nicolas.grekas">Nicolas Grekas</a>, <a href="https://medium.com/@mnapoli">Matthieu Napoli</a>, &amp; David Negrier)<br />
+A number of potential PSRs relating to what’s next for container and dependency injection interoperability.</li>
+</ul>
+
+<p>If you’d like to know more about any of these, get involved, they are relevant to your project or you think you have specialist knowledge on any of these topics, please contact myself (<a href="https://medium.com/@michaelcullumuk">Michael Cullum</a>) or the Editor/Suggester mentioned.</p>
+
+<p>&#91;1&#93;: PSR-12: Extended Coding Style Guide.<br />
+&#91;2&#93;: PSR-18: HTTP Client<br />
+&#91;3&#93;: PSR-9: Security Advisories<br />
+&#91;4&#93;: PSR-10: Security Reporting Process<br />
+&#91;5&#93;: PSR-6: Cache Interface<br />
+&#91;6&#93;: PSR-16: Simple Cache Interface</p>
+]]></content>
+
+                        <author>
+                <name><![CDATA[Michael Cullum]]></name>
+                <uri>https://www.php-fig.org/authors/michaelcullumuk</uri>
+            </author>
+            
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Hello world: The PHP-FIG blog]]></title>
+            <link href="https://www.php-fig.org/blog/2017/10/hello-world-the-php-fig-blog"/>
+            <updated>2017-10-23T16:13:16+00:00</updated>
+            <id>https://www.php-fig.org/blog/2017/10/hello-world-the-php-fig-blog</id>
+            <content type="html"><![CDATA[<p><img src="/img/blog/1__yX6dcMv__dCXRsSpm4c8fGA.jpeg" alt="computer and code screen" /></p>
+
+<p>A lot goes on within the PHP-FIG but one of the biggest problems we have is communicating with the rest of the PHP community what’s going on.</p>
+
+<p>To try and improve the situation, we’re launching this PHP-FIG blog written by the Secretaries and others. It will contain:</p>
+
+<ul>
+<li>Regular updates on what’s going on with the PHP-FIG</li>
+<li>Technical documentation and summaries of PSRs and their usage</li>
+<li>Guides on how to get more involved with the PHP-FIG</li>
+<li>Posts on the various roles within the PHP-FIG and how our internal processes work</li>
+<li>Case studies and guest posts from popular implementation libraries showing you how PSRs are, and can be, used out in the wild</li>
+</ul>
+
+<p>We hope that this blog will become a valuable resource for the wider PHP community, that want to know more about PSRs, as well as people already involved in some areas but don’t know everything that goes on in the PHP-FIG.</p>
+
+<p>Many thanks,<br />
+PHP-FIG Secretaries</p>
+]]></content>
+
+            
+        </entry>
+    </feed>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-18: The PHP standard for HTTP clients - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-18: The PHP standard for HTTP clients - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-18: The PHP standard for HTTP clients - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="A couple of days ago, the PHP Framework Interoperability Group (PHP-FIG) approved the PSR-18 “HTTP Client” standard. This standard was the last missing piece to build applications that need to send…">
+    <meta name="twitter:description" content="A couple of days ago, the PHP Framework Interoperability Group (PHP-FIG) approved the PSR-18 “HTTP Client” standard. This standard was the last missing piece to build applications that need to send…" />
+    <meta name="og:description" content="A couple of days ago, the PHP Framework Interoperability Group (PHP-FIG) approved the PSR-18 “HTTP Client” standard. This standard was the last missing piece to build applications that need to send…" />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-18: The PHP standard for HTTP clients
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+        
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+            <p>A couple of days ago, the PHP Framework Interoperability Group (PHP-FIG) approved the PSR-18 “HTTP Client” standard. This standard was the last missing piece to build applications that need to send HTTP requests to a server in an HTTP client agnostic way.</p>
+<p>First, <a href="https://www.php-fig.org/psr/psr-7/">PSR-7 “HTTP message interfaces”</a> defined how HTTP requests and responses are represented. For server applications that need to handle incoming requests and send a response, this was generally enough. The application bootstrap creates the request instance with a PSR-7 implementation and passes it into the application, which in turn can return any instance of a PSR-7 response. Middleware and other libraries can be reused as long as they rely on the PSR-7 interfaces.</p>
+<p>However, sometimes an application needs to send a request to another server. Be that a storage backend that uses HTTP to communicate like ElasticSearch, or some third party service like Twitter, Instagram or weather. Public third party services often provide common client libraries. Since <a href="https://www.php-fig.org/psr/psr-17/">PSR-17 “HTTP Factories”</a>, this code does not need to bind itself to a specific implementation of PSR-7 but can use the factory to create requests.</p>
+<p>Even with the request factory, libraries still had to depend on a concrete HTTP client implementation like Guzzle to actually send the request. (They can also do things themselves very low-level with <code>curl</code> calls, but this basically means implementing an own HTTP client.) Using a specific implementation of an HTTP client is not ideal. It becomes a problem when your application uses a client as well, or you start combining more than one client and they use different clients - or even more when needing different major versions of the same client. For example, Guzzle had to change its namespace from Guzzle to GuzzleHttp when switching from version 3 to 4 to allow both versions to be installed in parallel.</p>
+<p>Libraries should not care about the implementation of the HTTP client, as long as they are able to send requests and receive responses. A group of people around Márk Sági-Kazár started defining an interface for the HTTP client, branded <a href="http://httplug.io/">HTTPlug</a>. Various libraries like Mailgun, Geocoder or Payum adopted their HTTP request handling to HTTPlug. Tobias Nyholm, Mark and myself proposed the HTTPlug interface to the PHP-FIG and it has been adopted as <a href="https://www.php-fig.org/psr/psr-18/">PSR-18 “HTTP Client”</a> in October 2018. The interfaces are compatible from a consumer perspective. HTTPlug 2 implements PSR-18, while staying compatible to HTTPlug 1 for consumers. Consumers can upgrade from HTTPlug 1 to 2 seamlessly and then start transforming their code to the PSR interfaces. Eventually, HTTPlug should become obsolete and be replaced by the PSR-18 interfaces and HTTP clients directly implementing those interfaces.</p>
+<p>PSR-18 defines a very small interface for sending HTTP requess and receiving the response. It also defines how the HTTP client implementation has to behave in regard to error handling and exceptions, redirections and similar things, so that consumers can rely on a reproducable behaviour. Bootstrapping the client with the necessary set up parameters is done in the application, and then inject the client to the consumer:</p>
+<pre><code>use Psr\Http\Client\ClientInterface;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+class WebConsumer
+{
+    /**
+     * @var ClientInterface
+     */
+    private $httpClient;
+    /**
+     * @var RequestFactoryInterface
+     */
+    private $httpRequestFactory;
+    public function __construct(
+        ClientInterface $httpClient,
+        RequestFactoryInterface $httpRequestFactory
+    ) {
+        $this-&gt;httpClient = $httpClient;
+        $this-&gt;httpRequestFactory = $httpRequestFactory;
+    }
+    public function fetchInfo()
+    {
+        $request = $this-&gt;httpRequestFactory-&gt;createRequest('GET', 'https://www.liip.ch/');
+        try {
+            $response = $this-&gt;httpClient-&gt;sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            throw new DomainException($e);
+        }
+        $response-&gt;...
+    }
+}
+</code></pre>
+<p>The dependencies of this class in the “use” statements are only the PSR interfaces, no need for specific implementations anymore.<br />
+ Already, there is a release of <code>php-http/guzzle-adapter</code> that makes Guzzle available as PSR-18 client.</p>
+<h3 id="outlook">Outlook</h3>
+<p>PSR-18 does not cover asynchronous requests. Sending requests asynchronous allows to send several HTTP requests in parallel or to continue with other work, then wait for the result. This can be more efficient and helps to reduce response times. Asynchronous requests return a “promise” that can be checked if the response has been received or waited on, to block until the response has arrived. The main reason PSR-18 does not cover asynchronous requests is that there is no PSR for promises. It would be wrong for a HTTP PSR to define the much broader concept of promises.</p>
+<p>If you want to send asynchronous requests, you can use the <a href="http://docs.php-http.org/en/latest/components/promise.html">HTTPlug Promise component</a> together with the HTTPlug <code>HttpAsyncClient</code>. The guzzle adapter mentioned above also provides this interface. When a PSR for promises has been ratified, we hope to do an additional PSR for asynchronous HTTP requests.</p>
+<p><img src="/img/blog/1__yBqdI__HdOKpNDkkd7jNjrw.png" alt="HTTPlug Logo" />
+HTTPlug Logo</p>
+
+        </div>
+
+            <div class="post__tags">
+                    <a href="/blog/tags/http" class="post__tags__tag">http</a>
+                    <a href="/blog/tags/http-client" class="post__tags__tag">http-client</a>
+                    <a href="/blog/tags/interoperability" class="post__tags__tag">interoperability</a>
+            </div>
+
+        <span  class="blog-post__meta__date">
+            November 17th 2018
+        </span>
+    </div>
+
+            <div class="columns__column columns__column--4 columns__column--padding_left">
+            <nav class="sidebar">
+                <div class="sidebar__author">
+    <h2 class="sidebar__title">Author: David Buchmann</h2>
+
+            <div class="columns__column columns__column--12">
+                            <div class="columns__column columns__column--4">
+                    <img class="sidebar__author__avatar" src="https://miro.medium.com/fit/c/100/100/0*5ti667chDSfm_2B4" alt="David Buchmann's avatar"/>
+                </div>
+            
+            <p class="sidebar__description">Symfony CMF and working at Liip, doing PHP development. And occasionally hacking on other stuff.</p>
+        </div>
+    
+    <ul class="sidebar__list">
+                    <li class="sidebar__item">
+                <a class="sidebar__link" href="https://twitter.com/dbu" target="_blank">
+                    @dbu on Twitter
+                </a>
+            </li>
+        
+        <li class="sidebar__item">
+            <a class="sidebar__link" href="/authors/davidbu">
+                More about author
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+            </nav>
+        </div>
+        </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

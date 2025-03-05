@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-14: Event Dispatcher - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-14: Event Dispatcher - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-14: Event Dispatcher - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-14: Event Dispatcher
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Event Dispatcher<a id="event-dispatcher" href="#event-dispatcher" name="event-dispatcher" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>Event Dispatching is a common and well-tested mechanism to allow developers to inject logic into an application easily and consistently.</p>
+<p>The goal of this PSR is to establish a common mechanism for event-based extension and collaboration so that libraries and components may be reused more freely between various applications and frameworks.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<h2>Goal<a id="goal" href="#goal" name="goal" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Having common interfaces for dispatching and handling events allows developers to create libraries that can interact with many frameworks and other libraries in a common fashion.</p>
+<p>Some examples:</p>
+<ul>
+<li>A security framework that will prevent saving/accessing data when a user doesn't have permission.</li>
+<li>A common full page caching system.</li>
+<li>Libraries that extend other libraries, regardless of what framework they are both integrated into.</li>
+<li>A logging package to track all actions taken within the application</li>
+</ul>
+<h2>Definitions<a id="definitions" href="#definitions" name="definitions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<strong>Event</strong> - An Event is a message produced by an <em>Emitter</em>.  It may be any arbitrary PHP object.</li>
+<li>
+<strong>Listener</strong> - A Listener is any PHP callable that expects to be passed an Event.  Zero or more Listeners may be passed the same Event.  A Listener MAY enqueue some other asynchronous behavior if it so chooses.</li>
+<li>
+<strong>Emitter</strong> - An Emitter is any arbitrary code that wishes to dispatch an Event.  This is also known as the &quot;calling code&quot;.  It is not represented by any particular data structure but refers to the use case.</li>
+<li>
+<strong>Dispatcher</strong> - A Dispatcher is a service object that is given an Event object by an Emitter.  The Dispatcher is responsible for ensuring that the Event is passed to all relevant Listeners, but MUST defer determining the responsible listeners to a Listener Provider.</li>
+<li>
+<strong>Listener Provider</strong> - A Listener Provider is responsible for determining what Listeners are relevant for a given Event, but MUST NOT call the Listeners itself.  A Listener Provider may specify zero or more relevant Listeners.</li>
+</ul>
+<h2>Events<a id="events" href="#events" name="events" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Events are objects that act as the unit of communication between an Emitter and appropriate Listeners.</p>
+<p>Event objects MAY be mutable should the use case call for Listeners providing information back to the Emitter.  However, if no such bidirectional communication is needed then it is RECOMMENDED that the Event be defined as immutable; i.e., defined such that it lacks mutator methods.</p>
+<p>Implementers MUST assume that the same object will be passed to all Listeners.</p>
+<p>It is RECOMMENDED, but NOT REQUIRED, that Event objects support lossless serialization and deserialization; <code>$event == unserialize(serialize($event))</code> SHOULD hold true.  Objects MAY leverage PHP’s <code>Serializable</code> interface, <code>__sleep()</code> or <code>__wakeup()</code> magic methods, or similar language functionality if appropriate.</p>
+<h2>Stoppable Events<a id="stoppable-events" href="#stoppable-events" name="stoppable-events" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A <strong>Stoppable Event</strong> is a special case of Event that contains additional ways to prevent further Listeners from being called.  It is indicated by implementing the <code>StoppableEventInterface</code>.</p>
+<p>An Event that implements <code>StoppableEventInterface</code> MUST return <code>true</code> from <code>isPropagationStopped()</code> when whatever Event it represents has been completed.  It is up to the implementer of the class to determine when that is.  For example, an Event that is asking for a PSR-7 <code>RequestInterface</code> object to be matched with a corresponding <code>ResponseInterface</code> object could have a <code>setResponse(ResponseInterface $res)</code> method for a Listener to call, which causes <code>isPropagationStopped()</code> to return <code>true</code>.</p>
+<h2>Listeners<a id="listeners" href="#listeners" name="listeners" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Listener may be any PHP callable.  A Listener MUST have one and only one parameter, which is the Event to which it responds.  Listeners SHOULD type hint that parameter as specifically as is relevant for their use case; that is, a Listener MAY type hint against an interface to indicate it is compatible with any Event type that implements that interface, or to a specific implementation of that interface.</p>
+<p>A Listener SHOULD have a <code>void</code> return, and SHOULD type hint that return explicitly.  A Dispatcher MUST ignore return values from Listeners.</p>
+<p>A Listener MAY delegate actions to other code. That includes a Listener being a thin wrapper around an object that runs the actual business logic.</p>
+<p>A Listener MAY enqueue information from the Event for later processing by a secondary process, using cron, a queue server, or similar techniques.  It MAY serialize the Event object itself to do so; however, care should be taken that not all Event objects may be safely serializable. A secondary process MUST assume that any changes it makes to an Event object will NOT propagate to other Listeners.</p>
+<h2>Dispatcher<a id="dispatcher" href="#dispatcher" name="dispatcher" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Dispatcher is a service object implementing <code>EventDispatcherInterface</code>.  It is responsible for retrieving Listeners from a Listener Provider for the Event dispatched, and invoking each Listener with that Event.</p>
+<p>A Dispatcher:</p>
+<ul>
+<li>MUST call Listeners synchronously in the order they are returned from a ListenerProvider.</li>
+<li>MUST return the same Event object it was passed after it is done invoking Listeners.</li>
+<li>MUST NOT return to the Emitter until all Listeners have executed.</li>
+</ul>
+<p>If passed a Stoppable Event, a Dispatcher</p>
+<ul>
+<li>MUST call <code>isPropagationStopped()</code> on the Event before each Listener has been called.  If that method returns <code>true</code> it MUST return the Event to the Emitter immediately and MUST NOT call any further Listeners.  This implies that if an Event is passed to the Dispatcher that always returns <code>true</code> from <code>isPropagationStopped()</code>, zero listeners will be called.</li>
+</ul>
+<p>A Dispatcher SHOULD assume that any Listener returned to it from a Listener Provider is type-safe.  That is, the Dispatcher SHOULD assume that calling <code>$listener($event)</code> will not produce a <code>TypeError</code>.</p>
+<h3>Error handling<a id="error-handling" href="#error-handling" name="error-handling" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>An Exception or Error thrown by a Listener MUST block the execution of any further Listeners.  An Exception or Error thrown by a Listener MUST be allowed to propagate back up to the Emitter.</p>
+<p>A Dispatcher MAY catch a thrown object to log it, allow additional action to be taken, etc., but then MUST rethrow the original throwable.</p>
+<h2>Listener Provider<a id="listener-provider" href="#listener-provider" name="listener-provider" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Listener Provider is a service object responsible for determining what Listeners are relevant to and should be called for a given Event.  It may determine both what Listeners are relevant and the order in which to return them by whatever means it chooses.  That MAY include:</p>
+<ul>
+<li>Allowing for some form of registration mechanism so that implementers may assign a Listener to an Event in a fixed order.</li>
+<li>Deriving a list of applicable Listeners through reflection based on the type and implemented interfaces of the Event.</li>
+<li>Generating a compiled list of Listeners ahead of time that may be consulted at runtime.</li>
+<li>Implementing some form of access control so that certain Listeners will only be called if the current user has a certain permission.</li>
+<li>Extracting some information from an object referenced by the Event, such as an Entity, and calling pre-defined lifecycle methods on that object.</li>
+<li>Delegating its responsibility to one or more other Listener Providers using some arbitrary logic.</li>
+</ul>
+<p>Any combination of the above, or other mechanisms, MAY be used as desired.</p>
+<p>Listener Providers SHOULD use the class name of an Event to differentiate one event from another.  They MAY also consider any other information on the event as appropriate.</p>
+<p>Listener Providers MUST treat parent types identically to the Event's own type when determining listener applicability.  In the following case:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>{}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>{}
+
+$b = <span class="hljs-keyword">new</span> B();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listener</span><span class="hljs-params">(A $event)</span>: <span class="hljs-title">void</span> </span>{};
+</code></pre>
+<p>A Listener Provider MUST treat <code>listener()</code> as an applicable listener for <code>$b</code>, as it is type compatible, unless some other criteria prevents it from doing so.</p>
+<h2>Object composition<a id="object-composition" href="#object-composition" name="object-composition" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Dispatcher SHOULD compose a Listener Provider to determine relevant listeners.  It is RECOMMENDED that a Listener Provider be implemented as a distinct object from the Dispatcher but that is NOT REQUIRED.</p>
+<h2>Interfaces<a id="interfaces" href="#interfaces" name="interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">EventDispatcher</span>;
+
+<span class="hljs-comment">/**
+ * Defines a dispatcher for events.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">EventDispatcherInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Provide all relevant listeners with an event to process.
+     *
+     * <span class="hljs-doctag">@param</span> object $event
+     *   The object to process.
+     *
+     * <span class="hljs-doctag">@return</span> object
+     *   The Event that was passed, now modified by listeners.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dispatch</span><span class="hljs-params">(object $event)</span></span>;
+}
+</code></pre>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">EventDispatcher</span>;
+
+<span class="hljs-comment">/**
+ * Mapper from an event to the listeners that are applicable to that event.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ListenerProviderInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@param</span> object $event
+     *   An event for which to return the relevant listeners.
+     * <span class="hljs-doctag">@return</span> iterable&lt;callable&gt;
+     *   An iterable (array, iterator, or generator) of callables.  Each
+     *   callable MUST be type-compatible with $event.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getListenersForEvent</span><span class="hljs-params">(object $event)</span> : <span class="hljs-title">iterable</span></span>;
+}
+</code></pre>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">EventDispatcher</span>;
+
+<span class="hljs-comment">/**
+ * An Event whose processing may be interrupted when the event has been handled.
+ *
+ * A Dispatcher implementation MUST check to determine if an Event
+ * is marked as stopped after each listener is called.  If it is then it should
+ * return immediately without calling any further Listeners.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">StoppableEventInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Is propagation stopped?
+     *
+     * This will typically only be used by the Dispatcher to determine if the
+     * previous listener halted propagation.
+     *
+     * <span class="hljs-doctag">@return</span> bool
+     *   True if the Event is complete and no further listeners should be called.
+     *   False to continue calling listeners.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPropagationStopped</span><span class="hljs-params">()</span> : <span class="hljs-title">bool</span></span>;
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-14: Event Dispatcher</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-14/meta">PSR-14 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

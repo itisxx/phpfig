@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-11: Container interface - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-11: Container interface - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-11: Container interface - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-11: Container interface
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Container interface<a id="container-interface" href="#container-interface" name="container-interface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>This document describes a common interface for dependency injection containers.</p>
+<p>The goal set by <code>ContainerInterface</code> is to standardize how frameworks and libraries make use of a
+container to obtain objects and parameters (called <em>entries</em> in the rest of this document).</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<p>The word <code>implementor</code> in this document is to be interpreted as someone
+implementing the <code>ContainerInterface</code> in a dependency injection-related library or framework.
+Users of dependency injection containers (DIC) are referred to as <code>user</code>.</p>
+<h2>1. Specification<a id="1-specification" href="#1-specification" name="1-specification" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>1.1 Basics<a id="11-basics" href="#11-basics" name="11-basics" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<h4>1.1.1 Entry identifiers<a id="111-entry-identifiers" href="#111-entry-identifiers" name="111-entry-identifiers" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>An entry identifier is any PHP-legal string of at least one character that uniquely identifies an item within a container.  An entry identifier is an opaque string, so callers SHOULD NOT assume that the structure of the string carries any semantic meaning.</p>
+<h4>1.1.2 Reading from a container<a id="112-reading-from-a-container" href="#112-reading-from-a-container" name="112-reading-from-a-container" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<ul>
+<li>
+<p>The <code>Psr\Container\ContainerInterface</code> exposes two methods: <code>get</code> and <code>has</code>.</p>
+</li>
+<li>
+<p><code>get</code> takes one mandatory parameter: an entry identifier, which MUST be a string.
+<code>get</code> can return anything (a <em>mixed</em> value), or throw a <code>NotFoundExceptionInterface</code> if the identifier
+is not known to the container. Two successive calls to <code>get</code> with the same
+identifier SHOULD return the same value. However, depending on the <code>implementor</code>
+design and/or <code>user</code> configuration, different values might be returned, so
+<code>user</code> SHOULD NOT rely on getting the same value on 2 successive calls.</p>
+</li>
+<li>
+<p><code>has</code> takes one unique parameter: an entry identifier, which MUST be a string.
+<code>has</code> MUST return <code>true</code> if an entry identifier is known to the container and <code>false</code> if it is not.
+If <code>has($id)</code> returns false, <code>get($id)</code> MUST throw a <code>NotFoundExceptionInterface</code>.</p>
+</li>
+</ul>
+<h3>1.2 Exceptions<a id="12-exceptions" href="#12-exceptions" name="12-exceptions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Exceptions directly thrown by the container SHOULD implement the
+<a href="#container-exception"><code>Psr\Container\ContainerExceptionInterface</code></a>.</p>
+<p>A call to the <code>get</code> method with a non-existing id MUST throw a
+<a href="#not-found-exception"><code>Psr\Container\NotFoundExceptionInterface</code></a>.</p>
+<h3>1.3 Recommended usage<a id="13-recommended-usage" href="#13-recommended-usage" name="13-recommended-usage" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Users SHOULD NOT pass a container into an object so that the object can retrieve <em>its own dependencies</em>.
+This means the container is used as a <a href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service Locator</a>
+which is a pattern that is generally discouraged.</p>
+<p>Please refer to section 4 of the META document for more details.</p>
+<h2>2. Package<a id="2-package" href="#2-package" name="2-package" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The interfaces and classes described as well as relevant exceptions are provided as part of the
+<a href="https://packagist.org/packages/psr/container">psr/container</a> package.</p>
+<p>Packages providing a PSR container implementation should declare that they provide <code>psr/container-implementation</code> <code>1.0.0</code>.</p>
+<p>Projects requiring an implementation should require <code>psr/container-implementation</code> <code>1.0.0</code>.</p>
+<h2>3. Interfaces<a id="3-interfaces" href="#3-interfaces" name="3-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p><a name="container-interface"></a></p>
+<h3>3.1. <code>Psr\Container\ContainerInterface</code><a id="31-psrcontainercontainerinterface" href="#31-psrcontainercontainerinterface" name="31-psrcontainercontainerinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Container</span>;
+
+<span class="hljs-comment">/**
+ * Describes the interface of a container that exposes methods to read its entries.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ContainerInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Finds an entry of the container by its identifier and returns it.
+     *
+     * <span class="hljs-doctag">@param</span> string $id Identifier of the entry to look for.
+     *
+     * <span class="hljs-doctag">@throws</span> NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * <span class="hljs-doctag">@throws</span> ContainerExceptionInterface Error while retrieving the entry.
+     *
+     * <span class="hljs-doctag">@return</span> mixed Entry.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get</span><span class="hljs-params">($id)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns true if the container can return an entry for the given identifier.
+     * Returns false otherwise.
+     *
+     * `has($id)` returning true does not mean that `get($id)` will not throw an exception.
+     * It does however mean that `get($id)` will not throw a `NotFoundExceptionInterface`.
+     *
+     * <span class="hljs-doctag">@param</span> string $id Identifier of the entry to look for.
+     *
+     * <span class="hljs-doctag">@return</span> bool
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">($id)</span></span>;
+}
+</code></pre>
+<p>Since <a href="https://packagist.org/packages/psr/container#1.1.0">psr/container version 1.1</a>,
+the above interface has been updated to add argument type hints.</p>
+<p>Since <a href="https://packagist.org/packages/psr/container#2.0.0">psr/container version 2.0</a>,
+the above interface has been updated to add return type hints (but only to the
+<code>has()</code> method).</p>
+<p><a name="container-exception"></a></p>
+<h3>3.2. <code>Psr\Container\ContainerExceptionInterface</code><a id="32-psrcontainercontainerexceptioninterface" href="#32-psrcontainercontainerexceptioninterface" name="32-psrcontainercontainerexceptioninterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Container</span>;
+
+<span class="hljs-comment">/**
+ * Base interface representing a generic exception in a container.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ContainerExceptionInterface</span>
+</span>{
+}
+</code></pre>
+<p><a name="not-found-exception"></a></p>
+<h3>3.3. <code>Psr\Container\NotFoundExceptionInterface</code><a id="33-psrcontainernotfoundexceptioninterface" href="#33-psrcontainernotfoundexceptioninterface" name="33-psrcontainernotfoundexceptioninterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Container</span>;
+
+<span class="hljs-comment">/**
+ * No entry was found in the container.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">NotFoundExceptionInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ContainerExceptionInterface</span>
+</span>{
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-11: Container interface</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-11/meta">PSR-11 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

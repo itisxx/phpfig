@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR Evolution - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR Evolution - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR Evolution - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR Evolution
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>PSR evolution<a id="psr-evolution" href="#psr-evolution" name="psr-evolution" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>Scope and objectives<a id="scope-and-objectives" href="#scope-and-objectives" name="scope-and-objectives" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A PSR is often comprised of text and code, generally interfaces. Those interfaces are pieces of code that are released and tagged at a specific moment in time. However, the PHP language doesn't stand still; it evolves over time.</p>
+<p>This means that those interfaces need to both provide a stable contract, as well as evolve to leverage new language features that could help better enforce the behaviors described in the PSR itself.</p>
+<p>At the same time, a PSR cannot be changed after its release (at which point only erratas are allowed), to protect a package that declared compatibility from becoming de facto incompatible.</p>
+<p>This document defines a process to be followed in updating PSR interfaces, in a way that is not breaking in regard to behavior for end users, and with an appropriate upgrade path for the consumers.</p>
+<h2>Definitions<a id="definitions" href="#definitions" name="definitions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<strong>Consumer</strong> - libraries and projects that consume one or more interfaces from the code released as part of the PSR in question.</li>
+<li>
+<strong>Implementer</strong> - libraries and projects that implement one or more interfaces from code released as part of the PSR in question.</li>
+<li>
+<strong>Cross-compatibility</strong> - the ability for a consumer or an implementer to support more than one code version of the PSR with a single release of their own.</li>
+</ul>
+<h2>New releases<a id="new-releases" href="#new-releases" name="new-releases" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A new minor release of a PHP-FIG package containing interfaces for a PSR MUST follow these rules:</p>
+<ul>
+<li>the new release MUST follow <a href="https://semver.org/">Semantic Versioning</a> rules;</li>
+<li>the PSR behavior MUST NOT be altered;</li>
+<li>consumers or implementers of those interfaces MUST NOT suffer breaking changes;</li>
+<li>the PHP version constraint of the PHP-FIG package MAY be increased to leverage newer language features, especially those that would aid cross-compatibility of consumers and implementers with the old and the new versions;</li>
+<li>the PHP version constraint of the PHP-FIG package MUST NOT be altered to use newer language features that would create cross-compatibility issues.</li>
+</ul>
+<p>A new major release of a PHP-FIG package containing interfaces for a PSR MUST follow the same rules, with this exception:</p>
+<ul>
+<li>the new major version of the package MAY contain breaking changes if the implementing packages have a reasonable upgrade path, like the possibility of releasing a cross-compatible implementation with the previous releases;</li>
+<li>the new major version of the package MAY refer to a new, superseding PSR.</li>
+</ul>
+<p>Note that if the upgrade path causes the consumers or implementers to maintain multiple versions of their libraries side-by-side, only to support multiple versions of the same PSR, the upgrade path is to be considered too steep.</p>
+<h3>Workflow<a id="workflow" href="#workflow" name="workflow" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Since releasing new versions of the interfaces MUST NOT alter the PSR in its behavior, those releases can be voted in with the same process as errata changes. The new releases MUST be declared and embedded with a brief explanation and a link in the PSR document, like in the following example:</p>
+<blockquote>
+<p>```php
+interface ContainerInterface
+{
+// code snippet here
+}
+```</p>
+<p>Since <a href="https://packagist.org/packages/psr/container#1.1.0">psr/container version 1.1</a>, the above interface has been updated to add argument type hints.</p>
+</blockquote>
+<p>In the example above, the last line is indicative of what should be added to the specification.</p>
+<p>The meta document MUST be amended with information detailing the consumer and/or implementer upgrade path.</p>
+<h3>Practical example<a id="practical-example" href="#practical-example" name="practical-example" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A common case for an upgrade in the interfaces is to add types for parameters and returns, since they are new language features introduced by PHP 7, and many PSR interfaces predate that release. We'll use a method from PSR-11 as an example of how a PSR interface could be updated.</p>
+<h4>PSR-11: the interface<a id="psr-11-the-interface" href="#psr-11-the-interface" name="psr-11-the-interface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>PSR-11 is released with the <a href="https://packagist.org/packages/psr/container"><code>psr/container</code> package</a> and it holds the <code>ContainerInterface</code>, which has this method:</p>
+<pre><code class="language-php hljs php" data-lang="php">    <span class="hljs-comment">/**
+     * <span class="hljs-doctag">@param</span> string $id Identifier of the entry to look for.
+     *
+     * <span class="hljs-doctag">@return</span> bool
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">($id)</span></span>;
+</code></pre>
+<p>This method could be updated with a new minor release that adds the argument type for <code>$id</code>:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">(string $id)</span></span>;
+</code></pre>
+<p>This change would technically be a breaking change, but thanks to the <a href="https://wiki.php.net/rfc/parameter-no-type-variance">limited contravariance possible in PHP 7.2</a>, we can avoid that. This means that just by requiring <code>&quot;php&quot;: &quot;^7.2&quot;</code> in the <code>psr/container</code> <code>composer.json</code>, we could tag this change as a minor release, and have all the consumers and implementers be automatically cross-compatible, provided that they declare <code>&quot;psr/container&quot;: &quot;^1.0&quot;</code> (or equivalent) as a constraint.</p>
+<p>After this intermediate step, it would be possible to release a new major version, adding a return type hint:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">(string $id)</span>: <span class="hljs-title">bool</span></span>;
+</code></pre>
+<p>This must be released as a new major version of <code>psr/container</code> (2.0); any package that would implement this would be able to declare <code>&quot;psr/container&quot;: &quot;^1.1 || ^2.0&quot;</code>, since backward compatibility to the first release would be impossible, due to the sum of covariance and contravariance rules.</p>
+<h4>PSR-11: the implementation<a id="psr-11-the-implementation" href="#psr-11-the-implementation" name="psr-11-the-implementation" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>On the other side, the implementers would be able to do a release cycle in the opposite fashion. The first release looks like this:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">($id)</span></span>;
+</code></pre>
+<p>The second release would add the return type, maintaining compatibility with the original interface:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">($id)</span>: <span class="hljs-title">bool</span></span>;
+</code></pre>
+<p>A third release would also add the argument type hint:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has</span><span class="hljs-params">(string $id)</span>: <span class="hljs-title">bool</span></span>;
+</code></pre>
+
+                    </div>
+    </div>
+    <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Bylaws index:</h2>
+            <ul class="sidebar__list">
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/mission-and-structure">Mission and Structure</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-workflow">PSR Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/per-workflow">PER Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/voting-protocol">Voting Protocol</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/elections-and-vacancies">Elections and Vacancies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/licensing-policies">Licensing Policies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-amendments">PSR Amendments</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link sidebar__link--active" href="/bylaws/psr-evolution">PSR Evolution</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-naming-conventions">PSR Naming Conventions</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/funding">Funding</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/fig-3-transition">FIG 3.0 Transition</a>
+                </li>
+                        </ul>
+        </nav>
+    </div>
+</div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

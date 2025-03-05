@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-17: HTTP Factories - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-17: HTTP Factories - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-17: HTTP Factories - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-17: HTTP Factories
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Factories<a id="http-factories" href="#http-factories" name="http-factories" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>This document describes a common standard for factories that create <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a>
+compliant HTTP objects.</p>
+<p>PSR-7 did not include a recommendation on how to create HTTP objects, which leads
+to difficulties when needing to create new HTTP objects within components that are
+not tied to a specific implementation of PSR-7.</p>
+<p>The interfaces outlined in this document describe methods by which PSR-7 objects
+can be instantiated.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<h2>1. Specification<a id="1-specification" href="#1-specification" name="1-specification" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An HTTP factory is a method by which a new HTTP object, as defined by PSR-7,
+is created. HTTP factories MUST implement these interfaces for each object type
+that is provided by the package.</p>
+<h2>2. Interfaces<a id="2-interfaces" href="#2-interfaces" name="2-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The following interfaces MAY be implemented together within a single class or
+in separate classes.</p>
+<h3>2.1 RequestFactoryInterface<a id="21-requestfactoryinterface" href="#21-requestfactoryinterface" name="21-requestfactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create client requests.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">RequestInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">UriInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RequestFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new request.
+     *
+     * <span class="hljs-doctag">@param</span> string $method The HTTP method associated with the request.
+     * <span class="hljs-doctag">@param</span> UriInterface|string $uri The URI associated with the request. 
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createRequest</span><span class="hljs-params">(string $method, $uri)</span>: <span class="hljs-title">RequestInterface</span></span>;
+}
+</code></pre>
+<h3>2.2 ResponseFactoryInterface<a id="22-responsefactoryinterface" href="#22-responsefactoryinterface" name="22-responsefactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create responses.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ResponseInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ResponseFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new response.
+     *
+     * <span class="hljs-doctag">@param</span> int $code The HTTP status code. Defaults to 200.
+     * <span class="hljs-doctag">@param</span> string $reasonPhrase The reason phrase to associate with the status code
+     *     in the generated response. If none is provided, implementations MAY use
+     *     the defaults as suggested in the HTTP specification.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createResponse</span><span class="hljs-params">(int $code = <span class="hljs-number">200</span>, string $reasonPhrase = <span class="hljs-string">''</span>)</span>: <span class="hljs-title">ResponseInterface</span></span>;
+}
+</code></pre>
+<h3>2.3 ServerRequestFactoryInterface<a id="23-serverrequestfactoryinterface" href="#23-serverrequestfactoryinterface" name="23-serverrequestfactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create server requests.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ServerRequestInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">UriInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ServerRequestFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new server request.
+     *
+     * Note that server parameters are taken precisely as given - no parsing/processing
+     * of the given values is performed. In particular, no attempt is made to
+     * determine the HTTP method or URI, which must be provided explicitly.
+     *
+     * <span class="hljs-doctag">@param</span> string $method The HTTP method associated with the request.
+     * <span class="hljs-doctag">@param</span> UriInterface|string $uri The URI associated with the request. 
+     * <span class="hljs-doctag">@param</span> array $serverParams An array of Server API (SAPI) parameters with
+     *     which to seed the generated request instance.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createServerRequest</span><span class="hljs-params">(string $method, $uri, array $serverParams = [])</span>: <span class="hljs-title">ServerRequestInterface</span></span>;
+}
+</code></pre>
+<h3>2.4 StreamFactoryInterface<a id="24-streamfactoryinterface" href="#24-streamfactoryinterface" name="24-streamfactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create streams for requests and responses.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">StreamInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">StreamFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new stream from a string.
+     *
+     * The stream SHOULD be created with a temporary resource.
+     *
+     * <span class="hljs-doctag">@param</span> string $content String content with which to populate the stream.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createStream</span><span class="hljs-params">(string $content = <span class="hljs-string">''</span>)</span>: <span class="hljs-title">StreamInterface</span></span>;
+
+    <span class="hljs-comment">/**
+     * Create a stream from an existing file.
+     *
+     * The file MUST be opened using the given mode, which may be any mode
+     * supported by the `fopen` function.
+     *
+     * The `$filename` MAY be any string supported by `fopen()`.
+     *
+     * <span class="hljs-doctag">@param</span> string $filename The filename or stream URI to use as basis of stream.
+     * <span class="hljs-doctag">@param</span> string $mode The mode with which to open the underlying filename/stream.
+     *
+     * <span class="hljs-doctag">@throws</span> \RuntimeException If the file cannot be opened.
+     * <span class="hljs-doctag">@throws</span> \InvalidArgumentException If the mode is invalid.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createStreamFromFile</span><span class="hljs-params">(string $filename, string $mode = <span class="hljs-string">'r'</span>)</span>: <span class="hljs-title">StreamInterface</span></span>;
+
+    <span class="hljs-comment">/**
+     * Create a new stream from an existing resource.
+     *
+     * The stream MUST be readable and may be writable.
+     *
+     * <span class="hljs-doctag">@param</span> resource $resource The PHP resource to use as the basis for the stream.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createStreamFromResource</span><span class="hljs-params">($resource)</span>: <span class="hljs-title">StreamInterface</span></span>;
+}
+</code></pre>
+<p>Implementations of this interface SHOULD use a temporary stream when creating
+resources from strings. The RECOMMENDED method for doing so is:</p>
+<pre><code class="language-php hljs php" data-lang="php">$resource = fopen(<span class="hljs-string">'php://temp'</span>, <span class="hljs-string">'r+'</span>);
+</code></pre>
+<h3>2.5 UploadedFileFactoryInterface<a id="25-uploadedfilefactoryinterface" href="#25-uploadedfilefactoryinterface" name="25-uploadedfilefactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create streams for uploaded files.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">StreamInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">UploadedFileInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UploadedFileFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new uploaded file.
+     *
+     * If a size is not provided it will be determined by checking the size of
+     * the stream.
+     *
+     * <span class="hljs-doctag">@link</span> http://php.net/manual/features.file-upload.post-method.php
+     * <span class="hljs-doctag">@link</span> http://php.net/manual/features.file-upload.errors.php
+     *
+     * <span class="hljs-doctag">@param</span> StreamInterface $stream The underlying stream representing the
+     *     uploaded file content.
+     * <span class="hljs-doctag">@param</span> int $size The size of the file in bytes.
+     * <span class="hljs-doctag">@param</span> int $error The PHP file upload error.
+     * <span class="hljs-doctag">@param</span> string $clientFilename The filename as provided by the client, if any.
+     * <span class="hljs-doctag">@param</span> string $clientMediaType The media type as provided by the client, if any.
+     *
+     * <span class="hljs-doctag">@throws</span> \InvalidArgumentException If the file resource is not readable.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createUploadedFile</span><span class="hljs-params">(
+        StreamInterface $stream,
+        int $size = null,
+        int $error = \UPLOAD_ERR_OK,
+        string $clientFilename = null,
+        string $clientMediaType = null
+    )</span>: <span class="hljs-title">UploadedFileInterface</span></span>;
+}
+</code></pre>
+<h3>2.6 UriFactoryInterface<a id="26-urifactoryinterface" href="#26-urifactoryinterface" name="26-urifactoryinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Has the ability to create URIs for client and server requests.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">UriInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UriFactoryInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Create a new URI.
+     *
+     * <span class="hljs-doctag">@param</span> string $uri The URI to parse.
+     *
+     * <span class="hljs-doctag">@throws</span> \InvalidArgumentException If the given URI cannot be parsed.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createUri</span><span class="hljs-params">(string $uri = <span class="hljs-string">''</span>)</span> : <span class="hljs-title">UriInterface</span></span>;
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-17: HTTP Factories</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-17/meta">PSR-17 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

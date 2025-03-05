@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PER Coding Style Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PER Coding Style Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PER Coding Style Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PER Coding Style Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Coding Style Guide Meta Document<a id="coding-style-guide-meta-document" href="#coding-style-guide-meta-document" name="coding-style-guide-meta-document" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>1. Summary<a id="1-summary" href="#1-summary" name="1-summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>This document describes the process and discussions that led to the Coding
+Style PER. Its goal is to explain the reasons behind each decision.</p>
+<h2>2. Why Bother?<a id="2-why-bother" href="#2-why-bother" name="2-why-bother" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>PSR-12 was accepted in 2019 and since then a number of changes have been made to PHP,
+most notably recent changes for PHP 8 and PHP 8.1, which have implications for coding style
+guidelines. Whilst PSR-12 is very comprehensive of PHP functionality that existed at
+the time of writing, new functionality is very open to interpretation. PSR-12 seeks
+to provide a set way that both coding style tools can implement, projects can declare
+adherence to and developers can easily relate on between different projects for these
+coding style reducing cognitive friction.</p>
+<p>PSR-12 was an update for PSR-2 which was created based upon the common practices of the PHP-FIG
+projects at the time but ultimately this meant it was a compromise of many of the different
+projects' guidelines. The repercussions of projects changing their coding guidelines to align
+with PSR-2 (Almost all projects do align with PSR-1, even if it is not explicitly stated) were
+seen to be too great (losing git history, huge changesets and breaking existing patches/pull requests).</p>
+<p>PSR-2 required adopters to reformat large amounts of existing code which stifled adoption.
+To help alleviate this issue with PSR-12, we have taken a more prescriptive approach and
+defined the standards for new language features as they are released.</p>
+<p>However, it is for a lack of wanting to be dictatorial that we aimed to apply PSR-2
+styling, rationale and stances (Described in Section 5, Approaches) in PSR-12 instead of
+establishing new conventions.</p>
+<p>The same approach is applied to the current PER.</p>
+<h2>3. Scope<a id="3-scope" href="#3-scope" name="3-scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>3.1. Goals<a id="31-goals" href="#31-goals" name="31-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>This PER shares the same goals as PSR-12.</p>
+<blockquote>
+<p>The intent of this guide is to reduce cognitive friction when scanning code from
+different authors. It does so by enumerating a shared set of rules and expectations
+about how to format PHP code.
+When various authors collaborate across multiple projects, it helps to have one set
+of guidelines to be used among all those projects. Thus, the benefit of this guide is
+not in the rules themselves, but in the sharing of those rules.</p>
+</blockquote>
+<p>This PER extends, expands and replaces PSR-12, and is therefore also an extension of PSR-1.
+With PSR-12 being the base of this PER, a list of differences is provided below to assist with migration,
+but it should be considered as an independent specification.</p>
+<p>This PER will include coding style guidelines related to new functionality added to PHP
+after the publication of PSR-12. This PER will also include clarifications on the text of
+PSR-12.</p>
+<p>The question of whether to include or replace requirements from PSR-1 was examined by the Working Group. However it was decided to omit any such requirements for further consideration in a subsequent release.</p>
+<h3>3.2. Non-Goals<a id="32-non-goals" href="#32-non-goals" name="32-non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>It is not the intention of this PER to add entirely new coding style guidelines. It will
+also not change anything stipulated in PSR-1 and PSR-12.</p>
+<h2>4. Versioning<a id="4-versioning" href="#4-versioning" name="4-versioning" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>New releases of this PER are assigned version numbers in keeping with <a href="https://semver.org/">semantic versioning</a>.
+Semantic versioning is well defined when applied to software releases but has no common definition in other contexts.
+This PER applies the following meanings:</p>
+<ul>
+<li>
+<strong>Patch</strong> versions may contain:
+<ul>
+<li>Any changes that do not alter the underlying requirements of this PER, such as fixing typos, adding clarifications or
+other modifications with no compatibility impact.</li>
+</ul>
+</li>
+<li>
+<strong>Minor</strong> versions may additionally:
+<ul>
+<li>Add new requirements for PHP syntax previously unspecified in this PER.</li>
+<li>Add, remove or alter requirements in a way that is both more permissive and backwards compatible for implementers.</li>
+</ul>
+</li>
+<li>
+<strong>Major</strong> versions may additionally:
+<ul>
+<li>Add, remove or alter any requirements.</li>
+</ul>
+</li>
+</ul>
+<p>Projects are expected to pin their own coding style guidelines to a major version of this PER, allowing for regular
+upgrades to minor and patch releases as they are published. When performing such upgrades, it is intended that no change
+to existing code is required to maintain compliance with all requirements and recommendations of this PER. This ensures
+new code contributions processed by an automatic formatter follow (or disregard) recommendations consistently with the
+existing code.</p>
+<p>Please note this backwards compatibility promise does not extend to projects that use new PHP syntax yet to be specified
+in this PER. In this circumstance, a minor version may introduce new requirements that are effectively breaking changes.</p>
+<p>It is ultimately determined whether a meaningful change may be included in a minor release on a case-by-case basis by
+consensus. The addition of <code>MAY</code> or <code>OPTIONAL</code> requirements or the removal of requirements with non-optional RFC 2119
+keywords will not always meet the criteria for minor release. For example, specifying that projects may use tabs instead
+of spaces for indentation creates a new implicit requirement that projects must use one style consistently; this new
+burden on projects to reformat incoming contributions to their chosen style defines the change as major.</p>
+<h2>5. Approaches<a id="5-approaches" href="#5-approaches" name="5-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The overarching approach is to attempt to apply existing PSR-12 styling and rationale to
+new functionality as opposed to establishing new conventions.</p>
+<h3>5.1. Strict Types Declarations<a id="51-strict-types-declarations" href="#51-strict-types-declarations" name="51-strict-types-declarations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>There was a discussion about whether strict types should be enforced in the standard
+https://github.com/cs-extended/fig-standards/issues/7. All were in agreement we should only
+use a MUST or MUST NOT statement and avoid the use of a SHOULD statement and nobody wanted
+to say that strict types could not be declared. The discussion was whether it should be
+considered a coding style item which should be covered or whether it was out of scope, and it
+was decided to be out of scope of a coding style guide.</p>
+<h3>5.2. Finally and Return Types Declaration Spacing<a id="52-finally-and-return-types-declaration-spacing" href="#52-finally-and-return-types-declaration-spacing" name="52-finally-and-return-types-declaration-spacing" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Numerous options were suggested, and they can be seen
+<a href="https://gist.github.com/michaelcullum/c025f3870c9ea1dd2668#file-returntypesspacing-php">here for return type declarations</a> or
+<a href="https://gist.github.com/michaelcullum/c025f3870c9ea1dd2668#file-finallyblocks-php">here for finally blocks</a>
+and the current implementation was chosen due to consistency with other parts of the standard.</p>
+<h3>5.3. Enforcing short form for all type keywords<a id="53-enforcing-short-form-for-all-type-keywords" href="#53-enforcing-short-form-for-all-type-keywords" name="53-enforcing-short-form-for-all-type-keywords" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>PHP 7.0 introduced <a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration">scalar types declaration</a>
+which does not support long type aliases. Therefore, it makes sense to enforce primary short type forms to be used to
+have uniform syntax and prevent possible confusion.</p>
+<h3>5.4. Public Survey<a id="54-public-survey" href="#54-public-survey" name="54-public-survey" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>In order to settle things using data, survey was conducted and responses from 142 people
+including 17 project representatives were gathered:</p>
+<h4>5.4.1. PHP-FIG Representative Results<a id="541-php-fig-representative-results" href="#541-php-fig-representative-results" name="541-php-fig-representative-results" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Representative</th>
+<th>Project</th>
+<th>Compound namespaces with a depth of two or more MUST not be used</th>
+<th>Header statement grouping and ordering</th>
+<th>Declare statements must each be on their own line</th>
+<th>Declare statements in PHP files containing markup</th>
+<th>Declare statements have no spaces: <code>declare(strict_types=1);</code></th>
+<th>Block declare statement formatting</th>
+<th><code>new</code> keyword usage, parenthesis required</th>
+<th>Return type declaration formatting</th>
+<th>Use statement leading slashes disallowed</th>
+<th>Block namespace declaration formatting</th>
+<th>General operator spacing</th>
+<th>Try, Catch, Finally formatting</th>
+<th>Anonymous class declaration formatting</th>
+<th>Keyword casing, only lower case</th>
+<th>Type keywords, short form only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alexander Makarov</td>
+<td>Yii framework</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Korvin Szanto</td>
+<td>concrete5</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Leo Feyer</td>
+<td>Contao</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Larry Garfield</td>
+<td>Drupal</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>André R.</td>
+<td>eZ</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Jan Schneider</td>
+<td>Horde</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Karsten Dambekalns</td>
+<td>Neos and Flow</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Andres Gutierrez</td>
+<td>Phalcon</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Ryan Thompson</td>
+<td>PyroCMS</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Matteo Beccati</td>
+<td>Revive Adserver</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Damian Mooyman</td>
+<td>SilverStripe</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Brian Retterer</td>
+<td>Stormpath PHP SDK</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>❌</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Matthew Weier O'Phinney</td>
+<td>Zend Framework</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Jordi Boggiano</td>
+<td>Composer</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>❌</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Ben Marks</td>
+<td>Magento</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Chuck Burgess</td>
+<td>PEAR</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Totals</strong>:</td>
+<td>13/3</td>
+<td>15/1</td>
+<td>15/1</td>
+<td>13/3</td>
+<td>14/2</td>
+<td>15/1</td>
+<td>14/2</td>
+<td>15/1</td>
+<td>14/2</td>
+<td>14/2</td>
+<td>15/1</td>
+<td>16/0</td>
+<td>15/1</td>
+<td>15/1</td>
+<td>15/1</td>
+</tr>
+</tbody>
+</table>
+<h4>5.4.2. General non-representative voters<a id="542-general-non-representative-voters" href="#542-general-non-representative-voters" name="542-general-non-representative-voters" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>For</th>
+<th>Against</th>
+<th>Percentage For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compound namespaces required depth</td>
+<td>114</td>
+<td>12</td>
+<td>89.47%</td>
+</tr>
+<tr>
+<td>Header statement grouping and ordering</td>
+<td>113</td>
+<td>13</td>
+<td>88.5%</td>
+</tr>
+<tr>
+<td>Declare statements must each be on their own line</td>
+<td>120</td>
+<td>6</td>
+<td>95%</td>
+</tr>
+<tr>
+<td>Declare statements in PHP files containing markup</td>
+<td>119</td>
+<td>7</td>
+<td>94.12%</td>
+</tr>
+<tr>
+<td>Declare statements have no spaces</td>
+<td>116</td>
+<td>10</td>
+<td>91.38%</td>
+</tr>
+<tr>
+<td>Block declare statement formatting</td>
+<td>118</td>
+<td>8</td>
+<td>93.22%</td>
+</tr>
+<tr>
+<td><code>new</code> keyword usage, parenthesis required</td>
+<td>116</td>
+<td>10</td>
+<td>91.38%</td>
+</tr>
+<tr>
+<td>Return type declaration formatting</td>
+<td>115</td>
+<td>11</td>
+<td>90.43%</td>
+</tr>
+<tr>
+<td>Use statement leading slashes disallowed</td>
+<td>118</td>
+<td>8</td>
+<td>93.22%</td>
+</tr>
+<tr>
+<td>Block namespace declaration formatting</td>
+<td>120</td>
+<td>6</td>
+<td>95%</td>
+</tr>
+<tr>
+<td>General operator spacing</td>
+<td>123</td>
+<td>3</td>
+<td>97.56%</td>
+</tr>
+<tr>
+<td>Try, Catch, Finally formatting</td>
+<td>124</td>
+<td>2</td>
+<td>98.39%</td>
+</tr>
+<tr>
+<td>Anonymous class declaration formatting</td>
+<td>117</td>
+<td>9</td>
+<td>92.31%</td>
+</tr>
+<tr>
+<td>Keyword casing, only lower case</td>
+<td>124</td>
+<td>2</td>
+<td>98.39%</td>
+</tr>
+<tr>
+<td>Type keywords, short form only</td>
+<td>121</td>
+<td>5</td>
+<td>95.87%</td>
+</tr>
+</tbody>
+</table>
+<h3>5.5. Multiline Function Arguments Mixed With Multiline Return<a id="55-multiline-function-arguments-mixed-with-multiline-return" href="#55-multiline-function-arguments-mixed-with-multiline-return" name="55-multiline-function-arguments-mixed-with-multiline-return" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A potential readability issue <a href="https://groups.google.com/d/msg/php-fig/ULSL4gqK8GY/cgDELuPOCQAJ">was raised on the mailing list</a>.
+We reviewed options for changes to the specification that could provide better readability and
+the floated option was to require a blank line after the opening bracket of a function if the
+arguments and the return are both multiline. Instead, it was pointed out that this specification
+<em>already</em> allows you to decide where you'd like to add blank lines, and so we will leave it to
+the implementors to decide.</p>
+<h2>6. Changelog<a id="6-changelog" href="#6-changelog" name="6-changelog" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Please note this changelog is not a verbose list of changes from PSR-12 and further but highlights the most
+notable changes. It should be considered a new specification, and therefore you should read the
+specification for a full understanding of its contents.</p>
+<h3>6.1. New Statements<a id="61-new-statements" href="#61-new-statements" name="61-new-statements" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Lowercase for all keywords - Section 2.5</li>
+<li>Short form for all type keywords - Section 2.5</li>
+<li>Use statement grouping - Section 3</li>
+<li>Use statement blocks - Section 3</li>
+<li>Declare statement/Strict types declaration usage - Section 3</li>
+<li>Parentheses are always required for class instantiation - Section 4</li>
+<li>Typed properties - Section 4.3</li>
+<li>Return type declarations - Section 4.5</li>
+<li>Variadic and reference argument operators - Section 4.5</li>
+<li>Type hints - Section 4.5</li>
+<li>Add finally block - Section 5.6</li>
+<li>Operators - Section 6</li>
+<li>Unary operators - Section 6.1</li>
+<li>Binary operators - Section 6.2</li>
+<li>Ternary operators - Section 6.3</li>
+<li>Anonymous classes - Section 8</li>
+</ul>
+<h3>6.2. Clarifications and Errata<a id="62-clarifications-and-errata" href="#62-clarifications-and-errata" name="62-clarifications-and-errata" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Adjust 'methods' to 'methods and functions' in a number of instances - Throughout</li>
+<li>Adjust references to classes and interfaces to also include traits - Throughout</li>
+<li>StudlyCaps meaning clarified as PascalCase - Section 2.1</li>
+<li>The last line should not be blank but contain an EOL character - Section 2.2</li>
+<li>Blank lines may be added for readability except where explicitly forbidden within the PSR - Section 2.3</li>
+<li>PSR-2 errata statement about multi-line arguments - Section 4</li>
+<li>PSR-2 errata statement about extending multiple interfaces - Section 4</li>
+<li>Forbid blank lines before/after closing/opening braces for classes - Section 4</li>
+</ul>
+<h2>7. People<a id="7-people" href="#7-people" name="7-people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>7.1.  Editor:<a id="71-editor" href="#71-editor" name="71-editor" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Korvin Szanto</li>
+</ul>
+<h3>7.2. Sponsor:<a id="72-sponsor" href="#72-sponsor" name="72-sponsor" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Chris Tankersley</li>
+</ul>
+<h3>7.3. Working Group Members:<a id="73-working-group-members" href="#73-working-group-members" name="73-working-group-members" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Alexander Makarov</li>
+<li>Ken Guest</li>
+<li>Larry Garfield</li>
+<li>Luke Diggins</li>
+<li>Woody Gilk</li>
+</ul>
+<h3>7.4. Special Thanks<a id="74-special-thanks" href="#74-special-thanks" name="74-special-thanks" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Everyone involved in PSR-1, PSR-2, PSR-12.</li>
+</ul>
+<h2>8. Votes<a id="8-votes" href="#8-votes" name="8-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<strong>Entrance Vote:</strong> https://groups.google.com/g/php-fig/c/YqPDYGK0RhM/m/pJmThkNKBgAJ</li>
+</ul>
+<h2>9. Relevant Links<a id="9-relevant-links" href="#9-relevant-links" name="9-relevant-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p><em><strong>Note:</strong> Order descending chronologically.</em></p>
+<ul>
+<li>
+<strong>PSR-12:</strong> https://www.php-fig.org/psr/psr-12/</li>
+<li>
+<strong>PSR-2:</strong> https://www.php-fig.org/psr/psr-2/</li>
+<li>
+<strong>PSR-1:</strong> https://www.php-fig.org/psr/psr-1/</li>
+</ul>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/per/coding-style">PER Coding Style</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PER Coding Style Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

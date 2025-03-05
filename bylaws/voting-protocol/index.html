@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Voting Protocol - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="Voting Protocol - PHP-FIG" />
+
+    <meta name="twitter:title" content="Voting Protocol - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        Voting Protocol
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Votes<a id="votes" href="#votes" name="votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>There are a number of different types of vote, each of which has its own rule set and expected threshold. Unless otherwise specified, all votes take place over a period of two weeks, or until all eligible voters have voted, whichever comes first, and votes are public. Explicit abstentions (+0) will count toward quorum, if applicable, but do not count toward majority.</p>
+<p>Non-trivial votes should be preceded by at least two weeks of discussion, although no formal discussion mechanism is required.</p>
+<p>The mechanics of voting (email, forum, any conventional subject lines, etc.) may be established and publicized by the Secretaries.</p>
+<p>Votes may be changed at will until the end of the voting period.</p>
+<p>In some cases, votes may overlap such that an individual would become eligible to cast a vote only as a result of another overlapping vote, such as a membership vote. In all cases, eligibility to vote will be defined based on membership at the moment a given vote starts. For nominations for Secretary or Core Committee member, eligibility to vote will be defined based on membership at the moment the nominating period begins.</p>
+<p>A secretary may trigger any type of vote if appropriate and necessary.</p>
+<p>Rounding of quorums and majorities would occur such that:</p>
+<ul>
+<li>A vote requiring a quorum of 1/3 of an electorate of 20, 21 or 22 members would require 7 votes to be cast</li>
+<li>A vote requiring a quorum of 1/3 of an electorate of 23, 24 or 25 members would require 8 votes to be cast</li>
+<li>A vote requiring a 50% majority with 10 or 11 votes cast would require 6 or more to be in favour to pass</li>
+<li>A vote requiring a 50% majority with 12 or 13 votes cast would require 7 or more to be in favour to pass</li>
+</ul>
+<h2>Vote Types<a id="vote-types" href="#vote-types" name="vote-types" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Most votes are held by the Core Committee, and fall into one of two categories: Approval or Decision.  Unless otherwise specified, any member of the Core Committee or a Secretary may call an Approval or Decision Vote.</p>
+<h3>Approval Vote<a id="approval-vote" href="#approval-vote" name="approval-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>An Approval Vote is a yes-or-no question, in which case the status quo (voting &quot;no&quot;) produces a stable outcome. Only Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 2/3 majority is required for passage.</p>
+<h3>Decision Vote<a id="decision-vote" href="#decision-vote" name="decision-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A Decision Vote is used to select between two or more mutually-exclusive courses of action, in which case the status quo is not stable (e.g., a vacancy is being filled).  Only Core Committee members may vote.  A Decision Vote will be conducted using Single Transferable Vote with a single-winner.  Quorum is 50%.</p>
+<h2>Entrance Vote<a id="entrance-vote" href="#entrance-vote" name="entrance-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Entrance Vote is called by the Sponsor of a proposed PSR.  It follows Approval Vote procedures.</p>
+<h2>Readiness Vote<a id="readiness-vote" href="#readiness-vote" name="readiness-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Readiness Vote is called by the Editor of a proposed PSR in Draft Phase. Only members of the PSR's Working Group (including the Editor and Sponsor) may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 2/3 majority is required for passage.</p>
+<h2>Acceptance Vote<a id="acceptance-vote" href="#acceptance-vote" name="acceptance-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Acceptance Vote is called by the Sponsor of a proposed PSR in the Review Phase. It follows Approval Vote procedures.</p>
+<h2>Errata Vote<a id="errata-vote" href="#errata-vote" name="errata-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Errata Vote is called by the Editor of an approved PSR, or a Secretary if the Editor is no longer available. It follows Approval Vote procedures.</p>
+<h2>Deprecation Vote<a id="deprecation-vote" href="#deprecation-vote" name="deprecation-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Deprecation Vote is called by any Core Committee Member. It follows Approval Vote procedures.</p>
+<h2>Abandonment Vote<a id="abandonment-vote" href="#abandonment-vote" name="abandonment-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Abandonment Vote is called by any Secretary or Core Committee Member. It follows Approval Vote procedures.</p>
+<h2>Implicit Approval<a id="implicit-approval" href="#implicit-approval" name="implicit-approval" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>At times, routine Working Group activity is subject to the approval of the Core Committee but in most cases is not sufficiently controversial to warrant a full vote.  In such cases, an individual may declare an Intent to take an action.  If no member of the Core Committee objects within seven days, the action is implicitly approved.</p>
+<p>Any member of the Core Committee may request during that seven-day period that the change be put to a vote.  If any member does so, the action is put to an Approval Vote or Decision Vote (as appropriate to the situation) to determine if it is accepted or not.</p>
+<h2>Membership Vote<a id="membership-vote" href="#membership-vote" name="membership-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Membership Vote is called by any Project Representative and consists of a separate concurrent vote by the Core Committee and Project Representatives.</p>
+<p>For the Core Committee vote, Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 50% majority is required for passage.</p>
+<p>For the Project Representative vote, Project Representatives may vote, either For (+1), Against (-1), or Abstain (+0). There is no quorum. A 50% majority is required for passage.</p>
+<p>Both the Core Committee and Project Representative votes must pass for the Membership Vote to be approved. If an individual is serving as both a Project Representative and Core Committee member, they are ineligible to vote in the Project Representative vote. If an individual is on the Core Committee and they are to be the Project Represenative for the project in question, they are not eligible to vote.</p>
+<h2>Expulsion vote<a id="expulsion-vote" href="#expulsion-vote" name="expulsion-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Expulsion Vote is called by any Secretary or Core Committee member and consists of a separate concurrent vote by the Core Committee and Project Representatives.</p>
+<p>For the Core Committee vote, Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 50% majority is required for passage.</p>
+<p>For the Project Representative vote, Project Representatives may vote, either For (+1), Against (-1), or Abstain (+0). There is no quorum. A 50% majority is required for passage.</p>
+<p>Both the Core Committee and Project Representative votes must pass for the Expulsion Vote to be approved. If an individual is serving as both a Project Representative and Core Committee member, they are ineligible to vote in the Project Representative vote. The Project Representative that is the subject, or whose project is the subject, of the Expulsion Vote is not eligible to vote.</p>
+<h2>Recall Vote<a id="recall-vote" href="#recall-vote" name="recall-vote" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Recall Vote is called by any two of a Secretary, Core Committee member, and Project Representative, and consists of a separate concurrent vote by the Core Committee and Project Representatives.</p>
+<p>For the Core Committee vote, Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 2/3 majority is required for passage.</p>
+<p>For the Project Representative vote, Project Representatives may vote, either For (+1), Against (-1), or Abstain (+0). There is no quorum. A 2/3 majority is required for passage.</p>
+<p>Both the Core Committee and Project Representative votes must pass for the Recall Vote to be approved. If an individual is serving as both a Project Representative and Core Committee member, they are ineligible to vote in the Project Representative vote. If a Core Committee member is the subject of the Recall Vote, they are not eligible to vote.</p>
+<h2>Bylaw Votes<a id="bylaw-votes" href="#bylaw-votes" name="bylaw-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A vote to amend any FIG bylaw is called by a Secretary, and consists of a separate concurrent vote by the Core Committee and Project Representatives.</p>
+<p>For the Core Committee vote, Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 2/3 majority is required for passage.</p>
+<p>For the Project Representative vote, Project Representatives may vote, either For (+1), Against (-1), or Abstain (+0). There is no quorum. A 2/3 majority is required for passage.</p>
+<p>Both the Core Committee and Project Representative votes must pass for the Bylaw Vote to be approved. If an individual is serving as both a Project Representative and Core Committee member, they are ineligible to vote in the Project Representative vote.</p>
+<h2>Other Votes<a id="other-votes" href="#other-votes" name="other-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Should a need arise to call a formal vote for any situation not described here, the vote will be called by a Secretary. It consists of a separate vote by the Core Committee and Project Representatives.</p>
+<p>For the Core Committee vote, Core Committee members may vote, either For (+1), Against (-1), or Abstain (+0). Quorum is 50%. A 2/3 majority is required for passage.</p>
+<p>For the Project Representative vote, Project Representatives may vote, either For (+1), Against (-1), or Abstain (+0). There is no quorum. A 50% majority is required for passage.</p>
+<p>Both the Core Committee and Project Representative votes must pass for the Vote to be approved. If an individual is serving as both a Project Representative and Core Committee member, they are ineligible to vote in the Project Representative vote.</p>
+
+                    </div>
+    </div>
+    <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Bylaws index:</h2>
+            <ul class="sidebar__list">
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/mission-and-structure">Mission and Structure</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-workflow">PSR Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/per-workflow">PER Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link sidebar__link--active" href="/bylaws/voting-protocol">Voting Protocol</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/elections-and-vacancies">Elections and Vacancies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/licensing-policies">Licensing Policies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-amendments">PSR Amendments</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-evolution">PSR Evolution</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-naming-conventions">PSR Naming Conventions</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/funding">Funding</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/fig-3-transition">FIG 3.0 Transition</a>
+                </li>
+                        </ul>
+        </nav>
+    </div>
+</div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

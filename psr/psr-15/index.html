@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-15: HTTP Server Request Handlers - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-15: HTTP Server Request Handlers - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-15: HTTP Server Request Handlers - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-15: HTTP Server Request Handlers
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Server Request Handlers<a id="http-server-request-handlers" href="#http-server-request-handlers" name="http-server-request-handlers" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>This document describes common interfaces for HTTP server request handlers
+(&quot;request handlers&quot;) and HTTP server middleware components (&quot;middleware&quot;)
+that use HTTP messages as described by <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> or subsequent
+replacement PSRs.</p>
+<p>HTTP request handlers are a fundamental part of any web application. Server-side
+code receives a request message, processes it, and produces a response message.
+HTTP middleware is a way to move common request and response processing away from
+the application layer.</p>
+<p>The interfaces described in this document are abstractions for request handlers
+and middleware.</p>
+<p><em>Note: All references to &quot;request handlers&quot; and &quot;middleware&quot; are specific to
+<strong>server request</strong> processing.</em></p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<h3>References<a id="references" href="#references" name="references" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a>
+</li>
+<li>
+<a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>
+</li>
+</ul>
+<h2>1. Specification<a id="1-specification" href="#1-specification" name="1-specification" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>1.1 Request Handlers<a id="11-request-handlers" href="#11-request-handlers" name="11-request-handlers" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A request handler is an individual component that processes a request and
+produces a response, as defined by PSR-7.</p>
+<p>A request handler MAY throw an exception if request conditions prevent it from
+producing a response. The type of exception is not defined.</p>
+<p>Request handlers using this standard MUST implement the following interface:</p>
+<ul>
+<li>
+<code>Psr\Http\Server\RequestHandlerInterface</code>
+</li>
+</ul>
+<h3>1.2 Middleware<a id="12-middleware" href="#12-middleware" name="12-middleware" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A middleware component is an individual component participating, often together
+with other middleware components, in the processing of an incoming request and
+the creation of a resulting response, as defined by PSR-7.</p>
+<p>A middleware component MAY create and return a response without delegating to
+a request handler, if sufficient conditions are met.</p>
+<p>Middleware using this standard MUST implement the following interface:</p>
+<ul>
+<li>
+<code>Psr\Http\Server\MiddlewareInterface</code>
+</li>
+</ul>
+<h3>1.3 Generating Responses<a id="13-generating-responses" href="#13-generating-responses" name="13-generating-responses" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>It is RECOMMENDED that any middleware or request handler that generates a response
+will either compose a prototype of a PSR-7 <code>ResponseInterface</code> or a factory capable
+of generating a <code>ResponseInterface</code> instance in order to prevent dependence on a
+specific HTTP message implementation.</p>
+<h3>1.4 Handling Exceptions<a id="14-handling-exceptions" href="#14-handling-exceptions" name="14-handling-exceptions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>It is RECOMMENDED that any application using middleware includes a component
+that catches exceptions and converts them into responses. This middleware SHOULD
+be the first component executed and wrap all further processing to ensure that
+a response is always generated.</p>
+<h2>2. Interfaces<a id="2-interfaces" href="#2-interfaces" name="2-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>2.1 Psr\Http\Server\RequestHandlerInterface<a id="21-psrhttpserverrequesthandlerinterface" href="#21-psrhttpserverrequesthandlerinterface" name="21-psrhttpserverrequesthandlerinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The following interface MUST be implemented by request handlers.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Server</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ResponseInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ServerRequestInterface</span>;
+
+<span class="hljs-comment">/**
+ * Handles a server request and produces a response.
+ *
+ * An HTTP request handler process an HTTP request in order to produce an
+ * HTTP response.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RequestHandlerInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Handles a request and produces a response.
+     *
+     * May call other collaborating code to generate the response.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(ServerRequestInterface $request)</span>: <span class="hljs-title">ResponseInterface</span></span>;
+}
+</code></pre>
+<h3>2.2 Psr\Http\Server\MiddlewareInterface<a id="22-psrhttpservermiddlewareinterface" href="#22-psrhttpservermiddlewareinterface" name="22-psrhttpservermiddlewareinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The following interface MUST be implemented by compatible middleware components.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Server</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ResponseInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ServerRequestInterface</span>;
+
+<span class="hljs-comment">/**
+ * Participant in processing a server request and response.
+ *
+ * An HTTP middleware component participates in processing an HTTP message:
+ * by acting on the request, generating the response, or forwarding the
+ * request to a subsequent middleware and possibly acting on its response.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">MiddlewareInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Process an incoming server request.
+     *
+     * Processes an incoming server request in order to produce a response.
+     * If unable to produce the response itself, it may delegate to the provided
+     * request handler to do so.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">(ServerRequestInterface $request, RequestHandlerInterface $handler)</span>: <span class="hljs-title">ResponseInterface</span></span>;
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-15: HTTP Server Request Handlers</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-15/meta">PSR-15 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

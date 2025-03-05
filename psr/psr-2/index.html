@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-2: Coding Style Guide - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-2: Coding Style Guide - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-2: Coding Style Guide - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-2: Coding Style Guide
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Coding Style Guide<a id="coding-style-guide" href="#coding-style-guide" name="coding-style-guide" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<blockquote>
+<p><strong>Deprecated</strong> - As of 2019-08-10 PSR-2 has been marked as deprecated. <a href="https://www.php-fig.org/psr/psr-12/">PSR-12</a> is now recommended
+as an alternative.</p>
+</blockquote>
+<p>This guide extends and expands on <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1</a>, the basic coding standard.</p>
+<p>The intent of this guide is to reduce cognitive friction when scanning code
+from different authors. It does so by enumerating a shared set of rules and
+expectations about how to format PHP code.</p>
+<p>The style rules herein are derived from commonalities among the various member
+projects. When various authors collaborate across multiple projects, it helps
+to have one set of guidelines to be used among all those projects. Thus, the
+benefit of this guide is not in the rules themselves, but in the sharing of
+those rules.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.</p>
+<h2>1. Overview<a id="1-overview" href="#1-overview" name="1-overview" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<p>Code MUST follow a &quot;coding style guide&quot; PSR [<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1</a>].</p>
+</li>
+<li>
+<p>Code MUST use 4 spaces for indenting, not tabs.</p>
+</li>
+<li>
+<p>There MUST NOT be a hard limit on line length; the soft limit MUST be 120
+characters; lines SHOULD be 80 characters or less.</p>
+</li>
+<li>
+<p>There MUST be one blank line after the <code>namespace</code> declaration, and there
+MUST be one blank line after the block of <code>use</code> declarations.</p>
+</li>
+<li>
+<p>Opening braces for classes MUST go on the next line, and closing braces MUST
+go on the next line after the body.</p>
+</li>
+<li>
+<p>Opening braces for methods MUST go on the next line, and closing braces MUST
+go on the next line after the body.</p>
+</li>
+<li>
+<p>Visibility MUST be declared on all properties and methods; <code>abstract</code> and
+<code>final</code> MUST be declared before the visibility; <code>static</code> MUST be declared
+after the visibility.</p>
+</li>
+<li>
+<p>Control structure keywords MUST have one space after them; method and
+function calls MUST NOT.</p>
+</li>
+<li>
+<p>Opening braces for control structures MUST go on the same line, and closing
+braces MUST go on the next line after the body.</p>
+</li>
+<li>
+<p>Opening parentheses for control structures MUST NOT have a space after them,
+and closing parentheses for control structures MUST NOT have a space before.</p>
+</li>
+</ul>
+<h3>1.1. Example<a id="11-example" href="#11-example" name="11-example" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>This example encompasses some of the rules below as a quick overview:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">FooInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">BarClass</span> <span class="hljs-title">as</span> <span class="hljs-title">Bar</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">OtherVendor</span>\<span class="hljs-title">OtherPackage</span>\<span class="hljs-title">BazClass</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Bar</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FooInterface</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sampleMethod</span><span class="hljs-params">($a, $b = null)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> ($a === $b) {
+            bar();
+        } <span class="hljs-keyword">elseif</span> ($a &gt; $b) {
+            $foo-&gt;bar($arg1);
+        } <span class="hljs-keyword">else</span> {
+            BazClass::bar($arg2, $arg3);
+        }
+    }
+
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+<h2>2. General<a id="2-general" href="#2-general" name="2-general" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>2.1. Basic Coding Standard<a id="21-basic-coding-standard" href="#21-basic-coding-standard" name="21-basic-coding-standard" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Code MUST follow all rules outlined in <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1</a>.</p>
+<h3>2.2. Files<a id="22-files" href="#22-files" name="22-files" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>All PHP files MUST use the Unix LF (linefeed) line ending.</p>
+<p>All PHP files MUST end with a single blank line.</p>
+<p>The closing <code>?&gt;</code> tag MUST be omitted from files containing only PHP.</p>
+<h3>2.3. Lines<a id="23-lines" href="#23-lines" name="23-lines" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>There MUST NOT be a hard limit on line length.</p>
+<p>The soft limit on line length MUST be 120 characters; automated style checkers
+MUST warn but MUST NOT error at the soft limit.</p>
+<p>Lines SHOULD NOT be longer than 80 characters; lines longer than that SHOULD
+be split into multiple subsequent lines of no more than 80 characters each.</p>
+<p>There MUST NOT be trailing whitespace at the end of non-blank lines.</p>
+<p>Blank lines MAY be added to improve readability and to indicate related
+blocks of code.</p>
+<p>There MUST NOT be more than one statement per line.</p>
+<h3>2.4. Indenting<a id="24-indenting" href="#24-indenting" name="24-indenting" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting.</p>
+<blockquote>
+<p>N.b.: Using only spaces, and not mixing spaces with tabs, helps to avoid
+problems with diffs, patches, history, and annotations. The use of spaces
+also makes it easy to insert fine-grained sub-indentation for inter-line
+alignment.</p>
+</blockquote>
+<h3>2.5. Keywords and True/False/Null<a id="25-keywords-and-truefalsenull" href="#25-keywords-and-truefalsenull" name="25-keywords-and-truefalsenull" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>PHP <a href="http://php.net/manual/en/reserved.keywords.php">keywords</a> MUST be in lower case.</p>
+<p>The PHP constants <code>true</code>, <code>false</code>, and <code>null</code> MUST be in lower case.</p>
+<h2>3. Namespace and Use Declarations<a id="3-namespace-and-use-declarations" href="#3-namespace-and-use-declarations" name="3-namespace-and-use-declarations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>When present, there MUST be one blank line after the <code>namespace</code> declaration.</p>
+<p>When present, all <code>use</code> declarations MUST go after the <code>namespace</code>
+declaration.</p>
+<p>There MUST be one <code>use</code> keyword per declaration.</p>
+<p>There MUST be one blank line after the <code>use</code> block.</p>
+<p>For example:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">FooClass</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">BarClass</span> <span class="hljs-title">as</span> <span class="hljs-title">Bar</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">OtherVendor</span>\<span class="hljs-title">OtherPackage</span>\<span class="hljs-title">BazClass</span>;
+
+<span class="hljs-comment">// ... additional PHP code ...</span>
+
+</code></pre>
+<h2>4. Classes, Properties, and Methods<a id="4-classes-properties-and-methods" href="#4-classes-properties-and-methods" name="4-classes-properties-and-methods" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The term &quot;class&quot; refers to all classes, interfaces, and traits.</p>
+<h3>4.1. Extends and Implements<a id="41-extends-and-implements" href="#41-extends-and-implements" name="41-extends-and-implements" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The <code>extends</code> and <code>implements</code> keywords MUST be declared on the same line as
+the class name.</p>
+<p>The opening brace for the class MUST go on its own line; the closing brace
+for the class MUST go on the next line after the body.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">FooClass</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">BarClass</span> <span class="hljs-title">as</span> <span class="hljs-title">Bar</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">OtherVendor</span>\<span class="hljs-title">OtherPackage</span>\<span class="hljs-title">BazClass</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ParentClass</span> <span class="hljs-keyword">implements</span> \<span class="hljs-title">ArrayAccess</span>, \<span class="hljs-title">Countable</span>
+</span>{
+    <span class="hljs-comment">// constants, properties, methods</span>
+}
+</code></pre>
+<p>Lists of <code>implements</code> MAY be split across multiple lines, where each
+subsequent line is indented once. When doing so, the first item in the list
+MUST be on the next line, and there MUST be only one interface per line.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">FooClass</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">BarClass</span> <span class="hljs-title">as</span> <span class="hljs-title">Bar</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">OtherVendor</span>\<span class="hljs-title">OtherPackage</span>\<span class="hljs-title">BazClass</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ParentClass</span> <span class="hljs-keyword">implements</span>
+    \<span class="hljs-title">ArrayAccess</span>,
+    \<span class="hljs-title">Countable</span>,
+    \<span class="hljs-title">Serializable</span>
+</span>{
+    <span class="hljs-comment">// constants, properties, methods</span>
+}
+</code></pre>
+<h3>4.2. Properties<a id="42-properties" href="#42-properties" name="42-properties" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Visibility MUST be declared on all properties.</p>
+<p>The <code>var</code> keyword MUST NOT be used to declare a property.</p>
+<p>There MUST NOT be more than one property declared per statement.</p>
+<p>Property names SHOULD NOT be prefixed with a single underscore to indicate
+protected or private visibility.</p>
+<p>A property declaration looks like the following.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">public</span> $foo = <span class="hljs-keyword">null</span>;
+}
+</code></pre>
+<h3>4.3. Methods<a id="43-methods" href="#43-methods" name="43-methods" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Visibility MUST be declared on all methods.</p>
+<p>Method names SHOULD NOT be prefixed with a single underscore to indicate
+protected or private visibility.</p>
+<p>Method names MUST NOT be declared with a space after the method name. The
+opening brace MUST go on its own line, and the closing brace MUST go on the
+next line following the body. There MUST NOT be a space after the opening
+parenthesis, and there MUST NOT be a space before the closing parenthesis.</p>
+<p>A method declaration looks like the following. Note the placement of
+parentheses, commas, spaces, and braces:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fooBarBaz</span><span class="hljs-params">($arg1, &amp;$arg2, $arg3 = [])</span>
+    </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+<h3>4.4. Method Arguments<a id="44-method-arguments" href="#44-method-arguments" name="44-method-arguments" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>In the argument list, there MUST NOT be a space before each comma, and there
+MUST be one space after each comma.</p>
+<p>Method arguments with default values MUST go at the end of the argument
+list.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">($arg1, &amp;$arg2, $arg3 = [])</span>
+    </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+<p>Argument lists MAY be split across multiple lines, where each subsequent line
+is indented once. When doing so, the first item in the list MUST be on the
+next line, and there MUST be only one argument per line.</p>
+<p>When the argument list is split across multiple lines, the closing parenthesis
+and opening brace MUST be placed together on their own line with one space
+between them.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">aVeryLongMethodName</span><span class="hljs-params">(
+        ClassTypeHint $arg1,
+        &amp;$arg2,
+        array $arg3 = []
+    )</span> </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+<h3>4.5. <code>abstract</code>, <code>final</code>, and <code>static</code><a id="45-abstract-final-and-static" href="#45-abstract-final-and-static" name="45-abstract-final-and-static" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>When present, the <code>abstract</code> and <code>final</code> declarations MUST precede the
+visibility declaration.</p>
+<p>When present, the <code>static</code> declaration MUST come after the visibility
+declaration.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> $foo;
+
+    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">zim</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+<h3>4.6. Method and Function Calls<a id="46-method-and-function-calls" href="#46-method-and-function-calls" name="46-method-and-function-calls" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>When making a method or function call, there MUST NOT be a space between the
+method or function name and the opening parenthesis, there MUST NOT be a space
+after the opening parenthesis, and there MUST NOT be a space before the
+closing parenthesis. In the argument list, there MUST NOT be a space before
+each comma, and there MUST be one space after each comma.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+bar();
+$foo-&gt;bar($arg1);
+Foo::bar($arg2, $arg3);
+</code></pre>
+<p>Argument lists MAY be split across multiple lines, where each subsequent line
+is indented once. When doing so, the first item in the list MUST be on the
+next line, and there MUST be only one argument per line.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+$foo-&gt;bar(
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+);
+</code></pre>
+<h2>5. Control Structures<a id="5-control-structures" href="#5-control-structures" name="5-control-structures" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The general style rules for control structures are as follows:</p>
+<ul>
+<li>There MUST be one space after the control structure keyword</li>
+<li>There MUST NOT be a space after the opening parenthesis</li>
+<li>There MUST NOT be a space before the closing parenthesis</li>
+<li>There MUST be one space between the closing parenthesis and the opening
+brace</li>
+<li>The structure body MUST be indented once</li>
+<li>The closing brace MUST be on the next line after the body</li>
+</ul>
+<p>The body of each structure MUST be enclosed by braces. This standardizes how
+the structures look, and reduces the likelihood of introducing errors as new
+lines get added to the body.</p>
+<h3>5.1. <code>if</code>, <code>elseif</code>, <code>else</code><a id="51-if-elseif-else" href="#51-if-elseif-else" name="51-if-elseif-else" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>An <code>if</code> structure looks like the following. Note the placement of parentheses,
+spaces, and braces; and that <code>else</code> and <code>elseif</code> are on the same line as the
+closing brace from the earlier body.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">if</span> ($expr1) {
+    <span class="hljs-comment">// if body</span>
+} <span class="hljs-keyword">elseif</span> ($expr2) {
+    <span class="hljs-comment">// elseif body</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// else body;</span>
+}
+</code></pre>
+<p>The keyword <code>elseif</code> SHOULD be used instead of <code>else if</code> so that all control
+keywords look like single words.</p>
+<h3>5.2. <code>switch</code>, <code>case</code><a id="52-switch-case" href="#52-switch-case" name="52-switch-case" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A <code>switch</code> structure looks like the following. Note the placement of
+parentheses, spaces, and braces. The <code>case</code> statement MUST be indented once
+from <code>switch</code>, and the <code>break</code> keyword (or other terminating keyword) MUST be
+indented at the same level as the <code>case</code> body. There MUST be a comment such as
+<code>// no break</code> when fall-through is intentional in a non-empty <code>case</code> body.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">switch</span> ($expr) {
+    <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'First case, with a break'</span>;
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'Second case, which falls through'</span>;
+        <span class="hljs-comment">// no break</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'Third case, return instead of break'</span>;
+        <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">'Default case'</span>;
+        <span class="hljs-keyword">break</span>;
+}
+</code></pre>
+<h3>5.3. <code>while</code>, <code>do while</code><a id="53-while-do-while" href="#53-while-do-while" name="53-while-do-while" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A <code>while</code> statement looks like the following. Note the placement of
+parentheses, spaces, and braces.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">while</span> ($expr) {
+    <span class="hljs-comment">// structure body</span>
+}
+</code></pre>
+<p>Similarly, a <code>do while</code> statement looks like the following. Note the placement
+of parentheses, spaces, and braces.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">do</span> {
+    <span class="hljs-comment">// structure body;</span>
+} <span class="hljs-keyword">while</span> ($expr);
+</code></pre>
+<h3>5.4. <code>for</code><a id="54-for" href="#54-for" name="54-for" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A <code>for</code> statement looks like the following. Note the placement of parentheses,
+spaces, and braces.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">for</span> ($i = <span class="hljs-number">0</span>; $i &lt; <span class="hljs-number">10</span>; $i++) {
+    <span class="hljs-comment">// for body</span>
+}
+</code></pre>
+<h3>5.5. <code>foreach</code><a id="55-foreach" href="#55-foreach" name="55-foreach" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A <code>foreach</code> statement looks like the following. Note the placement of
+parentheses, spaces, and braces.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">foreach</span> ($iterable <span class="hljs-keyword">as</span> $key =&gt; $value) {
+    <span class="hljs-comment">// foreach body</span>
+}
+</code></pre>
+<h3>5.6. <code>try</code>, <code>catch</code><a id="56-try-catch" href="#56-try-catch" name="56-try-catch" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A <code>try catch</code> block looks like the following. Note the placement of
+parentheses, spaces, and braces.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// try body</span>
+} <span class="hljs-keyword">catch</span> (FirstExceptionType $e) {
+    <span class="hljs-comment">// catch body</span>
+} <span class="hljs-keyword">catch</span> (OtherExceptionType $e) {
+    <span class="hljs-comment">// catch body</span>
+}
+</code></pre>
+<h2>6. Closures<a id="6-closures" href="#6-closures" name="6-closures" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Closures MUST be declared with a space after the <code>function</code> keyword, and a
+space before and after the <code>use</code> keyword.</p>
+<p>The opening brace MUST go on the same line, and the closing brace MUST go on
+the next line following the body.</p>
+<p>There MUST NOT be a space after the opening parenthesis of the argument list
+or variable list, and there MUST NOT be a space before the closing parenthesis
+of the argument list or variable list.</p>
+<p>In the argument list and variable list, there MUST NOT be a space before each
+comma, and there MUST be one space after each comma.</p>
+<p>Closure arguments with default values MUST go at the end of the argument
+list.</p>
+<p>A closure declaration looks like the following. Note the placement of
+parentheses, commas, spaces, and braces:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+$closureWithArgs = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($arg1, $arg2)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+
+$closureWithArgsAndVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($arg1, $arg2)</span> <span class="hljs-title">use</span> <span class="hljs-params">($var1, $var2)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+</code></pre>
+<p>Argument lists and variable lists MAY be split across multiple lines, where
+each subsequent line is indented once. When doing so, the first item in the
+list MUST be on the next line, and there MUST be only one argument or variable
+per line.</p>
+<p>When the ending list (whether of arguments or variables) is split across
+multiple lines, the closing parenthesis and opening brace MUST be placed
+together on their own line with one space between them.</p>
+<p>The following are examples of closures with and without argument lists and
+variable lists split across multiple lines.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+$longArgs_noVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+
+$noArgs_longVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> <span class="hljs-title">use</span> <span class="hljs-params">(
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+
+$longArgs_longVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+)</span> <span class="hljs-title">use</span> <span class="hljs-params">(
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+
+$longArgs_shortVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+)</span> <span class="hljs-title">use</span> <span class="hljs-params">($var1)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+
+$shortArgs_longVars = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($arg)</span> <span class="hljs-title">use</span> <span class="hljs-params">(
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+)</span> </span>{
+    <span class="hljs-comment">// body</span>
+};
+</code></pre>
+<p>Note that the formatting rules also apply when the closure is used directly
+in a function or method call as an argument.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+$foo-&gt;bar(
+    $arg1,
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($arg2)</span> <span class="hljs-title">use</span> <span class="hljs-params">($var1)</span> </span>{
+        <span class="hljs-comment">// body</span>
+    },
+    $arg3
+);
+</code></pre>
+<h2>7. Conclusion<a id="7-conclusion" href="#7-conclusion" name="7-conclusion" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>There are many elements of style and practice intentionally omitted by this
+guide. These include but are not limited to:</p>
+<ul>
+<li>
+<p>Declaration of global variables and global constants</p>
+</li>
+<li>
+<p>Declaration of functions</p>
+</li>
+<li>
+<p>Operators and assignment</p>
+</li>
+<li>
+<p>Inter-line alignment</p>
+</li>
+<li>
+<p>Comments and documentation blocks</p>
+</li>
+<li>
+<p>Class name prefixes and suffixes</p>
+</li>
+<li>
+<p>Best practices</p>
+</li>
+</ul>
+<p>Future recommendations MAY revise and extend this guide to address those or
+other elements of style and practice.</p>
+<h2>Appendix A. Survey<a id="appendix-a-survey" href="#appendix-a-survey" name="appendix-a-survey" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>In writing this style guide, the group took a survey of member projects to
+determine common practices.  The survey is retained herein for posterity.</p>
+<h3>A.1. Survey Data<a id="a1-survey-data" href="#a1-survey-data" name="a1-survey-data" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php">url,http:<span class="hljs-comment">//www.horde.org/apps/horde/docs/CODING_STANDARDS,http://pear.php.net/manual/en/standards.php,http://solarphp.com/manual/appendix-standards.style,http://framework.zend.com/manual/en/coding-standard.html,https://symfony.com/doc/2.0/contributing/code/standards.html,http://www.ppi.io/docs/coding-standards.html,https://github.com/ezsystems/ezp-next/wiki/codingstandards,http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html,https://github.com/UnionOfRAD/lithium/wiki/Spec%3A-Coding,http://drupal.org/coding-standards,http://code.google.com/p/sabredav/,http://area51.phpbb.com/docs/31x/coding-guidelines.html,https://docs.google.com/a/zikula.org/document/edit?authkey=CPCU0Us&amp;hgd=1&amp;id=1fcqb93Sn-hR9c0mkN6m_tyWnmEvoswKBtSc0tKkZmJA,http://www.chisimba.com,n/a,https://github.com/Respect/project-info/blob/master/coding-standards-sample.php,n/a,Object Calisthenics for PHP,http://doc.nette.org/en/coding-standard,http://flow3.typo3.org,https://github.com/propelorm/Propel2/wiki/Coding-Standards,http://developer.joomla.org/coding-standards.html</span>
+voting,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,no,no,no,?,yes,no,yes
+indent_type,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,tab,<span class="hljs-number">4</span>,tab,tab,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,tab,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,tab,tab,<span class="hljs-number">4</span>,tab
+line_length_limit_soft,<span class="hljs-number">75</span>,<span class="hljs-number">75</span>,<span class="hljs-number">75</span>,<span class="hljs-number">75</span>,no,<span class="hljs-number">85</span>,<span class="hljs-number">120</span>,<span class="hljs-number">120</span>,<span class="hljs-number">80</span>,<span class="hljs-number">80</span>,<span class="hljs-number">80</span>,no,<span class="hljs-number">100</span>,<span class="hljs-number">80</span>,<span class="hljs-number">80</span>,?,?,<span class="hljs-number">120</span>,<span class="hljs-number">80</span>,<span class="hljs-number">120</span>,no,<span class="hljs-number">150</span>
+line_length_limit_hard,<span class="hljs-number">85</span>,<span class="hljs-number">85</span>,<span class="hljs-number">85</span>,<span class="hljs-number">85</span>,no,no,no,no,<span class="hljs-number">100</span>,?,no,no,no,<span class="hljs-number">100</span>,<span class="hljs-number">100</span>,?,<span class="hljs-number">120</span>,<span class="hljs-number">120</span>,no,no,no,no
+class_names,studly,studly,studly,studly,studly,studly,studly,studly,studly,studly,studly,lower_under,studly,lower,studly,studly,studly,studly,?,studly,studly,studly
+class_brace_line,next,next,next,next,next,same,next,same,same,same,same,next,next,next,next,next,next,next,next,same,next,next
+constant_names,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper,upper
+true_false_null,lower,lower,lower,lower,lower,lower,lower,lower,lower,upper,lower,lower,lower,upper,lower,lower,lower,lower,lower,upper,lower,lower
+method_names,camel,camel,camel,camel,camel,camel,camel,camel,camel,camel,camel,lower_under,camel,camel,camel,camel,camel,camel,camel,camel,camel,camel
+method_brace_line,next,next,next,next,next,same,next,same,same,same,same,next,next,same,next,next,next,next,next,same,next,next
+control_brace_line,same,same,same,same,same,same,next,same,same,same,same,next,same,same,next,same,same,same,same,same,same,next
+control_space_after,yes,yes,yes,yes,yes,no,yes,yes,yes,yes,no,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes,yes
+always_use_control_braces,yes,yes,yes,yes,yes,yes,no,yes,yes,yes,no,yes,yes,yes,yes,no,yes,yes,yes,yes,yes,yes
+else_elseif_line,same,same,same,same,same,same,next,same,same,next,same,next,same,next,next,same,same,same,same,same,same,next
+case_break_indent_from_switch,<span class="hljs-number">0</span>/<span class="hljs-number">1</span>,<span class="hljs-number">0</span>/<span class="hljs-number">1</span>,<span class="hljs-number">0</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">0</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">1</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>,<span class="hljs-number">1</span>/<span class="hljs-number">2</span>
+function_space_after,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+closing_php_tag_required,no,no,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,yes,no,no
+line_endings,LF,LF,LF,LF,LF,LF,LF,LF,?,LF,?,LF,LF,LF,LF,?,,LF,?,LF,LF,LF
+static_or_visibility_first,<span class="hljs-keyword">static</span>,?,<span class="hljs-keyword">static</span>,either,either,either,visibility,visibility,visibility,either,<span class="hljs-keyword">static</span>,either,?,visibility,?,?,either,either,visibility,visibility,<span class="hljs-keyword">static</span>,?
+control_space_parens,no,no,no,no,no,no,yes,no,no,no,no,no,no,yes,?,no,no,no,no,no,no,no
+blank_line_after_php,no,no,no,no,yes,no,no,no,no,yes,yes,no,no,yes,?,yes,yes,no,yes,no,yes,no
+class_method_control_brace,next/next/same,next/next/same,next/next/same,next/next/same,next/next/same,same/same/same,next/next/next,same/same/same,same/same/same,same/same/same,same/same/same,next/next/next,next/next/same,next/same/same,next/next/next,next/next/same,next/next/same,next/next/same,next/next/same,same/same/same,next/next/same,next/next/next
+</code></pre>
+<h3>A.2. Survey Legend<a id="a2-survey-legend" href="#a2-survey-legend" name="a2-survey-legend" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p><code>indent_type</code>:
+The type of indenting. <code>tab</code> = &quot;Use a tab&quot;, <code>2</code> or <code>4</code> = &quot;number of spaces&quot;</p>
+<p><code>line_length_limit_soft</code>:
+The &quot;soft&quot; line length limit, in characters. <code>?</code> = not discernible or no response, <code>no</code> means no limit.</p>
+<p><code>line_length_limit_hard</code>:
+The &quot;hard&quot; line length limit, in characters. <code>?</code> = not discernible or no response, <code>no</code> means no limit.</p>
+<p><code>class_names</code>:
+How classes are named. <code>lower</code> = lowercase only, <code>lower_under</code> = lowercase with underscore separators, <code>studly</code> = StudlyCase.</p>
+<p><code>class_brace_line</code>:
+Does the opening brace for a class go on the <code>same</code> line as the class keyword, or on the <code>next</code> line after it?</p>
+<p><code>constant_names</code>:
+How are class constants named? <code>upper</code> = Uppercase with underscore separators.</p>
+<p><code>true_false_null</code>:
+Are the <code>true</code>, <code>false</code>, and <code>null</code> keywords spelled as all <code>lower</code> case, or all <code>upper</code> case?</p>
+<p><code>method_names</code>:
+How are methods named? <code>camel</code> = <code>camelCase</code>, <code>lower_under</code> = lowercase with underscore separators.</p>
+<p><code>method_brace_line</code>:
+Does the opening brace for a method go on the <code>same</code> line as the method name, or on the <code>next</code> line?</p>
+<p><code>control_brace_line</code>:
+Does the opening brace for a control structure go on the <code>same</code> line, or on the <code>next</code> line?</p>
+<p><code>control_space_after</code>:
+Is there a space after the control structure keyword?</p>
+<p><code>always_use_control_braces</code>:
+Do control structures always use braces?</p>
+<p><code>else_elseif_line</code>:
+When using <code>else</code> or <code>elseif</code>, does it go on the <code>same</code> line as the previous closing brace, or does it go on the <code>next</code> line?</p>
+<p><code>case_break_indent_from_switch</code>:
+How many times are <code>case</code> and <code>break</code> indented from an opening <code>switch</code> statement?</p>
+<p><code>function_space_after</code>:
+Do function calls have a space after the function name and before the opening parenthesis?</p>
+<p><code>closing_php_tag_required</code>:
+In files containing only PHP, is the closing <code>?&gt;</code> tag required?</p>
+<p><code>line_endings</code>:
+What type of line ending is used?</p>
+<p><code>static_or_visibility_first</code>:
+When declaring a method, does <code>static</code> come first, or does the visibility come first?</p>
+<p><code>control_space_parens</code>:
+In a control structure expression, is there a space after the opening parenthesis and a space before the closing parenthesis? <code>yes</code> = <code>if ( $expr )</code>, <code>no</code> = <code>if ($expr)</code>.</p>
+<p><code>blank_line_after_php</code>:
+Is there a blank line after the opening PHP tag?</p>
+<p><code>class_method_control_brace</code>:
+A summary of what line the opening braces go on for classes, methods, and control structures.</p>
+<h3>A.3. Survey Results<a id="a3-survey-results" href="#a3-survey-results" name="a3-survey-results" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php">indent_type:
+    tab: <span class="hljs-number">7</span>
+    <span class="hljs-number">2</span>: <span class="hljs-number">1</span>
+    <span class="hljs-number">4</span>: <span class="hljs-number">14</span>
+line_length_limit_soft:
+    ?: <span class="hljs-number">2</span>
+    no: <span class="hljs-number">3</span>
+    <span class="hljs-number">75</span>: <span class="hljs-number">4</span>
+    <span class="hljs-number">80</span>: <span class="hljs-number">6</span>
+    <span class="hljs-number">85</span>: <span class="hljs-number">1</span>
+    <span class="hljs-number">100</span>: <span class="hljs-number">1</span>
+    <span class="hljs-number">120</span>: <span class="hljs-number">4</span>
+    <span class="hljs-number">150</span>: <span class="hljs-number">1</span>
+line_length_limit_hard:
+    ?: <span class="hljs-number">2</span>
+    no: <span class="hljs-number">11</span>
+    <span class="hljs-number">85</span>: <span class="hljs-number">4</span>
+    <span class="hljs-number">100</span>: <span class="hljs-number">3</span>
+    <span class="hljs-number">120</span>: <span class="hljs-number">2</span>
+class_names:
+    ?: <span class="hljs-number">1</span>
+    lower: <span class="hljs-number">1</span>
+    lower_under: <span class="hljs-number">1</span>
+    studly: <span class="hljs-number">19</span>
+class_brace_line:
+    next: <span class="hljs-number">16</span>
+    same: <span class="hljs-number">6</span>
+constant_names:
+    upper: <span class="hljs-number">22</span>
+true_false_null:
+    lower: <span class="hljs-number">19</span>
+    upper: <span class="hljs-number">3</span>
+method_names:
+    camel: <span class="hljs-number">21</span>
+    lower_under: <span class="hljs-number">1</span>
+method_brace_line:
+    next: <span class="hljs-number">15</span>
+    same: <span class="hljs-number">7</span>
+control_brace_line:
+    next: <span class="hljs-number">4</span>
+    same: <span class="hljs-number">18</span>
+control_space_after:
+    no: <span class="hljs-number">2</span>
+    yes: <span class="hljs-number">20</span>
+always_use_control_braces:
+    no: <span class="hljs-number">3</span>
+    yes: <span class="hljs-number">19</span>
+else_elseif_line:
+    next: <span class="hljs-number">6</span>
+    same: <span class="hljs-number">16</span>
+case_break_indent_from_switch:
+    <span class="hljs-number">0</span>/<span class="hljs-number">1</span>: <span class="hljs-number">4</span>
+    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>: <span class="hljs-number">4</span>
+    <span class="hljs-number">1</span>/<span class="hljs-number">2</span>: <span class="hljs-number">14</span>
+function_space_after:
+    no: <span class="hljs-number">22</span>
+closing_php_tag_required:
+    no: <span class="hljs-number">19</span>
+    yes: <span class="hljs-number">3</span>
+line_endings:
+    ?: <span class="hljs-number">5</span>
+    LF: <span class="hljs-number">17</span>
+static_or_visibility_first:
+    ?: <span class="hljs-number">5</span>
+    either: <span class="hljs-number">7</span>
+    <span class="hljs-keyword">static</span>: <span class="hljs-number">4</span>
+    visibility: <span class="hljs-number">6</span>
+control_space_parens:
+    ?: <span class="hljs-number">1</span>
+    no: <span class="hljs-number">19</span>
+    yes: <span class="hljs-number">2</span>
+blank_line_after_php:
+    ?: <span class="hljs-number">1</span>
+    no: <span class="hljs-number">13</span>
+    yes: <span class="hljs-number">8</span>
+class_method_control_brace:
+    next/next/next: <span class="hljs-number">4</span>
+    next/next/same: <span class="hljs-number">11</span>
+    next/same/same: <span class="hljs-number">1</span>
+    same/same/same: <span class="hljs-number">6</span>
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-2: Coding Style Guide</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-2/meta">PSR-2 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

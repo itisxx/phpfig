@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-14 Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-14 Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-14 Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-14 Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Event Dispatcher Meta Document<a id="event-dispatcher-meta-document" href="#event-dispatcher-meta-document" name="event-dispatcher-meta-document" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>1. Summary<a id="1-summary" href="#1-summary" name="1-summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The purpose of this document is to describe the rationale and logic behind the Event Dispatcher specification.</p>
+<h2>2. Why Bother?<a id="2-why-bother" href="#2-why-bother" name="2-why-bother" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Many libraries, components, and frameworks have long supported mechanisms for allowing arbitrary third party code to interact with them.  Most are variations on the classic Observer pattern, often mediated through an intermediary object or service.  Others take a more Aspect-Oriented Programming (AOP) approach.  Nonetheless all have the same basic concept: interrupt program flow at a fixed point to provide information to arbitrary third party libraries with information about the action being performed and allow them to either react or influence the program behavior.</p>
+<p>This is a well-established model, but a standard mechanism by which libraries do so will allow them to interoperate with more and more varied third party libraries with less effort by both the original developer and extension developers.</p>
+<h2>3. Scope<a id="3-scope" href="#3-scope" name="3-scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>3.1 Goals<a id="31-goals" href="#31-goals" name="31-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Simplify and standardize the process by which libraries and components may expose themselves to extension via &quot;events&quot; so that they may be more easily incorporated into applications and frameworks.</li>
+<li>Simplify and standardize the process by which libraries and components may register an interest in responding to an Event so that they may be more easily incorporated into arbitrary applications and frameworks.</li>
+<li>To the extent feasible, ease the process for existing code bases to transition toward this specification.</li>
+</ul>
+<h3>3.2 Non-Goals<a id="32-non-goals" href="#32-non-goals" name="32-non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Asynchronous systems often have a concept of an &quot;event loop&quot; to manage interleaving coroutines.  That is an unrelated matter and explicitly irrelevant to this specification.</li>
+<li>Storage systems implementing an &quot;Event Source&quot; pattern also have a concept of an &quot;event&quot;.  That is unrelated to the Events discussed here and explicitly out of scope.</li>
+<li>Strict backward compatibility with existing event systems is not a priority and is not expected.</li>
+<li>While this specification will undoubtedly suggest implementation patterns, it does not seek to define One True Event Dispatcher Implementation, only how callers and Listeners communicate with that Dispatcher.</li>
+</ul>
+<h2>4. Approaches<a id="4-approaches" href="#4-approaches" name="4-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>4.1 Use cases considered<a id="41-use-cases-considered" href="#41-use-cases-considered" name="41-use-cases-considered" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The Working Group identified four possible workflows for event passing, based on use cases seen in the wild in various systems.</p>
+<ul>
+<li>One-way notification.  (&quot;I did a thing, if you care.&quot;)</li>
+<li>Object enhancement.  (&quot;Here's a thing, please modify it before I do something with it.&quot;)</li>
+<li>Collection.  (&quot;Give me all your things, that I may do something with that list.&quot;)</li>
+<li>Alternative chain.  (&quot;Here's a thing; the first one of you that can handle it do so, then stop.&quot;)</li>
+</ul>
+<p>On further review, the Working Goup determined that:</p>
+<ul>
+<li>Collection was a special case of object enhancement (the collection being the object that is enhanced).</li>
+<li>Alternative chain is similarly a special case of object enhancement, as the signature is identical and the dispatch workflow is nearly identical, albeit with an extra check included.</li>
+<li>One-way notification is a degenerate case of the others, or can be represented as such.</li>
+</ul>
+<p>Although in concept one-way notification can be done asynchronously (including delaying it through a queue), in practice, few explicit implementations of that model exist, providing fewer places from which to draw guidance on details (such as proper error handling).  After much consideration, the Working Group elected not to provide an explicitly separate workflow for one-way notification as it could be adequately represented as a degenerate case of the others.</p>
+<h3>4.2 Example applications<a id="42-example-applications" href="#42-example-applications" name="42-example-applications" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Indicating that some change in system configuration or some user action has occurred and allowing other systems to react in ways that do not affect program flow (such as sending an email or logging the action).</li>
+<li>Passing an object to a series of Listeners to allow it to be modified before it is saved to a persistence system.</li>
+<li>Passing a collection to a series of Listeners to allow them to register values with it or modify existing values so that the Emitter may act on all of the collected information.</li>
+<li>Passing some contextual information to a series of Listeners so that all of them may &quot;vote&quot; on what action to take, with the Emitter deciding based on the aggregate information provided.</li>
+<li>Passing an object to a series of Listeners and allowing any Listener to terminate the process early before other Listeners have completed.</li>
+</ul>
+<h3>4.3 Immutable events<a id="43-immutable-events" href="#43-immutable-events" name="43-immutable-events" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Initially the Working Group wished to define all Events as immutable message objects, similar to PSR-7.  However, that proved problematic in all but the one-way notification case.  In the other scenarios, Listeners needed a way to return data to the caller.  In concept, there were three possible avenues:</p>
+<ul>
+<li>Make the Event mutable and modify it in place.</li>
+<li>Require that Events be evolvable (immutable but with <code>with*()</code> methods like PSR-7 and PSR-13) and that Listeners return the Event to pass along.</li>
+<li>Make the Event immutable, but aggregate and return the return value from each Listener.</li>
+</ul>
+<p>However, Stoppable Events (the alternative chain case) also needed to have a channel by which to indicate that further Listeners should not be called.  That could be done either by:</p>
+<ul>
+<li>Modifying the Event (e.g., calling a <code>stopPropagation()</code> method)</li>
+<li>Returning a sentinel value from the Listener (<code>true</code> or <code>false</code>) to indicate that propagation should terminate.</li>
+<li>Evolving the Event to be stopped (<code>withPropagationStopped()</code>)</li>
+</ul>
+<p>Each of these alternatives have drawbacks. The first means that, at least for the purposes of indicating propagation status, Events must be mutable. The second requires that Listeners return a value, at least when they intend to halt event propagation; this could have ramifications with existing libraries, and potential issues in terms of documentation. The third requires that Listeners return the Event or mutated Event in all cases, and would require Dispatchers to test to ensure that the returned value is of the same type as the value passed to the Listener; it effectively puts an onus both on consumers and implementers, thus raising more potential integration issues.</p>
+<p>Additionally, a desired feature was the ability to derive whether or not to stop propagation based on values collected from the Listeners.  (For example, to stop when one of them has provided a certain value, or after at least three of them have indicated a &quot;reject this request&quot; flag, or similar.)  While technically possible to implement as an evolvable object, such behavior is intrinsically stateful, so would be highly cumbersome for both implementers and users.</p>
+<p>Having Listeners return evolvable Events also posed a challenge.  That pattern is not used by any known implementations in PHP or elsewhere.  It also relies on the Listener to remember to return the Event (additional work for the Listener author) and to not return some other, new object that might not be fully compatible with later Listeners (such as a subclass or superclass of the Event).</p>
+<p>Immutable Events also rely on the Event author to respect the admonition to be immutable.  Events are, by nature, very loosely designed, and the potential for implementers to ignore that part of the spec, even inadvertently, is high.</p>
+<p>That left two possible options:</p>
+<ul>
+<li>Allow Events to be mutable.</li>
+<li>Require, but be unable to enforce, immutable Events with a high-ceremony interface, more work for Listener authors, and a higher potential for breakage that may not be detectable at compile time.</li>
+</ul>
+<p>By &quot;high-ceremony&quot;, we imply that verbose syntax and/or implementations would be required.  In the former case, Listener authors would need to (a) create a new Event instance with the propagation flag toggled, and (b) return the new Event instance so that the Dispatcher could examine it:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(SomeEvent $event)</span> : <span class="hljs-title">SomeEvent</span>
+</span>{
+    <span class="hljs-comment">// do some work</span>
+    <span class="hljs-keyword">return</span> $event-&gt;withPropagationStopped();
+}
+</code></pre>
+<p>The latter case, Dispatcher implementations, would require checks on the return value:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">foreach</span> ($provider-&gt;getListenersForEvent($event) <span class="hljs-keyword">as</span> $listener) {
+    $returnedEvent = $listener($event);
+    
+    <span class="hljs-keyword">if</span> (! $returnedEvent <span class="hljs-keyword">instanceof</span> $event) {
+        <span class="hljs-comment">// This is an exceptional case!</span>
+        <span class="hljs-comment">// </span>
+        <span class="hljs-comment">// We now have an event of a different type, or perhaps nothing was</span>
+        <span class="hljs-comment">// returned by the listener. An event of a different type might mean:</span>
+        <span class="hljs-comment">// </span>
+        <span class="hljs-comment">// - we need to trigger the new event</span>
+        <span class="hljs-comment">// - we have an event mismatch, and should raise an exception</span>
+        <span class="hljs-comment">// - we should attempt to trigger the remaining listeners anyway</span>
+        <span class="hljs-comment">// </span>
+        <span class="hljs-comment">// In the case of nothing being returned, this could mean any of:</span>
+        <span class="hljs-comment">// </span>
+        <span class="hljs-comment">// - we should continue triggering, using the original event</span>
+        <span class="hljs-comment">// - we should stop triggering, and treat this as a request to</span>
+        <span class="hljs-comment">//   stop propagation</span>
+        <span class="hljs-comment">// - we should raise an exception, because the listener did not</span>
+        <span class="hljs-comment">//   return what was expected</span>
+        <span class="hljs-comment">//</span>
+        <span class="hljs-comment">// In short, this becomes very hard to specify, or enforce.</span>
+    }
+
+    <span class="hljs-keyword">if</span> ($returnedEvent <span class="hljs-keyword">instanceof</span> StoppableEventInterface
+        &amp;&amp; $returnedEvent-&gt;isPropagationStopped()
+    ) {
+        <span class="hljs-keyword">break</span>;
+    }
+}
+</code></pre>
+<p>In both situations, we would be introducing more potential edge cases, with little benefit, and few language-level mechanisms to guide developers to correct implementation.</p>
+<p>Given these options, the Working Group felt mutable Events were the safer alternative.</p>
+<p>That said, <em>there is no requirement that an Event be mutable</em>.  Implementers should provide mutator methods on an Event object <em>if and only if it is necessary</em> and appropriate to the use case at hand.</p>
+<h3>4.4 Listener registration<a id="44-listener-registration" href="#44-listener-registration" name="44-listener-registration" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Experimentation during development of the specification determined that there were a wide range of viable, legitimate means by which a Dispatcher could be informed of a Listener.  A Listener:</p>
+<ul>
+<li>could be registered explicitly;</li>
+<li>could be registered explicitly based on reflection of its signature;</li>
+<li>could be registered with a numeric priority order;</li>
+<li>could be registered using a before/after mechanism to control ordering more precisely;</li>
+<li>could be registered from a service container;</li>
+<li>could use a pre-compile step to generate code;</li>
+<li>could be based on method names on objects in the Event itself;</li>
+<li>could be limited to certain situations or contexts based on arbitrarily complex logic (only for certain users, only on certain days, only if certain system settings are present, etc).</li>
+</ul>
+<p>These and other mechanisms all exist in the wild today in PHP, all are valid use cases worth supporting, and few if any can be conveniently represented as a special case of another.  That is, standardizing one way, or even a small set of ways, to inform the system of a Listener turned out to be impractical if not impossible without cutting off many use cases that should be supported.</p>
+<p>The Working Group therefore chose to encapsulate the registration of Listeners behind the <code>ListenerProviderInterface</code>.  A Provider object may have an explicit registration mechanism available, or multiple such mechanisms, or none.  It could also be generated code produced by some compile step.  However, that also splits the responsibility of managing the process of dispatching an Event from the process of mapping an Event to Listeners.  That way different implementations may be mixed-and-matched with different Provider mechanisms as needed.</p>
+<p>It is even possible, and potentially advisable, to allow libraries to include their own Providers that get aggregated into a common Provider that aggregates their Listeners to return to the Dispatcher.  That is one possible way to handle arbitrary Listener registration within an arbitrary framework, although the Working Group is clear that is not the only option.</p>
+<p>While combining the Dispatcher and Provider into a single object is a valid and permissible degenerate case, it is NOT RECOMMENDED as it reduces the flexibility of system integrators.  Instead, the Provider SHOULD be composed as a dependent object.</p>
+<h3>4.5 Deferred listeners<a id="45-deferred-listeners" href="#45-deferred-listeners" name="45-deferred-listeners" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The specification requires that the callables returned by a Provider MUST all be invoked (unless propagation is explicitly stopped) before the Dispatcher returns.  However, the specification also explicitly states that Listeners may enqueue Events for later processing rather than taking immediate action.  It is also entirely permissible for a Provider to accept registration of a callable, but then wrap it in another callable before returning it to the Dispatcher.  (In that case, the wrapper is the Listener from the Dispatcher's point of view.)  That allows all of the following behaviors to be legal:</p>
+<ul>
+<li>Providers return callable Listeners that were provided to them.</li>
+<li>Providers return callables that create an entry in a queue that will react to the Event with another callable at some later point in time.</li>
+<li>Listeners may themselves create an entry in a queue that will react to the Event at some later point in time.</li>
+<li>Listeners or Providers may trigger an asynchronous task, if running in an environment with support for asynchronous behavior (assuming that the result of the asynchronous task is not needed by the Emitter.)</li>
+<li>Providers may perform such delay or wrapping on Listeners selectively based on arbitrary logic.</li>
+</ul>
+<p>The net result is that Providers and Listeners are responsible for determining when it is safe to defer a response to an Event until some later time.  In that case, the Provider or Listener is explicitly opting out of being able to pass meaningful data back to the Emitter, but the Working Group determined that they were in the best position to know if it was safe to do so.</p>
+<p>While technically a side effect of the design, it is essentially the same approach used by Laravel (as of Laravel 5) and has been proven in the wild.</p>
+<h3>4.6 Return values<a id="46-return-values" href="#46-return-values" name="46-return-values" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Per the spec, a Dispatcher MUST return the Event passed by the Emitter.  This is specified to provide a more ergonomic experience for users, allowing short-hands similar to the following:</p>
+<pre><code class="language-php hljs php" data-lang="php">$event = $dispatcher-&gt;dispatch(<span class="hljs-keyword">new</span> SomeEvent(<span class="hljs-string">'some context'</span>));
+
+$items = $dispatcher-&gt;dispatch(<span class="hljs-keyword">new</span> ItemCollector())-&gt;getItems();
+</code></pre>
+<p>The <code>EventDispatcher::dispatch()</code> interface, however, has no return type specified.  That is primarily for backward compatibility with existing implementations to make it easier for them to adopt the new interface.  Additionally, as Events can be any arbitrary object the return type could only have been <code>object</code>, which would provide only minimal (albeit non-zero) value, as that type declaration would not provide IDEs with any useful information nor would it effectively enforce that the same Event is returned.  The method return was thus left syntactically untyped.  However, returning the same Event object from <code>dispatch()</code> is still a requirement and failure to do so is a violation of the specification.</p>
+<h2>5. People<a id="5-people" href="#5-people" name="5-people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The Event Manager Working Group consisted of:</p>
+<h3>5.1 Editor<a id="51-editor" href="#51-editor" name="51-editor" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Larry Garfield</li>
+</ul>
+<h3>5.2 Sponsor<a id="52-sponsor" href="#52-sponsor" name="52-sponsor" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Cees-Jan Kiewiet</li>
+</ul>
+<h3>5.3 Working Group Members<a id="53-working-group-members" href="#53-working-group-members" name="53-working-group-members" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Benjamin Mack</li>
+<li>Elizabeth Smith</li>
+<li>Ryan Weaver</li>
+<li>Matthew Weier O'Phinney</li>
+</ul>
+<h2>6. Votes<a id="6-votes" href="#6-votes" name="6-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/6kQFX-lhuk4/discussion">Entrance vote</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/sR4oEQC3Gz8/discussion">Review Period Initiation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/o4ZSu7vJi2w/discussion">Acceptance</a>
+</li>
+</ul>
+<h2>7. Relevant Links<a id="7-relevant-links" href="#7-relevant-links" name="7-relevant-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="https://groups.google.com/forum/#!topic/php-fig/-EJOStgxAwY">Inspiration Mailing List Thread</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/6kQFX-lhuk4/discussion">Entrance vote</a>
+</li>
+<li>
+<a href="https://docs.google.com/forms/d/1fvhYUH6xvPgJ1UW9I-3pMGPUtxkt5_Ph6_x_3qXHIuM/edit#responses">Informal poll on package structure</a>
+</li>
+<li>
+<a href="https://docs.google.com/forms/d/1Rs6APuwNx4k2VzJbTgieeNvN48kLu7CG8qn6Dd2FhTw/edit#responses">Informal poll on naming structure</a>
+</li>
+</ul>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-14/">PSR-14: Event Dispatcher</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-14 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

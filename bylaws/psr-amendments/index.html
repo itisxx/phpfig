@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR Amendments - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR Amendments - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR Amendments - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR Amendments
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Amendments<a id="amendments" href="#amendments" name="amendments" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>Following the rules of the <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/002-psr-workflow.md">workflow bylaw</a>, once a PSR has been &quot;Accepted&quot; the PSR meaning
+cannot change, backwards compatibility must remain at 100%, and any confusion that arises from
+original wording can be clarified through errata.</p>
+<p>The rules for errata are covered in the <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/002-psr-workflow.md">workflow bylaw</a>, and only allow backwards compatible
+clarification to be added to the meta document. Sometimes, modifications will be necessary in PSR
+document itself, and this document outlines those cases.</p>
+<h2>1. Deprecation and Replacement<a id="1-deprecation-and-replacement" href="#1-deprecation-and-replacement" name="1-deprecation-and-replacement" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>If a PSR is found to require substantive updates or errata is no longer able to clarify confusion,
+then the PSR must be replaced, following the workflow set out in <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/002-psr-workflow.md">workflow bylaw</a>.</p>
+<p>The original PSR may at some point in time be deprecated, as specified in the <a href="https://github.com/php-fig/fig-standards/blob/master/bylaws/004-votes.md">votes bylaw</a>.</p>
+<p>Once a vote to deprecate a PSR and supersede it with another PSR has passed, the deprecated PSR must
+be marked as such in the original document and a link should be placed in the body.</p>
+<p>For example, the following Markdown be placed at the very top of the relevant standard file in the
+official PHP FIG GitHub repo <code>fig-standards</code>.</p>
+<blockquote>
+<p><strong>Deprecated</strong> - As of 2014-12-30 PSR-0 has been marked as deprecated. [PSR-4] is now recommended
+as an alternative.
+[PSR-4]: http://php-fig.org/psr/psr-4</p>
+</blockquote>
+<h2>2. Dependencies<a id="2-dependencies" href="#2-dependencies" name="2-dependencies" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>As documents are expected to be replaced rather than amended, dependencies on
+other PSR's should be avoided whenever possible. For instance, the following is
+no longer permitted:</p>
+<blockquote>
+<ul>
+<li>Namespaces and classes MUST follow PSR-0.</li>
+</ul>
+</blockquote>
+<p>Instead - if a dependency is considered necessary by the working group creating it - then the following
+example can be used:</p>
+<blockquote>
+<ul>
+<li>Namespaces and classes MUST follow an autoloading PSR: [ [PSR-0] ].</li>
+</ul>
+</blockquote>
+<p>The outer set of square brackets denote a &quot;dependency list&quot;, which is a list of PSRs
+that are considered a compatible dependency.</p>
+<p>When more PSR's are added to the &quot;dependency list&quot; the same example would look like this:</p>
+<blockquote>
+<ul>
+<li>Namespaces and classes MUST follow an autoloading PSR: [ [PSR-0], [PSR-4] ].</li>
+</ul>
+</blockquote>
+<p>New PSR's can be added to the &quot;dependency list&quot;, but old PSR's can never be removed as this would break
+backwards compatibility.</p>
+<h2>3. Acceptable Amendments<a id="3-acceptable-amendments" href="#3-acceptable-amendments" name="3-acceptable-amendments" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Other than updating the &quot;dependency list&quot;, there are two other potentially acceptable amendment scenarios
+which do not require their own special vote.</p>
+<h3>3.1. Annotations<a id="31-annotations" href="#31-annotations" name="31-annotations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>If Errata is added which is deemed important enough by whoever is initiating the errata vote,
+annotations may be placed in or near the offending line so that readers know to view the errata for
+more information, with a link containing an anchor to that specific piece of errata.</p>
+<blockquote>
+<ul>
+<li>Something confusing about where brackets go. [cf. <a href="foo-meta.md#errata-1-foo">errata</a>]</li>
+</ul>
+</blockquote>
+<p>This will be done as part of the errata vote, not its own.</p>
+<h3>3.2. Formatting &amp; Typos<a id="32-formatting--typos" href="#32-formatting--typos" name="32-formatting--typos" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>If formatting is broken for any reason then changing formatting must not be considered a
+change to the document. These can be merged or pushed without hesitation by a secretary, as long as they
+don't change anything of any meaning or syntax.</p>
+<p>Some typos as trivial as a misplaced comma could have a subtle impact on meaning. Take special care not to
+alter backwards compatibility and create a vote if unsure. Common sense will help here.</p>
+<p>Examples:</p>
+<ol>
+<li>HTML Tables are currently broken on php-fig.org because of the syntax used.</li>
+<li>Somebody spelled something wrong and nobody spotted it for a year.</li>
+<li>Problems with GitHub Markdown</li>
+</ol>
+
+                    </div>
+    </div>
+    <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Bylaws index:</h2>
+            <ul class="sidebar__list">
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/mission-and-structure">Mission and Structure</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-workflow">PSR Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/per-workflow">PER Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/voting-protocol">Voting Protocol</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/elections-and-vacancies">Elections and Vacancies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/licensing-policies">Licensing Policies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link sidebar__link--active" href="/bylaws/psr-amendments">PSR Amendments</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-evolution">PSR Evolution</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-naming-conventions">PSR Naming Conventions</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/funding">Funding</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/fig-3-transition">FIG 3.0 Transition</a>
+                </li>
+                        </ul>
+        </nav>
+    </div>
+</div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

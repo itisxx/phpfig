@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-13 Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-13 Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-13 Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-13 Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Link Definition Meta Document<a id="link-definition-meta-document" href="#link-definition-meta-document" name="link-definition-meta-document" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>1. Summary<a id="1-summary" href="#1-summary" name="1-summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Hypermedia links are becoming an increasingly important part of the web, in both HTML contexts
+and various API format contexts. However, there is no single common hypermedia format, nor
+is there a common way to represent Links between formats.</p>
+<p>This specification aims to provide PHP developers with a simple, common way of representing a
+hypermedia link independently of the serialization format that is used. That in turn allows
+a system to serialize a response with hypermedia links into one or more wire formats independently
+of the process of deciding what those links should be.</p>
+<h2>2. Scope<a id="2-scope" href="#2-scope" name="2-scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>2.1 Goals<a id="21-goals" href="#21-goals" name="21-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>This specification aims to extract and standardize hypermedia link representation between different
+formats.</li>
+</ul>
+<h3>2.2 Non-Goals<a id="22-non-goals" href="#22-non-goals" name="22-non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>This specification does not seek to standardize or favor any particular hypermedia serialization format.</li>
+</ul>
+<h2>3. Design Decisions<a id="3-design-decisions" href="#3-design-decisions" name="3-design-decisions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>Why no mutator methods?<a id="why-no-mutator-methods" href="#why-no-mutator-methods" name="why-no-mutator-methods" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>One of the key targets for this specification is PSR-7 Response objects.  Response objects by design must be
+immutable.  Other value-object implementations likely would also require an immutable interface.</p>
+<p>Additionally, some Link Provider objects may not be value objects but other objects within a given
+domain, which are able to generate Links on the fly, perhaps off of a database result or other underlying
+representation.  In those cases a writeable provider definition would be incompatible.</p>
+<p>Therefore, this specification splits accessor methods and evolvable methods into separate interfaces,
+allowing objects to implement just the read-only or evolvable versions as appropriate to their use case.</p>
+<h3>Why is rel on a Link object multi-value?<a id="why-is-rel-on-a-link-object-multi-value" href="#why-is-rel-on-a-link-object-multi-value" name="why-is-rel-on-a-link-object-multi-value" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Different hypermedia standards handle multiple links with the same relationship differently. Some have a single
+link that has multiple rel's defined. Others have a single rel entry that then contains multiple links.</p>
+<p>Defining each Link uniquely but allowing it to have multiple rels provides a most-compatible-denominator definition.
+A single LinkInterface object may be serialized to one or more link entries in a given hypermedia format, as
+appropriate.  However, specifying multiple link objects each with a single rel yet the same URI is also legal, and
+a hypermedia format can serialize that as appropriate, too.</p>
+<h3>Why is a LinkProviderInterface needed?<a id="why-is-a-linkproviderinterface-needed" href="#why-is-a-linkproviderinterface-needed" name="why-is-a-linkproviderinterface-needed" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>In many contexts, a set of links will be attached to some other object.  Those objects may be used in situations
+where all that is relevant is their links, or some subset of their links. For example, various different value
+objects may be defined that represent different REST formats such as HAL, JSON-LD, or Atom.  It may be useful
+to extract those links from such an object uniformly for further processing. For instance, next/previous links
+may be extracted from an object and added to a PSR-7 Response object as Link headers.  Alternatively, many links
+would make sense to represent with a &quot;preload&quot; link relationship, which would indicate to an HTTP 2-compatible
+web server that the linked resources should be streamed to a client in anticipation of a subsequent request.</p>
+<p>All of those cases are independent of the payload or encoding of the object. By providing a common interface
+to access such links, we enable generic handling of the links themselves regardless of the value object or
+domain object that is producing them.</p>
+<h2>4. People<a id="4-people" href="#4-people" name="4-people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>4.1 Editor(s)<a id="41-editors" href="#41-editors" name="41-editors" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Larry Garfield</li>
+</ul>
+<h3>4.2 Sponsors<a id="42-sponsors" href="#42-sponsors" name="42-sponsors" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Matthew Weier O'Phinney (coordinator)</li>
+<li>Marc Alexander</li>
+</ul>
+<h3>4.3 Contributors<a id="43-contributors" href="#43-contributors" name="43-contributors" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Evert Pot</li>
+</ul>
+<h2>5. Votes<a id="5-votes" href="#5-votes" name="5-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h2>6. Relevant links<a id="6-relevant-links" href="#6-relevant-links" name="6-relevant-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="http://evertpot.com/whats-in-a-link/">What's in a link?</a> by Evert Pot</li>
+<li>
+<a href="https://groups.google.com/forum/#!forum/php-fig-link">FIG Link Working Group List</a>
+</li>
+</ul>
+<h2>7. Errata<a id="7-errata" href="#7-errata" name="7-errata" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>7.1 Type additions<a id="71-type-additions" href="#71-type-additions" name="71-type-additions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The 1.1 release of the <code>psr/link</code> package includes scalar parameter types.  The 2.0 release of the package includes return types.  This structure leverages PHP 7.2 covariance support to allow for a gradual upgrade process, but requires PHP 8.0 for type compatibility.</p>
+<p>Implementers MAY add return types to their own packages at their discretion, provided that:</p>
+<ul>
+<li>the return types match those in the 2.0 package.</li>
+<li>the implementation specifies a minimum PHP version of 8.0.0 or later.</li>
+</ul>
+<p>Implementers MAY add parameter types to their own packages in a new major release, either at the same time as adding return types or in a subsequent release, provided that:</p>
+<ul>
+<li>the parameter types match those in the 1.1 package.</li>
+<li>the implementation specifies a minimum PHP version of 8.0.0 or later.</li>
+<li>the implementation depends on <code>&quot;psr/link&quot;: &quot;^1.1 || ^2.0&quot;</code> so as to exclude the untyped 1.0 version.</li>
+</ul>
+<p>Implementers are encouraged but not required to transition their packages toward the 2.0 version of the package at their earliest convenience.</p>
+<h3>7.2 Attribute type handling<a id="72-attribute-type-handling" href="#72-attribute-type-handling" name="72-attribute-type-handling" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The original specification contained an inconsistency regarding array values for attributes.  The text of the specification states in section 1.2 that attribute values (as passed to <code>EvolvableLinkInterface::withAttribute()</code>) could be of multiple types, some of which allowed for special handling (such as booleans or arrays).  However, the docblock for that method specified that the <code>$value</code> parameter had to be a string, which was incorrect.</p>
+<p>To address this issue, the interface has been corrected in later releases to allow <code>$value</code> to be of type <code>string|\Stringable|int|float|bool|array</code>.  Implementers SHOULD treat a <code>Stringable</code> object the same as a <code>string</code> parameter.  Implementers MAY serialize <code>int</code>, <code>float</code>, or <code>bool</code> in alternate, type-aware ways for a particular serialization format as appropriate.  Other object types or resources remain disallowed.</p>
+<p>Multiple calls to <code>withAttribute()</code> with the same <code>$name</code> MUST override previously provided values, as the spec already states.  To provide multiple values to a particular attribute, pass an <code>array</code> with the desired values.</p>
+<p>All other guidelines and requirements in section 1.2 remain valid.</p>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-13/">PSR-13: Link definition interfaces</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-13 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

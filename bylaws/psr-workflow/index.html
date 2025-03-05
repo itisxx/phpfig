@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR Workflow - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR Workflow - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR Workflow - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR Workflow
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>PHP Standard Recommendation (PSR) Workflow<a id="php-standard-recommendation-psr-workflow" href="#php-standard-recommendation-psr-workflow" name="php-standard-recommendation-psr-workflow" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>Pre-Draft<a id="pre-draft" href="#pre-draft" name="pre-draft" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The goal of the Pre-Draft stage is to determine whether a majority of the PHP FIG is interested in publishing a PSR for a proposed concept.</p>
+<p>Interested parties may discuss a possible proposal, including possible implementations, by whatever means they feel is appropriate. That includes informal discussion on official FIG discussion mediums of whether or not the idea has merit and is within the scope of the PHP FIG's goals.</p>
+<p>Once those parties have determined to move forward, they must form a Full Working Group.</p>
+<p>The proposal is not required to be fully developed at this point, although that is permitted. At minimum, it must include a statement of the problem to be solved and basic information on the general approach to be taken. Further revision and expansion is expected during the Draft Phase.</p>
+<p>The Sponsor may then call for an Entrance Vote of the Core Committee to enquire whether the Core Committee is generally interested in publishing a PSR for the proposed subject, even if they disagree with the details of the proposal.</p>
+<p>If the vote passes, the proposal officially enters Draft stage. The proposal receives a PSR number incremented from the highest numbered PSR which has passed the Entrance Vote, regardless of the status of that PSR.</p>
+<p>The Working Group may continue to work on the proposal during the complete voting period.</p>
+<h2>Draft<a id="draft" href="#draft" name="draft" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The goal of the Draft stage is to discuss and polish a PSR proposal up to the point that it can be considered for review by the FIG Core Committee.</p>
+<p>In Draft stage, members of the Working Group may make any changes they see fit via pull requests, comments on GitHub, Mailing List threads, chat, and similar tools. Change here is not limited by any strict rules, and fundamental rewrites are possible if supported by the Editor. Alternative approaches may be proposed and discussed at any time. If the Editor and Sponsor are convinced that an alternative proposal is superior to the original proposal, then the alternative may replace the original. Working Group members are expected to remain engaged throughout the Draft Phase. Discussions are public and anyone, regardless of FIG affiliation, is welcome to offer constructive input. During this phase, the Editor has final authority on changes made to the proposed specification.</p>
+<p>All knowledge gained during Draft stage, such as possible alternative approaches, their implications, pros and cons etc. as well as the reasons for choosing the proposed approach must be summarized in the meta document. The purpose of this rule is to prevent circular discussions or alternative proposals from reappearing once they have been decided upon.</p>
+<p>When the Editor and Sponsor agree that the proposal is ready and that the meta document is objective and complete, the Editor may call for a Readiness Vote of the Working Group to determine if the specification is substantively complete and ready for trial implementations.</p>
+<p>If the vote passes, the proposal officially enters Review Phase. If it does not, it remains in Draft Phase.</p>
+<h2>Review<a id="review" href="#review" name="review" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The Review Phase is an opportunity for the community to experiment with a reasonably fixed target to evaluate a proposal's practicality. At this stage, the Sponsor is the final authority on changes to the specification as well as any decisions to move the proposal forward or backward, however, the Editor may veto proposed changes they believe are harmful to the design of the specification.</p>
+<p>During this phase, trial implementations of the specification are expected and encouraged. Changes to the specification are limited to those directly informed by trial implementations, wording, typos, clarification, etc. Major changes are not permitted in this phase. If the development of trial implementations demonstrates the need for major changes then the specification must be pushed back to Draft Phase. Any incompatible change that would require significant effort for trial implementations to adjust for qualifies as a major change. Small to moderate incompatible changes do not necessarily mandate a return to Draft Phase.</p>
+<p>Unless a proposal is moved to Draft stage again, it must remain in Review stage for a minimum of four weeks and until two independent viable trial implementations can be demonstrated. The responsibility for finding such trial implementations and presenting them to the Core Committee lies with the Working Group, and especially the Editor and Sponsor. As not all specifications are PHP interfaces where the definition of &quot;implementation&quot; is self-evident, the Sponsor should use good faith judgement to determine when that is the case. Any member of the Core Committee may object to a given trial implementation as irrelevant or insufficient with due cause.</p>
+<p>Once four weeks have passed and two viable trial implementations can be demonstrated, the Sponsor may call an Acceptance Vote. If the Acceptance Vote fails, the specification may remain in Review.</p>
+<h2>Accepted<a id="accepted" href="#accepted" name="accepted" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>If the Acceptance Vote passes, then the proposal officially becomes an accepted PSR. At this time the Working Group is automatically dissolved.  The Editor of the PSR automatically becomes the Maintainer of the specification should typos, changes or Errata on the specification be raised.  The Editor is also automatically the Maintainer of any artifacts the Working Group has produced, such as utility libraries.</p>
+<h2>Erratas<a id="erratas" href="#erratas" name="erratas" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>If an incongruence or the need for clarifications arise after the PSR acceptance, it is still possible to amend the document with an errata. The Maintainer of the PSR has the power to handle those situations, but any meaningful change has to go through an Errata vote before merging. Typos and any other edits that do not change the meaning of the text do not fall in this category, and can be merged by the Secretaries at will.</p>
+<p>Errata clarifications may only be added to the meta document, not to the spec itself, as items in their own section.  The spec itself may only be minimally edited to point readers toward a relevant errata if appropriate.</p>
+<h2>Deprecated<a id="deprecated" href="#deprecated" name="deprecated" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Deprecated PSR is one that has been approved, but is no longer considered relevant or recommended. Typically, this is due to the PSR being superseded by a new version, but that is not required.</p>
+<p>A PSR may be Deprecated explicitly as part of the Acceptance Vote for another PSR. Alternatively, it may be marked Deprecated by a Deprecation Vote.</p>
+<h2>Abandoned<a id="abandoned" href="#abandoned" name="abandoned" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>An Abandoned PSR is one that is not actively being worked upon.  Should the Working Group for the PSR be dissolved, the PSR is automatically marked as Abandoned.</p>
+<p>Once a PSR is in &quot;Abandoned&quot; stage it may only once again be moved to Draft after a fresh Entrance vote by the Core Committee following the same procedure as if it was a pre-draft, except it may retain its previously assigned number. If the aims of the PSR differ from the original entrance vote, it is up to the discretion of the Core Committee whether it should be considered a fresh PSR or a restart of activity on the Abandoned PSR.</p>
+<h2>Project Referendum<a id="project-referendum" href="#project-referendum" name="project-referendum" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>At any time the Editor of a PSR in Draft or Review Phase may call for a non-binding Referendum of Project Representatives on the current state of a PSR.  Such a Referendum may be called multiple times if appropriate as the PSR evolves, or never, at the Editor's discretion.  The Core Committee may also require such a Referendum as a condition of an Acceptance Vote if appropriate.  Referendum results are non-binding but the Working Group and Core Committee are expected to give the results due consideration.</p>
+
+                    </div>
+    </div>
+    <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Bylaws index:</h2>
+            <ul class="sidebar__list">
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/mission-and-structure">Mission and Structure</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link sidebar__link--active" href="/bylaws/psr-workflow">PSR Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/per-workflow">PER Workflow</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/voting-protocol">Voting Protocol</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/elections-and-vacancies">Elections and Vacancies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/licensing-policies">Licensing Policies</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-amendments">PSR Amendments</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-evolution">PSR Evolution</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/psr-naming-conventions">PSR Naming Conventions</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/funding">Funding</a>
+                </li>
+                            <li class="sidebar__item">
+                    <a class="sidebar__link " href="/bylaws/fig-3-transition">FIG 3.0 Transition</a>
+                </li>
+                        </ul>
+        </nav>
+    </div>
+</div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

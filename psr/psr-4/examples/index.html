@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-4 Example Implementations - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-4 Example Implementations - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-4 Example Implementations - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-4 Example Implementations
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Example Implementations of PSR-4<a id="example-implementations-of-psr-4" href="#example-implementations-of-psr-4" name="example-implementations-of-psr-4" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>The following examples illustrate PSR-4 compliant code:</p>
+<h2>Closure Example<a id="closure-example" href="#closure-example" name="closure-example" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">/**
+ * An example of a project-specific implementation.
+ *
+ * After registering this autoload function with SPL, the following line
+ * would cause the function to attempt to load the \Foo\Bar\Baz\Qux class
+ * from /path/to/project/src/Baz/Qux.php:
+ *
+ *      new \Foo\Bar\Baz\Qux;
+ *
+ * <span class="hljs-doctag">@param</span> string $class The fully-qualified class name.
+ * <span class="hljs-doctag">@return</span> void
+ */</span>
+spl_autoload_register(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($class)</span> </span>{
+
+    <span class="hljs-comment">// project-specific namespace prefix</span>
+    $prefix = <span class="hljs-string">'Foo\\Bar\\'</span>;
+
+    <span class="hljs-comment">// base directory for the namespace prefix</span>
+    $base_dir = <span class="hljs-keyword">__DIR__</span> . <span class="hljs-string">'/src/'</span>;
+
+    <span class="hljs-comment">// does the class use the namespace prefix?</span>
+    $len = strlen($prefix);
+    <span class="hljs-keyword">if</span> (strncmp($prefix, $class, $len) !== <span class="hljs-number">0</span>) {
+        <span class="hljs-comment">// no, move to the next registered autoloader</span>
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// get the relative class name</span>
+    $relative_class = substr($class, $len);
+
+    <span class="hljs-comment">// replace the namespace prefix with the base directory, replace namespace</span>
+    <span class="hljs-comment">// separators with directory separators in the relative class name, append</span>
+    <span class="hljs-comment">// with .php</span>
+    $file = $base_dir . str_replace(<span class="hljs-string">'\\'</span>, <span class="hljs-string">'/'</span>, $relative_class) . <span class="hljs-string">'.php'</span>;
+
+    <span class="hljs-comment">// if the file exists, require it</span>
+    <span class="hljs-keyword">if</span> (file_exists($file)) {
+        <span class="hljs-keyword">require</span> $file;
+    }
+});
+</code></pre>
+<h2>Class Example<a id="class-example" href="#class-example" name="class-example" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The following is an example class implementation to handle multiple
+namespaces:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Example</span>;
+
+<span class="hljs-comment">/**
+ * An example of a general-purpose implementation that includes the optional
+ * functionality of allowing multiple base directories for a single namespace
+ * prefix.
+ *
+ * Given a foo-bar package of classes in the file system at the following
+ * paths ...
+ *
+ *     /path/to/packages/foo-bar/
+ *         src/
+ *             Baz.php             # Foo\Bar\Baz
+ *             Qux/
+ *                 Quux.php        # Foo\Bar\Qux\Quux
+ *         tests/
+ *             BazTest.php         # Foo\Bar\BazTest
+ *             Qux/
+ *                 QuuxTest.php    # Foo\Bar\Qux\QuuxTest
+ *
+ * ... add the path to the class files for the \Foo\Bar\ namespace prefix
+ * as follows:
+ *
+ *      &lt;?php
+ *      // instantiate the loader
+ *      $loader = new \Example\Psr4AutoloaderClass;
+ *
+ *      // register the autoloader
+ *      $loader-&gt;register();
+ *
+ *      // register the base directories for the namespace prefix
+ *      $loader-&gt;addNamespace('Foo\Bar', '/path/to/packages/foo-bar/src');
+ *      $loader-&gt;addNamespace('Foo\Bar', '/path/to/packages/foo-bar/tests');
+ *
+ * The following line would cause the autoloader to attempt to load the
+ * \Foo\Bar\Qux\Quux class from /path/to/packages/foo-bar/src/Qux/Quux.php:
+ *
+ *      &lt;?php
+ *      new \Foo\Bar\Qux\Quux;
+ *
+ * The following line would cause the autoloader to attempt to load the
+ * \Foo\Bar\Qux\QuuxTest class from /path/to/packages/foo-bar/tests/Qux/QuuxTest.php:
+ *
+ *      &lt;?php
+ *      new \Foo\Bar\Qux\QuuxTest;
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Psr4AutoloaderClass</span>
+</span>{
+    <span class="hljs-comment">/**
+     * An associative array where the key is a namespace prefix and the value
+     * is an array of base directories for classes in that namespace.
+     *
+     * <span class="hljs-doctag">@var</span> array
+     */</span>
+    <span class="hljs-keyword">protected</span> $prefixes = <span class="hljs-keyword">array</span>();
+
+    <span class="hljs-comment">/**
+     * Register loader with SPL autoloader stack.
+     *
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>
+    </span>{
+        spl_autoload_register(<span class="hljs-keyword">array</span>(<span class="hljs-keyword">$this</span>, <span class="hljs-string">'loadClass'</span>));
+    }
+
+    <span class="hljs-comment">/**
+     * Adds a base directory for a namespace prefix.
+     *
+     * <span class="hljs-doctag">@param</span> string $prefix The namespace prefix.
+     * <span class="hljs-doctag">@param</span> string $base_dir A base directory for class files in the
+     * namespace.
+     * <span class="hljs-doctag">@param</span> bool $prepend If true, prepend the base directory to the stack
+     * instead of appending it; this causes it to be searched first rather
+     * than last.
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addNamespace</span><span class="hljs-params">($prefix, $base_dir, $prepend = false)</span>
+    </span>{
+        <span class="hljs-comment">// normalize namespace prefix</span>
+        $prefix = trim($prefix, <span class="hljs-string">'\\'</span>) . <span class="hljs-string">'\\'</span>;
+
+        <span class="hljs-comment">// normalize the base directory with a trailing separator</span>
+        $base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . <span class="hljs-string">'/'</span>;
+
+        <span class="hljs-comment">// initialize the namespace prefix array</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix]) === <span class="hljs-keyword">false</span>) {
+            <span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix] = <span class="hljs-keyword">array</span>();
+        }
+
+        <span class="hljs-comment">// retain the base directory for the namespace prefix</span>
+        <span class="hljs-keyword">if</span> ($prepend) {
+            array_unshift(<span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix], $base_dir);
+        } <span class="hljs-keyword">else</span> {
+            array_push(<span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix], $base_dir);
+        }
+    }
+
+    <span class="hljs-comment">/**
+     * Loads the class file for a given class name.
+     *
+     * <span class="hljs-doctag">@param</span> string $class The fully-qualified class name.
+     * <span class="hljs-doctag">@return</span> mixed The mapped file name on success, or boolean false on
+     * failure.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadClass</span><span class="hljs-params">($class)</span>
+    </span>{
+        <span class="hljs-comment">// the current namespace prefix</span>
+        $prefix = $class;
+
+        <span class="hljs-comment">// work backwards through the namespace names of the fully-qualified</span>
+        <span class="hljs-comment">// class name to find a mapped file name</span>
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">false</span> !== $pos = strrpos($prefix, <span class="hljs-string">'\\'</span>)) {
+
+            <span class="hljs-comment">// retain the trailing namespace separator in the prefix</span>
+            $prefix = substr($class, <span class="hljs-number">0</span>, $pos + <span class="hljs-number">1</span>);
+
+            <span class="hljs-comment">// the rest is the relative class name</span>
+            $relative_class = substr($class, $pos + <span class="hljs-number">1</span>);
+
+            <span class="hljs-comment">// try to load a mapped file for the prefix and relative class</span>
+            $mapped_file = <span class="hljs-keyword">$this</span>-&gt;loadMappedFile($prefix, $relative_class);
+            <span class="hljs-keyword">if</span> ($mapped_file) {
+                <span class="hljs-keyword">return</span> $mapped_file;
+            }
+
+            <span class="hljs-comment">// remove the trailing namespace separator for the next iteration</span>
+            <span class="hljs-comment">// of strrpos()</span>
+            $prefix = rtrim($prefix, <span class="hljs-string">'\\'</span>);
+        }
+
+        <span class="hljs-comment">// never found a mapped file</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * Load the mapped file for a namespace prefix and relative class.
+     *
+     * <span class="hljs-doctag">@param</span> string $prefix The namespace prefix.
+     * <span class="hljs-doctag">@param</span> string $relative_class The relative class name.
+     * <span class="hljs-doctag">@return</span> mixed Boolean false if no mapped file can be loaded, or the
+     * name of the mapped file that was loaded.
+     */</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadMappedFile</span><span class="hljs-params">($prefix, $relative_class)</span>
+    </span>{
+        <span class="hljs-comment">// are there any base directories for this namespace prefix?</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix]) === <span class="hljs-keyword">false</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        }
+
+        <span class="hljs-comment">// look through base directories for this namespace prefix</span>
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">$this</span>-&gt;prefixes[$prefix] <span class="hljs-keyword">as</span> $base_dir) {
+
+            <span class="hljs-comment">// replace the namespace prefix with the base directory,</span>
+            <span class="hljs-comment">// replace namespace separators with directory separators</span>
+            <span class="hljs-comment">// in the relative class name, append with .php</span>
+            $file = $base_dir
+                  . str_replace(<span class="hljs-string">'\\'</span>, <span class="hljs-string">'/'</span>, $relative_class)
+                  . <span class="hljs-string">'.php'</span>;
+
+            <span class="hljs-comment">// if the mapped file exists, require it</span>
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">$this</span>-&gt;requireFile($file)) {
+                <span class="hljs-comment">// yes, we're done</span>
+                <span class="hljs-keyword">return</span> $file;
+            }
+        }
+
+        <span class="hljs-comment">// never found it</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * If a file exists, require it from the file system.
+     *
+     * <span class="hljs-doctag">@param</span> string $file The file to require.
+     * <span class="hljs-doctag">@return</span> bool True if the file exists, false if not.
+     */</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requireFile</span><span class="hljs-params">($file)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (file_exists($file)) {
+            <span class="hljs-keyword">require</span> $file;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+}
+</code></pre>
+<h3>Unit Tests<a id="unit-tests" href="#unit-tests" name="unit-tests" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The following example is one way of unit testing the above class loader:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Example</span>\<span class="hljs-title">Tests</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockPsr4AutoloaderClass</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Psr4AutoloaderClass</span>
+</span>{
+    <span class="hljs-keyword">protected</span> $files = <span class="hljs-keyword">array</span>();
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setFiles</span><span class="hljs-params">(array $files)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;files = $files;
+    }
+
+    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requireFile</span><span class="hljs-params">($file)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> in_array($file, <span class="hljs-keyword">$this</span>-&gt;files);
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Psr4AutoloaderClassTest</span> <span class="hljs-keyword">extends</span> \<span class="hljs-title">PHPUnit_Framework_TestCase</span>
+</span>{
+    <span class="hljs-keyword">protected</span> $loader;
+
+    <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setUp</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;loader = <span class="hljs-keyword">new</span> MockPsr4AutoloaderClass;
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;setFiles(<span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'/vendor/foo.bar/src/ClassName.php'</span>,
+            <span class="hljs-string">'/vendor/foo.bar/src/DoomClassName.php'</span>,
+            <span class="hljs-string">'/vendor/foo.bar/tests/ClassNameTest.php'</span>,
+            <span class="hljs-string">'/vendor/foo.bardoom/src/ClassName.php'</span>,
+            <span class="hljs-string">'/vendor/foo.bar.baz.dib/src/ClassName.php'</span>,
+            <span class="hljs-string">'/vendor/foo.bar.baz.dib.zim.gir/src/ClassName.php'</span>,
+        ));
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;addNamespace(
+            <span class="hljs-string">'Foo\Bar'</span>,
+            <span class="hljs-string">'/vendor/foo.bar/src'</span>
+        );
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;addNamespace(
+            <span class="hljs-string">'Foo\Bar'</span>,
+            <span class="hljs-string">'/vendor/foo.bar/tests'</span>
+        );
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;addNamespace(
+            <span class="hljs-string">'Foo\BarDoom'</span>,
+            <span class="hljs-string">'/vendor/foo.bardoom/src'</span>
+        );
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;addNamespace(
+            <span class="hljs-string">'Foo\Bar\Baz\Dib'</span>,
+            <span class="hljs-string">'/vendor/foo.bar.baz.dib/src'</span>
+        );
+
+        <span class="hljs-keyword">$this</span>-&gt;loader-&gt;addNamespace(
+            <span class="hljs-string">'Foo\Bar\Baz\Dib\Zim\Gir'</span>,
+            <span class="hljs-string">'/vendor/foo.bar.baz.dib.zim.gir/src'</span>
+        );
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testExistingFile</span><span class="hljs-params">()</span>
+    </span>{
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'Foo\Bar\ClassName'</span>);
+        $expect = <span class="hljs-string">'/vendor/foo.bar/src/ClassName.php'</span>;
+        <span class="hljs-keyword">$this</span>-&gt;assertSame($expect, $actual);
+
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'Foo\Bar\ClassNameTest'</span>);
+        $expect = <span class="hljs-string">'/vendor/foo.bar/tests/ClassNameTest.php'</span>;
+        <span class="hljs-keyword">$this</span>-&gt;assertSame($expect, $actual);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testMissingFile</span><span class="hljs-params">()</span>
+    </span>{
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'No_Vendor\No_Package\NoClass'</span>);
+        <span class="hljs-keyword">$this</span>-&gt;assertFalse($actual);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testDeepFile</span><span class="hljs-params">()</span>
+    </span>{
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'Foo\Bar\Baz\Dib\Zim\Gir\ClassName'</span>);
+        $expect = <span class="hljs-string">'/vendor/foo.bar.baz.dib.zim.gir/src/ClassName.php'</span>;
+        <span class="hljs-keyword">$this</span>-&gt;assertSame($expect, $actual);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testConfusion</span><span class="hljs-params">()</span>
+    </span>{
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'Foo\Bar\DoomClassName'</span>);
+        $expect = <span class="hljs-string">'/vendor/foo.bar/src/DoomClassName.php'</span>;
+        <span class="hljs-keyword">$this</span>-&gt;assertSame($expect, $actual);
+
+        $actual = <span class="hljs-keyword">$this</span>-&gt;loader-&gt;loadClass(<span class="hljs-string">'Foo\BarDoom\ClassName'</span>);
+        $expect = <span class="hljs-string">'/vendor/foo.bardoom/src/ClassName.php'</span>;
+        <span class="hljs-keyword">$this</span>-&gt;assertSame($expect, $actual);
+    }
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-4/">PSR-4: Autoloader</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-4/meta">PSR-4 Meta Document</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-4 Example Implementations</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

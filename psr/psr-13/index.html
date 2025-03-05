@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-13: Link definition interfaces - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-13: Link definition interfaces - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-13: Link definition interfaces - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-13: Link definition interfaces
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Link definition interfaces<a id="link-definition-interfaces" href="#link-definition-interfaces" name="link-definition-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>Hypermedia links are becoming an increasingly important part of the web, in both HTML contexts
+and various API format contexts. However, there is no single common hypermedia format, nor
+is there a common way to represent links between formats.</p>
+<p>This specification aims to provide PHP developers with a simple, common way of representing a
+hypermedia link independently of the serialization format that is used. That in turn allows
+a system to serialize a response with hypermedia links into one or more wire formats independently
+of the process of deciding what those links should be.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<h3>References<a id="references" href="#references" name="references" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>
+</li>
+<li>
+<a href="https://tools.ietf.org/html/rfc4287">RFC 4287</a>
+</li>
+<li>
+<a href="https://tools.ietf.org/html/rfc5988">RFC 5988</a>
+</li>
+<li>
+<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a>
+</li>
+<li>
+<a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml">IANA Link Relations Registry</a>
+</li>
+<li>
+<a href="http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions">Microformats Relations List</a>
+</li>
+</ul>
+<h2>1. Specification<a id="1-specification" href="#1-specification" name="1-specification" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>1.1 Basic links<a id="11-basic-links" href="#11-basic-links" name="11-basic-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>A Hypermedia Link consists of, at minimum:</p>
+<ul>
+<li>A URI representing the target resource being referenced.</li>
+<li>A relationship defining how the target resource relates to the source.</li>
+</ul>
+<p>Various other attributes of the Link may exist, depending on the format used. As additional attributes
+are not well-standardized or universal, this specification does not seek to standardize them.</p>
+<p>For the purposes of this specification, the following definitions apply.</p>
+<ul>
+<li>
+<p><strong>Implementing Object</strong> - An object that implements one of the interfaces defined by this
+specification.</p>
+</li>
+<li>
+<p><strong>Serializer</strong> - A library or other system that takes one or more Link objects and produces
+a serialized representation of it in some defined format.</p>
+</li>
+</ul>
+<h3>1.2 Attributes<a id="12-attributes" href="#12-attributes" name="12-attributes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>All links MAY include zero or more additional attributes beyond the URI and relationship.
+There is no formal registry of the values that are allowed here, and validity of values
+is dependent on context and often on a particular serialization format. Commonly supported
+values include 'hreflang', 'title', and 'type'.</p>
+<p>Serializers MAY omit attributes on a link object if required to do so by the serialization
+format. However, serializers SHOULD encode all provided attributes possible in order to
+allow for user-extension unless prevented by a serialization format's definition.</p>
+<p>Some attributes (commonly <code>hreflang</code>) may appear more than once in their context. Therefore,
+an attribute value MAY be an array of values rather than a simple value. Serializers MAY
+encode that array in whatever format is appropriate for the serialized format (such
+as a space-separated list, comma-separated list, etc.). If a given attribute is not
+allowed to have multiple values in a particular context, serializers MUST use the first
+value provided and ignore all subsequent values.</p>
+<p>If an attribute value is boolean <code>true</code>, serializers MAY use abbreviated forms if appropriate
+and supported by a serialization format. For example, HTML permits attributes to
+have no value when the attribute's presence has a boolean meaning. This rule applies
+if and only if the attribute is boolean <code>true</code>, not for any other &quot;truthy&quot; value
+in PHP such as integer 1.</p>
+<p>If an attribute value is boolean <code>false</code>, serializers SHOULD omit the attribute entirely
+unless doing so changes the semantic meaning of the result. This rule applies if
+and only if the attribute is boolean <code>false</code>, not for any other &quot;falsey&quot; value in PHP
+such as integer 0.</p>
+<h3>1.3 Relationships<a id="13-relationships" href="#13-relationships" name="13-relationships" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Link relationships are defined as strings, and are either a simple keyword in
+case of a publicly defined relationship or an absolute URI in the case of a
+private relationships.</p>
+<p>In case a simple keyword is used, it SHOULD match one from the IANA registry at:</p>
+<p>http://www.iana.org/assignments/link-relations/link-relations.xhtml</p>
+<p>Optionally the microformats.org registry MAY be used, but this may not be valid
+in every context:</p>
+<p>http://microformats.org/wiki/existing-rel-values</p>
+<p>A relationship that is not defined in one of the above registries or a similar
+public registry is considered &quot;private&quot;, that is, specific to a particular
+application or use case. Such relationships MUST use an absolute URI.</p>
+<h2>1.4 Link Templates<a id="14-link-templates" href="#14-link-templates" name="14-link-templates" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p><a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> defines a format for URI templates, that is,
+a pattern for a URI that is expected to be filled in with values provided by a client
+tool. Some hypermedia formats support templated links while others do not, and may
+have a special way to denote that a link is a template. A Serializer for a format
+that does not support URI Templates MUST ignore any templated Links it encounters.</p>
+<h2>1.5 Evolvable providers<a id="15-evolvable-providers" href="#15-evolvable-providers" name="15-evolvable-providers" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>In some cases, a Link Provider may need the ability to have additional links
+added to it. In others, a link provider is necessarily read-only, with links
+derived at runtime from some other data source. For that reason, modifiable providers
+are a secondary interface that may optionally be implemented.</p>
+<p>Additionally, some Link Provider objects, such as PSR-7 Response objects, are
+by design immutable. That means methods to add links to them in-place would be
+incompatible. Therefore, the <code>EvolvableLinkProviderInterface</code>'s single method
+requires that a new object be returned, identical to the original but with
+an additional Link object included.</p>
+<h2>1.6 Evolvable link objects<a id="16-evolvable-link-objects" href="#16-evolvable-link-objects" name="16-evolvable-link-objects" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Link objects are in most cases value objects. As such, allowing them to evolve
+in the same fashion as PSR-7 value objects is a useful option. For that reason,
+an additional EvolvableLinkInterface is included that provides methods to
+produce new object instances with a single change. The same model is used by PSR-7
+and, thanks to PHP's copy-on-write behavior, is still CPU and memory efficient.</p>
+<p>There is no evolvable method for templated values, however, as the templated value of a
+link is based exclusively on the href value. It MUST NOT be set independently, but
+derived from whether or not the href value is an RFC 6570 link template.</p>
+<h2>2. Package<a id="2-package" href="#2-package" name="2-package" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The interfaces and classes described are provided as part of the
+<a href="https://packagist.org/packages/psr/link">psr/link</a> package.</p>
+<h2>3. Interfaces<a id="3-interfaces" href="#3-interfaces" name="3-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>3.1 <code>Psr\Link\LinkInterface</code><a id="31-psrlinklinkinterface" href="#31-psrlinklinkinterface" name="31-psrlinklinkinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Link</span>;
+
+<span class="hljs-comment">/**
+ * A readable link object.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LinkInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns the target of the link.
+     *
+     * The target link must be one of:
+     * - An absolute URI, as defined by RFC 5988.
+     * - A relative URI, as defined by RFC 5988. The base of the relative link
+     *     is assumed to be known based on context by the client.
+     * - A URI template as defined by RFC 6570.
+     *
+     * If a URI template is returned, isTemplated() MUST return True.
+     *
+     * <span class="hljs-doctag">@return</span> string
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHref</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns whether or not this is a templated link.
+     *
+     * <span class="hljs-doctag">@return</span> bool
+     *   True if this link object is templated, False otherwise.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isTemplated</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns the relationship type(s) of the link.
+     *
+     * This method returns 0 or more relationship types for a link, expressed
+     * as an array of strings.
+     *
+     * <span class="hljs-doctag">@return</span> string[]
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRels</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns a list of attributes that describe the target URI.
+     *
+     * <span class="hljs-doctag">@return</span> array
+     *   A key-value list of attributes, where the key is a string and the value
+     *  is either a PHP primitive or an array of PHP strings. If no values are
+     *  found an empty array MUST be returned.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAttributes</span><span class="hljs-params">()</span></span>;
+}
+</code></pre>
+<h3>3.2 <code>Psr\Link\EvolvableLinkInterface</code><a id="32-psrlinkevolvablelinkinterface" href="#32-psrlinkevolvablelinkinterface" name="32-psrlinkevolvablelinkinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Link</span>;
+
+<span class="hljs-comment">/**
+ * An evolvable link value object.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">EvolvableLinkInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified href.
+     *
+     * <span class="hljs-doctag">@param</span> string $href
+     *   The href value to include. It must be one of:
+     *     - An absolute URI, as defined by RFC 5988.
+     *     - A relative URI, as defined by RFC 5988. The base of the relative link
+     *       is assumed to be known based on context by the client.
+     *     - A URI template as defined by RFC 6570.
+     *     - An object implementing __toString() that produces one of the above
+     *       values.
+     *
+     * An implementing library SHOULD evaluate a passed object to a string
+     * immediately rather than waiting for it to be returned later.
+     *
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withHref</span><span class="hljs-params">($href)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified relationship included.
+     *
+     * If the specified rel is already present, this method MUST return
+     * normally without errors, but without adding the rel a second time.
+     *
+     * <span class="hljs-doctag">@param</span> string $rel
+     *   The relationship value to add.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withRel</span><span class="hljs-params">($rel)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified relationship excluded.
+     *
+     * If the specified rel is already not present, this method MUST return
+     * normally without errors.
+     *
+     * <span class="hljs-doctag">@param</span> string $rel
+     *   The relationship value to exclude.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withoutRel</span><span class="hljs-params">($rel)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified attribute added.
+     *
+     * If the specified attribute is already present, it will be overwritten
+     * with the new value.
+     *
+     * <span class="hljs-doctag">@param</span> string $attribute
+     *   The attribute to include.
+     * <span class="hljs-doctag">@param</span> string $value
+     *   The value of the attribute to set.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withAttribute</span><span class="hljs-params">($attribute, $value)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified attribute excluded.
+     *
+     * If the specified attribute is not present, this method MUST return
+     * normally without errors.
+     *
+     * <span class="hljs-doctag">@param</span> string $attribute
+     *   The attribute to remove.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withoutAttribute</span><span class="hljs-params">($attribute)</span></span>;
+}
+</code></pre>
+<h4>3.2 <code>Psr\Link\LinkProviderInterface</code><a id="32-psrlinklinkproviderinterface" href="#32-psrlinklinkproviderinterface" name="32-psrlinklinkproviderinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Link</span>;
+
+<span class="hljs-comment">/**
+ * A link provider object.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LinkProviderInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns an iterable of LinkInterface objects.
+     *
+     * The iterable may be an array or any PHP \Traversable object. If no links
+     * are available, an empty array or \Traversable MUST be returned.
+     *
+     * <span class="hljs-doctag">@return</span> LinkInterface[]|\Traversable
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLinks</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an iterable of LinkInterface objects that have a specific relationship.
+     *
+     * The iterable may be an array or any PHP \Traversable object. If no links
+     * with that relationship are available, an empty array or \Traversable MUST be returned.
+     *
+     * <span class="hljs-doctag">@return</span> LinkInterface[]|\Traversable
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLinksByRel</span><span class="hljs-params">($rel)</span></span>;
+}
+</code></pre>
+<h4>3.3 <code>Psr\Link\EvolvableLinkProviderInterface</code><a id="33-psrlinkevolvablelinkproviderinterface" href="#33-psrlinkevolvablelinkproviderinterface" name="33-psrlinkevolvablelinkproviderinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Link</span>;
+
+<span class="hljs-comment">/**
+ * An evolvable link provider value object.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">EvolvableLinkProviderInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkProviderInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified link included.
+     *
+     * If the specified link is already present, this method MUST return normally
+     * without errors. The link is present if $link is === identical to a link
+     * object already in the collection.
+     *
+     * <span class="hljs-doctag">@param</span> LinkInterface $link
+     *   A link object that should be included in this collection.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withLink</span><span class="hljs-params">(LinkInterface $link)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Returns an instance with the specified link removed.
+     *
+     * If the specified link is not present, this method MUST return normally
+     * without errors. The link is present if $link is === identical to a link
+     * object already in the collection.
+     *
+     * <span class="hljs-doctag">@param</span> LinkInterface $link
+     *   The link to remove.
+     * <span class="hljs-doctag">@return</span> static
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withoutLink</span><span class="hljs-params">(LinkInterface $link)</span></span>;
+}
+</code></pre>
+<p>Since <a href="https://packagist.org/packages/psr/link#1.1.0">psr/link version 1.1</a>, the above interfaces have been updated to add argument type hints.
+Since <a href="https://packagist.org/packages/psr/link#2.0.0">psr/link version 2.0</a>, the above interfaces have been updated to add return type hints.  References to <code>array|\Traversable</code> have been replaced with <code>iterable</code>.</p>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-13: Link definition interfaces</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-13/meta">PSR-13 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

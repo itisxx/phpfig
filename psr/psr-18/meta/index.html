@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-18 Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-18 Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-18 Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-18 Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Client Meta Document<a id="http-client-meta-document" href="#http-client-meta-document" name="http-client-meta-document" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>Summary<a id="summary" href="#summary" name="summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>HTTP requests and responses are the two fundamental objects in web programming.
+All clients communicating to an external API use some form of HTTP client. Many
+libraries are coupled to one specific client or implement a client and/or
+adapter layer themselves. This leads to bad library design, version conflicts,
+or code unrelated to the library domain.</p>
+<h2>Why bother?<a id="why-bother" href="#why-bother" name="why-bother" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Thanks to PSR-7 we know how HTTP requests and responses ideally look, but nothing
+defines how a request should be sent and a response received. A common interface for HTTP
+clients will allow libraries to be decoupled from specific implementations.</p>
+<h2>Scope<a id="scope" href="#scope" name="scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>Goals<a id="goals" href="#goals" name="goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>A common interface for sending PSR-7 messages and returning PSR-7 responses.</li>
+</ul>
+<h3>Non-Goals<a id="non-goals" href="#non-goals" name="non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Support for asynchronous HTTP requests is left for another future PSR.</li>
+<li>This PSR does not define how to configure an HTTP client. It only specifies the
+default behaviours.</li>
+<li>This PSR is neutral about the use of middleware.</li>
+</ul>
+<h4>Asynchronous HTTP client<a id="asynchronous-http-client" href="#asynchronous-http-client" name="asynchronous-http-client" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>The reason asynchronous requests are not covered by this PSR is the lack of a
+common standard for Promises. Promises are sufficiently complex enough that they
+deserve their own specification, and should not be wrapped into this one.</p>
+<p>A separate interface for asynchronous requests can be defined in a separate PSR
+once a Promise PSR is accepted. The method signature for asynchronous requests
+MUST be different from the method signature for synchronous requests because
+the return type of asynchronous calls will be a Promise. Thus this PSR is forwards
+compatible, and clients will be able to implement one or both interfaces based
+on the features they wish to expose.</p>
+<h2>Approaches<a id="approaches" href="#approaches" name="approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>Default behavior<a id="default-behavior" href="#default-behavior" name="default-behavior" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The intention of this PSR is to provide library developers with HTTP clients that
+have a well defined behaviour. A library should be able to use any compliant client
+without special code to handle client implementation details (Liskov substitution
+principle). The PSR does not try to restrict nor define how to configure HTTP clients.</p>
+<p>An alternative approach would be to pass configuration to the client. That approach
+would have a few drawbacks:</p>
+<ul>
+<li>Configuration must be defined by the PSR.</li>
+<li>All clients must support the defined configuration.</li>
+<li>If no configuration is passed to the client, the behavior is unpredictable.</li>
+</ul>
+<h4>Naming rationale<a id="naming-rationale" href="#naming-rationale" name="naming-rationale" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>The main interface behaviour is defined by the method <code>sendRequest(RequestInterface $request): ResponseInterface</code>.<br />
+While the shorter method name <code>send()</code> has been proposed, this was already used by existing and very common HTTP clients like Guzzle. As such, if they are to adopt this standard, they may need to break backwards compatibility in order to implement the specification. By defining <code>sendRequest()</code> instead, we ensure they can adopt without any immediate BC breaks.</p>
+<h3>Exception Model<a id="exception-model" href="#exception-model" name="exception-model" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The domain exceptions <code>NetworkExceptionInterface</code> and <code>RequestExceptionInterface</code> define
+a contract very similar to each other. The chosen approach is to not let them extend each other
+because inheritance does not make sense in the domain model. A <code>RequestExceptionInterface</code> is simply not a
+<code>NetworkExceptionInterface</code>.</p>
+<p>Allowing exceptions to extend a <code>RequestAwareException</code> and/or <code>ResponseAwareException</code> interface
+has been discussed but that is a convenience shortcut that one should not take. One should rather
+catch the specific exceptions and handle them accordingly.</p>
+<p>One could be more granular when defining exceptions. For example, <code>TimeOutException</code> and <code>HostNotFoundException</code>
+could be subtypes of <code>NetworkExceptionInterface</code>. The chosen approach is not to define such subtypes because
+the exception handling in a consuming library would in most cases not be different between those exceptions.</p>
+<h4>Throwing exceptions for 4xx and 5xx responses<a id="throwing-exceptions-for-4xx-and-5xx-responses" href="#throwing-exceptions-for-4xx-and-5xx-responses" name="throwing-exceptions-for-4xx-and-5xx-responses" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>The initial idea was to allow the client to be configured to throw exceptions for responses
+with HTTP status 4xx and 5xx. That approach is not desired because consuming libraries would
+have to check for 4xx and 5xx responses twice: first, by verifying the status code on the response,
+and second by catching potential exceptions.</p>
+<p>To make the specification more predictable, it was decided that HTTP clients never will throw
+exceptions for 4xx and 5xx responses.</p>
+<h2>Middleware and wrapping a client<a id="middleware-and-wrapping-a-client" href="#middleware-and-wrapping-a-client" name="middleware-and-wrapping-a-client" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The specification does not put any limitations on middleware or classes that want
+to wrap/decorate an HTTP client. If the decorating class also implements <code>ClientInterface</code>
+then it must also follow the specification.</p>
+<p>It is temping to allow configuration or add middleware to an HTTP client so it could i.e.
+follow redirects or throw exceptions. If that is a decision from an application developer,
+they have specifically said they want to break the specification. That is an issue (or feature)
+the application developer should handle. Third party libraries MUST NOT assume that
+a HTTP client breaks the specification.</p>
+<h2>Background<a id="background" href="#background" name="background" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The HTTP client PSR has been inspired and created by the <a href="https://github.com/orgs/php-http/people">php-http team</a>.
+Back in 2015, they created HTTPlug as a common interface for HTTP clients. They wanted an
+abstraction that third party libraries could use so as not to rely on a specific HTTP client
+implementation. A stable version was tagged in January 2016, and the project has been
+widely adopted since then. With over 3 million downloads in the two years
+following the initial stable version, it was time to convert this &quot;de-facto&quot;
+standard into a formal specification.</p>
+<h2>People<a id="people" href="#people" name="people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>5.1 Editor<a id="51-editor" href="#51-editor" name="51-editor" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Tobias Nyholm</li>
+</ul>
+<h3>5.2 Sponsors<a id="52-sponsors" href="#52-sponsors" name="52-sponsors" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Sara Golemon</li>
+</ul>
+<h3>5.3 Workgroup<a id="53-workgroup" href="#53-workgroup" name="53-workgroup" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Simon Asika (Windwalker)</li>
+<li>David Buchmann (HTTPlug)</li>
+<li>David De Boer (HTTPlug)</li>
+<li>Sara Golemon (Sponsor)</li>
+<li>Jeremy Lindblom (Guzzle)</li>
+<li>Christian Lück (Buzz react)</li>
+<li>Tobias Nyholm (Editor)</li>
+<li>Matthew Weier O'Phinney (Zend)</li>
+<li>Mark Sagi-Kazar (Guzzle)</li>
+<li>Joel Wurtz (HTTPlug)</li>
+</ul>
+<h2>Votes<a id="votes" href="#votes" name="votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/MJGYRXfUJGk/discussion">Entrance vote</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/dV9zIaOooZ4/discussion">Review Period Initiation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/rScdiW38nLM/discussion">Acceptance</a>
+</li>
+</ul>
+<h2>Proposed implementations<a id="proposed-implementations" href="#proposed-implementations" name="proposed-implementations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>Below are the two implementations provided by the working group to pass the review period:</p>
+<ul>
+<li>HTTPlug has prepared a 2.0 to make sure it is supporting the new PSR.
+They are just waiting for the PSR to be released: https://github.com/php-http/httplug/tree/2.x</li>
+<li>Buzz has been adapting to every version of the PSR and has their 0.17.3 release with the latest
+version of psr/http-client: https://github.com/kriswallsmith/Buzz</li>
+</ul>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-18/">PSR-18: HTTP Client</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-18 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

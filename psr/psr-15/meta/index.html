@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-15 Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-15 Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-15 Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-15 Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Server Request Handlers Meta Document<a id="http-server-request-handlers-meta-document" href="#http-server-request-handlers-meta-document" name="http-server-request-handlers-meta-document" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>1. Summary<a id="1-summary" href="#1-summary" name="1-summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The purpose of this PSR is to define formal interfaces for HTTP server request
+handlers (&quot;request handlers&quot;) and HTTP server request middleware (&quot;middleware&quot;)
+that are compatible with HTTP messages as defined in <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> or subsequent
+replacement PSRs.</p>
+<p><em>Note: All references to &quot;request handlers&quot; and &quot;middleware&quot; are specific to
+<strong>server request</strong> processing.</em></p>
+<h2>2. Why Bother?<a id="2-why-bother" href="#2-why-bother" name="2-why-bother" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The HTTP messages specification does not contain any reference to request
+handlers or middleware.</p>
+<p>Request handlers are a fundamental part of any web application. The handler is
+the component that receives a request and produces a response. Nearly all code
+that works with HTTP messages will have some kind of request handler.</p>
+<p><a href="https://en.wikipedia.org/wiki/Middleware">Middleware</a> has existed for many years in the PHP ecosystem. The
+general concept of reusable middleware was popularized by <a href="http://stackphp.com/">StackPHP</a>.
+Since the release of HTTP messages as a PSR, many frameworks have adopted
+middleware that use HTTP message interfaces.</p>
+<p>Agreeing on formal request handler and middleware interfaces eliminates several
+problems and has a number of benefits:</p>
+<ul>
+<li>Provides a formal standard for developers to commit to.</li>
+<li>Enables any middleware component to run in any compatible framework.</li>
+<li>Eliminates duplication of similar interfaces defined by various frameworks.</li>
+<li>Avoids minor discrepancies in method signatures.</li>
+</ul>
+<h2>3. Scope<a id="3-scope" href="#3-scope" name="3-scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>3.1 Goals<a id="31-goals" href="#31-goals" name="31-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Create a request handler interface that uses HTTP messages.</li>
+<li>Create a middleware interface that uses HTTP messages.</li>
+<li>Implement request handler and middleware signatures that are based on
+best practices.</li>
+<li>Ensure that request handlers and middleware will be compatible with any
+implementation of HTTP messages.</li>
+</ul>
+<h3>3.2 Non-Goals<a id="32-non-goals" href="#32-non-goals" name="32-non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Attempting to define the mechanism by which HTTP responses are created.</li>
+<li>Attempting to define interfaces for client/asynchronous middleware.</li>
+<li>Attempting to define how middleware is dispatched.</li>
+</ul>
+<h2>4. Request Handler Approaches<a id="4-request-handler-approaches" href="#4-request-handler-approaches" name="4-request-handler-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>There are many approaches to request handlers that use HTTP messages. However,
+the general process is the same in all of them:</p>
+<p>Given an HTTP request, produce an HTTP response for that request.</p>
+<p>The internal requirements of that process will vary from framework to framework
+and application to application. This proposal makes no effort to determine what
+that process should be.</p>
+<h2>5. Middleware Approaches<a id="5-middleware-approaches" href="#5-middleware-approaches" name="5-middleware-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>There are currently two common approaches to middleware that use HTTP messages.</p>
+<h3>5.1 Double Pass<a id="51-double-pass" href="#51-double-pass" name="51-double-pass" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The signature used by most middleware implementations has been mostly the same
+and is based on <a href="http://expressjs.com/en/guide/writing-middleware.html">Express middleware</a>, which is defined as:</p>
+<pre><code class="language- hljs " data-lang="">fn(request, response, next): response
+</code></pre>
+<p>Based on the middleware implementations already used by frameworks that have
+adopted this signature, the following commonalities are observed:</p>
+<ul>
+<li>The middleware is defined as a <a href="http://php.net/manual/language.types.callable.php">callable</a>.</li>
+<li>The middleware is passed 3 arguments during invocation:
+<ol>
+<li>A <code>ServerRequestInterface</code> implementation.</li>
+<li>A <code>ResponseInterface</code> implementation.</li>
+<li>A <code>callable</code> that receives the request and response to delegate to the next middleware.</li>
+</ol>
+</li>
+</ul>
+<p>A significant number of projects provide and/or use exactly the same interface.
+This approach is often referred to as &quot;double pass&quot; in reference to both the
+request and response being passed to the middleware.</p>
+<h4>5.1.1 Projects Using Double Pass<a id="511-projects-using-double-pass" href="#511-projects-using-double-pass" name="511-projects-using-double-pass" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<ul>
+<li>
+<a href="https://github.com/mindplay-dk/middleman/blob/1.0.0/src/MiddlewareInterface.php#L24">mindplay/middleman v1</a>
+</li>
+<li>
+<a href="https://github.com/relayphp/Relay.Relay/blob/1.0.0/src/MiddlewareInterface.php#L24">relay/relay v1</a>
+</li>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/3.4.0/Slim/MiddlewareAwareTrait.php#L66-L75">slim/slim v3</a>
+</li>
+<li>
+<a href="https://github.com/zendframework/zend-stratigility/blob/1.0.0/src/MiddlewarePipe.php#L69-L79">zendframework/zend-stratigility v1</a>
+</li>
+</ul>
+<h4>5.1.2 Middleware Implementing Double Pass<a id="512-middleware-implementing-double-pass" href="#512-middleware-implementing-double-pass" name="512-middleware-implementing-double-pass" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<ul>
+<li>
+<a href="https://github.com/bitExpert/adroit">bitexpert/adroit</a>
+</li>
+<li>
+<a href="https://github.com/akrabat/rka-ip-address-middleware">akrabat/rka-ip-address-middleware</a>
+</li>
+<li>
+<a href="https://github.com/akrabat/rka-scheme-and-host-detection-middleware">akrabat/rka-scheme-and-host-detection-middleware</a>
+</li>
+<li>
+<a href="https://github.com/bearsunday/BEAR.Middleware">bear/middleware</a>
+</li>
+<li>
+<a href="https://github.com/Lansoweb/api-problem">los/api-problem</a>
+</li>
+<li>
+<a href="https://github.com/Lansoweb/LosRateLimit">los/los-rate-limit</a>
+</li>
+<li>
+<a href="https://github.com/monii/monii-action-handler-psr7-middleware">monii/monii-action-handler-psr7-middleware</a>
+</li>
+<li>
+<a href="https://github.com/monii/monii-nikic-fast-route-psr7-middleware">monii/monii-nikic-fast-route-psr7-middleware</a>
+</li>
+<li>
+<a href="https://github.com/monii/monii-response-assertion-psr7-middleware">monii/monii-response-assertion-psr7-middleware</a>
+</li>
+<li>
+<a href="https://github.com/mtymek/blast-base-url">mtymek/blast-base-url</a>
+</li>
+<li>
+<a href="https://github.com/Ocramius/PSR7Session">ocramius/psr7-session</a>
+</li>
+<li>
+<a href="https://github.com/oscarotero/psr7-middlewares">oscarotero/psr7-middlewares</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/block-robots">php-middleware/block-robots</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/http-authentication">php-middleware/http-authentication</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/log-http-messages">php-middleware/log-http-messages</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/maintenance">php-middleware/maintenance</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/phpdebugbar">php-middleware/phpdebugbar</a>
+</li>
+<li>
+<a href="https://github.com/php-middleware/request-id">php-middleware/request-id</a>
+</li>
+<li>
+<a href="https://github.com/relayphp/Relay.Middleware">relay/middleware</a>
+</li>
+</ul>
+<p>The primary downside of this interface is that the while the interface itself is
+a callable, there is currently no way to strictly type a closure.</p>
+<h3>5.2 Single Pass (Lambda)<a id="52-single-pass-lambda" href="#52-single-pass-lambda" name="52-single-pass-lambda" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The other approach to middleware is much closer to <a href="http://stackphp.com/">StackPHP</a> style
+and is defined as:</p>
+<pre><code class="language- hljs " data-lang="">fn(request, next): response
+</code></pre>
+<p>Middleware taking this approach generally has the following commonalities:</p>
+<ul>
+<li>The middleware is defined with a specific interface with a method that takes
+the request for processing.</li>
+<li>The middleware is passed 2 arguments during invocation:
+<ol>
+<li>An HTTP request message.</li>
+<li>A request handler to which the middleware can delegate the responsibility
+of producing an HTTP response message.</li>
+</ol>
+</li>
+</ul>
+<p>In this form, middleware has no access to a response until one is generated by
+the request handler. Middleware can then modify the response before returning it.</p>
+<p>This approach is often referred to as &quot;single pass&quot; or &quot;lambda&quot; in reference to
+only the request being passed to the middleware.</p>
+<h4>5.2.1 Projects Using Single Pass<a id="521-projects-using-single-pass" href="#521-projects-using-single-pass" name="521-projects-using-single-pass" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>There are fewer examples of this approach within projects using HTTP messages,
+with one notable exception.</p>
+<p><a href="http://docs.guzzlephp.org/en/latest/handlers-and-middleware.html">Guzzle middleware</a> is focused on outgoing (client) requests
+and uses this signature:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(RequestInterface $request, array $options)</span>: <span class="hljs-title">ResponseInterface</span>
+</span></code></pre>
+<h4>5.2.2 Additional Projects Using Single Pass<a id="522-additional-projects-using-single-pass" href="#522-additional-projects-using-single-pass" name="522-additional-projects-using-single-pass" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>There are also significant projects that predate HTTP messages using this approach.</p>
+<p><a href="http://stackphp.com/">StackPHP</a> is based on <a href="https://symfony.com/doc/2.0/components/http_kernel/introduction.html">Symfony HttpKernel</a> and supports
+middleware with this signature:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(Request $request, $type, $catch)</span>: <span class="hljs-title">Response</span>
+</span></code></pre>
+<p><em>Note: While Stack has multiple arguments, a response object is not included.</em></p>
+<p><a href="https://laravel.com/docs/master/middleware">Laravel middleware</a> uses Symfony components and supports
+middleware with this signature:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(Request $request, callable $next)</span>: <span class="hljs-title">Response</span>
+</span></code></pre>
+<h3>5.3 Comparison of Approaches<a id="53-comparison-of-approaches" href="#53-comparison-of-approaches" name="53-comparison-of-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The single pass approach to middleware has been well established in the PHP
+community for many years. This is most evident with the large number of packages
+that are based around StackPHP.</p>
+<p>The double pass approach is much newer but has been almost universally used by
+early adopters of HTTP messages (PSR-7).</p>
+<h3>5.4 Chosen Approach<a id="54-chosen-approach" href="#54-chosen-approach" name="54-chosen-approach" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Despite the nearly universal adoption of the double-pass approach, there are
+significant issues regarding implementation.</p>
+<p>The most severe is that passing an empty response has no guarantees that the
+response is in a usable state. This is further exacerbated by the fact that a
+middleware may modify the response before passing it for further processing.</p>
+<p>Further compounding the problem is that there is no way to ensure that the
+response body has not been written to, which can lead to incomplete output or
+error responses being sent with cache headers attached. It is also possible
+to end up with <a href="https://akrabat.com/filtering-the-psr-7-body-in-middleware/">corrupted body content</a> when writing over
+existing body content if the new content is shorter than the original. The most
+effective way to resolve these issues is to always provide a fresh stream when
+modifying the body of a message.</p>
+<p>Some have argued that passing the response helps ensure dependency inversion.
+While it is true that it helps avoid depending on a specific implementation of
+HTTP messages, the problem can also be resolved by injecting factories into the
+middleware to create HTTP message objects, or by injecting empty message instances.
+With the creation of HTTP Factories in <a href="https://github.com/php-fig/fig-standards/blob/master/proposed/http-factory/http-factory-meta.md">PSR-17</a>, a standard approach to
+handling dependency inversion is possible.</p>
+<p>A more subjective, but also important, concern is that existing double-pass
+middleware typically uses the <code>callable</code> type hint to refer to middleware.
+This makes strict typing impossible, as there is no assurance that the <code>callable</code>
+being passed implements a middleware signature, which reduces runtime safety.</p>
+<p><strong>Due to these significant issues, the lambda approach has been chosen for this proposal.</strong></p>
+<h2>6. Design Decisions<a id="6-design-decisions" href="#6-design-decisions" name="6-design-decisions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>6.1 Request Handler Design<a id="61-request-handler-design" href="#61-request-handler-design" name="61-request-handler-design" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The <code>RequestHandlerInterface</code> defines a single method that accepts a request and
+MUST return a response. The request handler MAY delegate to another handler.</p>
+<h4>Why is a server request required?<a id="why-is-a-server-request-required" href="#why-is-a-server-request-required" name="why-is-a-server-request-required" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>To make it clear that the request handler can only be used in a server side context.
+In an client side context, a <a href="https://promisesaplus.com/">promise</a> would likely be returned instead
+of a response.</p>
+<h4>Why the term &quot;handler&quot;?<a id="why-the-term-handler" href="#why-the-term-handler" name="why-the-term-handler" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>The term &quot;handler&quot; means something designated to manage or control. In terms of
+request processing, a request handler is the point where the request must be
+acted upon to create a response.</p>
+<p>As opposed to the term &quot;delegate&quot;, which was used in a previous version of this
+specification, the internal behavior of this interface is not specified.
+As long as the request handler ultimately produces a response, it is valid.</p>
+<h4>Why doesn't request handler use <code>__invoke</code>?<a id="why-doesnt-request-handler-use-invoke" href="#why-doesnt-request-handler-use-invoke" name="why-doesnt-request-handler-use-invoke" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>Using <code>__invoke</code> is less transparent than using a named method. It also makes
+it easier to call the request handler when it is assigned to a class variable,
+without using <code>call_user_func</code> or other less common syntax.</p>
+<p><em>See <a href="https://groups.google.com/d/msg/php-fig/V12AAcT_SxE/aRXmNnIVCwAJ">PHP-FIG discussion of FrameInterface</a> for
+additional information.</em></p>
+<h3>6.2 Middleware Design<a id="62-middleware-design" href="#62-middleware-design" name="62-middleware-design" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The <code>MiddlewareInterface</code> defines a single method that accepts an HTTP request
+and a request handler and must return a response. The middleware may:</p>
+<ul>
+<li>Evolve the request before passing it to the request handler.</li>
+<li>Evolve the response received from the request handler before returning it.</li>
+<li>Create and return a response without passing the request to the request handler,
+thereby handling the request itself.</li>
+</ul>
+<p>When delegating from one middleware to another in a sequence, one approach for
+dispatching systems is to use an intermediary request handler composing the
+middleware sequence as a way to link middleware together. The final or innermost
+middleware will act as a gateway to application code and generate a response
+from its results; alternately, the middleware MAY delegate this responsibility
+to a dedicated request handler.</p>
+<h4>Why doesn't middleware use <code>__invoke</code>?<a id="why-doesnt-middleware-use-invoke" href="#why-doesnt-middleware-use-invoke" name="why-doesnt-middleware-use-invoke" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>Doing so would conflict with existing middleware that implements the double-pass
+approach and may want to implement the middleware interface for purposes of
+forward compatibility with this specification.</p>
+<h4>Why the name <code>process()</code>?<a id="why-the-name-process" href="#why-the-name-process" name="why-the-name-process" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>We reviewed a number of existing monolithic and middleware frameworks to
+determine what method(s) each defined for processing incoming requests. We found
+the following were commonly used:</p>
+<ul>
+<li>
+<code>__invoke</code> (within middleware systems, such as Slim, Expressive, Relay, etc.)</li>
+<li>
+<code>handle</code> (in particular, software derived from Symfony's <a href="https://symfony.com/doc/2.0/components/http_kernel/introduction.html">HttpKernel</a>)</li>
+<li>
+<code>dispatch</code> (Zend Framework's <a href="https://github.com/zendframework/zend-stdlib/blob/980ce463c29c1a66c33e0eb67961bba895d0e19e/src/DispatchableInterface.php">DispatchableInterface</a>)</li>
+</ul>
+<p>We chose to allow a forward-compatible approach for such classes to repurpose
+themselves as middleware (or middleware compatible with this specification),
+and thus needed to choose a name not in common usage. As such, we chose
+<code>process</code>, to indicate <em>processing</em> a request.</p>
+<h4>Why is a server request required?<a id="why-is-a-server-request-required-1" href="#why-is-a-server-request-required-1" name="why-is-a-server-request-required-1" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>To make it clear that the middleware can only be used in a synchronous, server
+side context.</p>
+<p>While not all middleware will need to use the additional methods defined by the
+server request interface, outbound requests are typically processed asynchronously
+and would typically return a <a href="https://promisesaplus.com/">promise</a> of a response. (This is primarily
+due to the fact that multiple requests can be made in parallel and processed as
+they are returned.) It is outside the scope of this proposal to address the needs
+of asynchronous request/response life cycles.</p>
+<p>Attempting to define client middleware would be premature at this point. Any future
+proposal that is focused on client side request processing should have the opportunity
+to define a standard that is specific to the nature of asynchronous middleware.</p>
+<p><em>See <a href="https://groups.google.com/d/topic/php-fig/vBk0BRgDe2s/discussion">PHP-FIG discussion about client vs server side middleware</a> for additional information.</em></p>
+<h4>What is the role of the request handler?<a id="what-is-the-role-of-the-request-handler" href="#what-is-the-role-of-the-request-handler" name="what-is-the-role-of-the-request-handler" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>Middleware has the following roles:</p>
+<ul>
+<li>
+<p>Producing a response on its own. If specific request conditions are met, the
+middleware can produce and return a response.</p>
+</li>
+<li>
+<p>Returning the result of the request handler. In cases where the middleware
+cannot produce its own response, it can delegate to the request handler to
+produce one; sometimes this may involve providing a transformed request (e.g.,
+to inject a request attribute, or the results of parsing the request body).</p>
+</li>
+<li>
+<p>Manipulating and returning the response produced by the request handler. In
+some cases, the middleware may be interested in manipulating the response
+the request handler returns (e.g., to gzip the response body, to add CORS
+headers, etc.). In such cases, the middleware will capture the response
+returned by the request handler, and return a transformed response on
+completion.</p>
+</li>
+</ul>
+<p>In these latter two cases, the middleware may have code such as the following:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-comment">// Straight delegation:</span>
+<span class="hljs-keyword">return</span> $handler-&gt;handle($request);
+
+<span class="hljs-comment">// Capturing the response to manipulate:</span>
+$response = $handler-&gt;handle($request);
+</code></pre>
+<p>How the handler acts is entirely up to the developer, so long as it produces a
+response.</p>
+<p>In one common scenario, the handler implements a <em>queue</em> or a <em>stack</em> of
+middleware instances internally. In such cases, calling
+<code>$handler-&gt;handle($request)</code> will advance the internal pointer, pull the
+middleware associated with that pointer, and call it using
+<code>$middleware-&gt;process($request, $this)</code>. If no more middleware exists, it will
+generally either raise an exception or return a canned response.</p>
+<p>Another possibility is for  <em>routing middleware</em> that matches the incoming
+server request to a specific handler, and then returns the response generated by
+executing that handler. If unable to route to a handler, it would instead
+execute the handler provided to the middleware. (This sort of mechanism can even
+be used in conjunction with middleware queues and stacks.)</p>
+<h3>6.3 Example Interface Interactions<a id="63-example-interface-interactions" href="#63-example-interface-interactions" name="63-example-interface-interactions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The two interfaces, <code>RequestHandlerInterface</code> and <code>MiddlewareInterface</code>, were
+designed to work in conjunction with one another. Middleware gains flexibility
+when de-coupled from any over-arching application layer, and instead only
+relying on the provided request handler to produce a response.</p>
+<p>Two approaches to middleware dispatch systems that the Working Group observed
+and/or implemented are demonstrated below. Additionally, examples of re-usable
+middleware are provided to demonstrate how to write middleware that is
+loosely-coupled.</p>
+<p>Please note that these are not suggested as definitive or exclusive approaches
+to defining middleware dispatch systems.</p>
+<h4>Queue-based request handler<a id="queue-based-request-handler" href="#queue-based-request-handler" name="queue-based-request-handler" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>In this approach, a request handler maintains a queue of middleware, and a
+fallback response to return if the queue is exhausted without returning a
+response. When executing the first middleware, the queue passes itself as a
+request handler to the middleware.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QueueRequestHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandlerInterface</span>
+</span>{
+    <span class="hljs-keyword">private</span> $middleware = [];
+    <span class="hljs-keyword">private</span> $fallbackHandler;
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(RequestHandlerInterface $fallbackHandler)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;fallbackHandler = $fallbackHandler;
+    }
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span><span class="hljs-params">(MiddlewareInterface $middleware)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;middleware[] = $middleware;
+    }
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(ServerRequestInterface $request)</span>: <span class="hljs-title">ResponseInterface</span>
+    </span>{
+        <span class="hljs-comment">// Last middleware in the queue has called on the request handler.</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> === count(<span class="hljs-keyword">$this</span>-&gt;middleware)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;fallbackHandler-&gt;handle($request);
+        }
+        
+        $middleware = array_shift(<span class="hljs-keyword">$this</span>-&gt;middleware);
+        <span class="hljs-keyword">return</span> $middleware-&gt;process($request, <span class="hljs-keyword">$this</span>);
+    }
+}
+</code></pre>
+<p>An application bootstrap might then look like this:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-comment">// Fallback handler:</span>
+$fallbackHandler = <span class="hljs-keyword">new</span> NotFoundHandler();
+
+<span class="hljs-comment">// Create request handler instance:</span>
+$app = <span class="hljs-keyword">new</span> QueueRequestHandler($fallbackHandler);
+
+<span class="hljs-comment">// Add one or more middleware:</span>
+$app-&gt;add(<span class="hljs-keyword">new</span> AuthorizationMiddleware());
+$app-&gt;add(<span class="hljs-keyword">new</span> RoutingMiddleware());
+
+<span class="hljs-comment">// execute it:</span>
+$response = $app-&gt;handle(ServerRequestFactory::fromGlobals());
+</code></pre>
+<p>This system has two request handlers: one that will produce a response if the
+last middleware delegates to the request handler, and one for dispatching the
+middleware layers. (In this example, the <code>RoutingMiddleware</code> will likely execute
+composed handlers on a successful route match; see more on that below.)</p>
+<p>This approach has the following benefits:</p>
+<ul>
+<li>Middleware does not need to know anything about any other middleware or how it
+is composed in the application.</li>
+<li>The <code>QueueRequestHandler</code> is agnostic of the PSR-7 implementation in use.</li>
+<li>Middleware is executed in the order it is added to the application, making the
+code explicit.</li>
+<li>Generation of the &quot;fallback&quot; response is delegated to the application
+developer. This allows the developer to determine whether that should be a
+&quot;404 Not Found&quot; condition, a default page, etc.</li>
+</ul>
+<h4>Decoration-based request handler<a id="decoration-based-request-handler" href="#decoration-based-request-handler" name="decoration-based-request-handler" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>In this approach, a request handler implementation decorates both a middleware
+instance and a fallback request handler to pass to it. The application is built
+from the outside-in, passing each request handler &quot;layer&quot; to the next outer one.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DecoratingRequestHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandlerInterface</span>
+</span>{
+    <span class="hljs-keyword">private</span> $middleware;
+    <span class="hljs-keyword">private</span> $nextHandler;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(MiddlewareInterface $middleware, RequestHandlerInterface $nextHandler)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;middleware = $middleware;
+        <span class="hljs-keyword">$this</span>-&gt;nextHandler = $nextHandler;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(ServerRequestInterface $request)</span>: <span class="hljs-title">ResponseInterface</span>
+    </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;middleware-&gt;process($request, <span class="hljs-keyword">$this</span>-&gt;nextHandler);
+    }
+}
+
+<span class="hljs-comment">// Create a response prototype to return if no middleware can produce a response</span>
+<span class="hljs-comment">// on its own. This could be a 404, 500, or default page.</span>
+$responsePrototype = (<span class="hljs-keyword">new</span> Response())-&gt;withStatus(<span class="hljs-number">404</span>);
+$innerHandler = <span class="hljs-keyword">new</span> <span class="hljs-class"><span class="hljs-keyword">class</span> ($<span class="hljs-title">responsePrototype</span>) <span class="hljs-keyword">implements</span> <span class="hljs-title">RequestHandlerInterface</span> </span>{
+    <span class="hljs-keyword">private</span> $responsePrototype;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(ResponseInterface $responsePrototype)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;responsePrototype = $responsePrototype;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle</span><span class="hljs-params">(ServerRequestInterface $request)</span>: <span class="hljs-title">ResponseInterface</span>
+    </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;responsePrototype;
+    }
+};
+
+$layer1 = <span class="hljs-keyword">new</span> DecoratingRequestHandler(<span class="hljs-keyword">new</span> RoutingMiddleware(), $innerHandler);
+$layer2 = <span class="hljs-keyword">new</span> DecoratingRequestHandler(<span class="hljs-keyword">new</span> AuthorizationMiddleware(), $layer1);
+
+$response = $layer2-&gt;handle(ServerRequestFactory::fromGlobals());
+</code></pre>
+<p>Similar to the queue-based middleware, request handlers serve two purposes in
+this system:</p>
+<ul>
+<li>Producing a fallback response if no other layer does.</li>
+<li>Dispatching middleware.</li>
+</ul>
+<h4>Reusable Middleware Examples<a id="reusable-middleware-examples" href="#reusable-middleware-examples" name="reusable-middleware-examples" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p>In the examples above, we have two middleware composed in each. In order for
+these to work in either situation, we need to write them such that they interact
+appropriately.</p>
+<p>Implementors of middleware striving for maximum interoperability may want to
+consider the following guidelines:</p>
+<ul>
+<li>
+<p>Test the request for a required condition. If it does not satisfy that
+condition, use a composed prototype response or a composed response factory
+to generate and return a response.</p>
+</li>
+<li>
+<p>If pre-conditions are met, delegate creation of the response to the provided
+request handler, optionally providing a &quot;new&quot; request by manipulating the
+provided request (e.g., <code>$handler-&gt;handle($request-&gt;withAttribute('foo', 'bar')</code>).</p>
+</li>
+<li>
+<p>Either pass the response returned by the request handler unaltered, or provide
+a new response by manipulating the one returned (e.g., <code>return $response-&gt;withHeader('X-Foo-Bar', 'baz')</code>).</p>
+</li>
+</ul>
+<p>The <code>AuthorizationMiddleware</code> is one that will exercise all three of these guidelines:</p>
+<ul>
+<li>If authorization is required, but the request is not authorized, it will use a
+composed prototype response to produce an &quot;unauthorized&quot; response.</li>
+<li>If authorization is not required, it will delegate the request to the handler
+without changes.</li>
+<li>If authorization is required and the request is authorized, it will delegate
+the request to the handler, and sign the response returned based on the request.</li>
+</ul>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthorizationMiddleware</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MiddlewareInterface</span>
+</span>{
+    <span class="hljs-keyword">private</span> $authorizationMap;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(AuthorizationMap $authorizationMap)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;authorizationMap = $authorizationMap;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">(ServerRequestInterface $request, RequestHandlerInterface $handler)</span>: <span class="hljs-title">ResponseInterface</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (! <span class="hljs-keyword">$this</span>-&gt;authorizationMap-&gt;needsAuthorization($request)) {
+            <span class="hljs-keyword">return</span> $handler-&gt;handle($request);
+        }
+
+        <span class="hljs-keyword">if</span> (! <span class="hljs-keyword">$this</span>-&gt;authorizationMap-&gt;isAuthorized($request)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;authorizationMap-&gt;prepareUnauthorizedResponse();
+        }
+
+        $response = $handler-&gt;handle($request);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;authorizationMap-&gt;signResponse($response, $request);
+    }
+}
+</code></pre>
+<p>Note that the middleware is not concerned with how the request handler is
+implemented; it merely uses it to produce a response when pre-conditions have
+been met.</p>
+<p>The <code>RoutingMiddleware</code> implementation described below follows a similar
+process: it analyzes the request to see if it matches known routes. In this
+particular implementation, routes map to request handlers, and the middleware
+essentially delegates to them in order to produce a response. However, in the
+case that no route is matched, it will execute the handler passed to it to
+produce the response to return.</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RoutingMiddleware</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MiddlewareInterface</span>
+</span>{
+    <span class="hljs-keyword">private</span> $router;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(Router $router)</span>
+    </span>{
+        <span class="hljs-keyword">$this</span>-&gt;router = $router;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">(ServerRequestInterface $request, RequestHandlerInterface $handler)</span>: <span class="hljs-title">ResponseInterface</span>
+    </span>{
+        $result = <span class="hljs-keyword">$this</span>-&gt;router-&gt;match($request);
+
+        <span class="hljs-keyword">if</span> ($result-&gt;isSuccess()) {
+            <span class="hljs-keyword">return</span> $result-&gt;getHandler()-&gt;handle($request);
+        }
+
+        <span class="hljs-keyword">return</span> $handler-&gt;handle($request);
+    }
+}
+</code></pre>
+<h2>7. People<a id="7-people" href="#7-people" name="7-people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>This PSR was produced by a FIG Working Group with the following members:</p>
+<ul>
+<li>Matthew Weier O'Phinney (sponsor), <a href="mailto:mweierophinney@gmail.com">mweierophinney@gmail.com</a>
+</li>
+<li>Woody Gilk (editor), <a href="mailto:woody.gilk@gmail.com">woody.gilk@gmail.com</a>
+</li>
+<li>Glenn Eggleton</li>
+<li>Matthieu Napoli</li>
+<li>Oscar Otero</li>
+<li>Korvin Szanto</li>
+<li>Stefano Torresi</li>
+</ul>
+<p>The working group would also like to acknowledge the contributions of:</p>
+<ul>
+<li>Jason Coward, <a href="mailto:jason@opengeek.com">jason@opengeek.com</a>
+</li>
+<li>Paul M. Jones, <a href="mailto:pmjones88@gmail.com">pmjones88@gmail.com</a>
+</li>
+<li>Rasmus Schultz, <a href="mailto:rasmus@mindplay.dk">rasmus@mindplay.dk</a>
+</li>
+</ul>
+<h2>8. Votes<a id="8-votes" href="#8-votes" name="8-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/rPFRTa0NODU/tIU9BZciAgAJ">Working Group Formation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/mfTrFinTvEM/PiYvU2S6BAAJ">Review Period Initiation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/bhQmHt39hJE/ZCYrK_O2AQAJ">Acceptance</a>
+</li>
+</ul>
+<h2>9. Relevant Links<a id="9-relevant-links" href="#9-relevant-links" name="9-relevant-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p><em><strong>Note:</strong> Order descending chronologically.</em></p>
+<ul>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/vTtGxdIuBX8/NXKieN9vDQAJ">PHP-FIG mailing list thread</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/thephpleague/jyztj-Nz_rw/I4lHVFigAAAJ">The PHP League middleware proposal</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/V12AAcT_SxE/aRXmNnIVCwAJ">PHP-FIG discussion of FrameInterface</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/topic/php-fig/vBk0BRgDe2s/discussion">PHP-FIG discussion about client vs server side middleware</a>
+</li>
+</ul>
+<h2>10. Errata<a id="10-errata" href="#10-errata" name="10-errata" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>...</p>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-15/">PSR-15: HTTP Server Request Handlers</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-15 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

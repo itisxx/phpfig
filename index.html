@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR   PHP 标准规范 - PHP编码规范</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/hljs_default.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHPFIG Blog Feed" />
+
+    <meta name="og:title" content="PSR   PHP 标准规范 - PHP编码规范" />
+
+    <meta name="twitter:title" content="PSR   PHP 标准规范 - PHP编码规范" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="/img/social-banner.png" />
+    <meta property="og:image" content="/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法">
+    <meta name="twitter:description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法" />
+    <meta name="og:description" content="PHP 标准规范 - PHP编码规范 我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法" />
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PSR中文网</span>
+            <span class="site_logo__long_name">PSR   PHP 标准规范 - PHP编码规范</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">菜单</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/">首页</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">博客</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/psr">标准规范（PSRs）</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">编码规范（PERs）</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">成员</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">章程</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">常见问题</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">参与</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    
+<div class="home_banner">
+    <div class="center">
+        <div class="home_banner__content">
+            <h1 class="home_banner__title">通过协作和标准推动PHP向前发展.</h1>
+            <p class="home_banner__intro">欢迎来到PHP框架互操作组！我们是一组已建立的PHP项目，其目标是讨论我们的项目之间的共同点，并找到我们可以更好地一起工作的方法。</p>
+            <div class="home_banner__links">
+                <a class="home_banner__link" href="/psr/">查看推荐规范(PSRs)</a>
+                <a class="home_banner__link" href="/faqs/">常见问题</a>
+            </div>
+        </div>
+    </div>
+    <div class="home_banner__background">
+    	<a href="https://yesdomain.pages.dev" target="_blank" title="易域名 - 优质COM域名" style="text-decoration: none;">
+    		<img src="/img/domain.jpg" style="height:545px;width:100%;opacity:0.4;" />
+    	</a>
+    </div>
+</div>
+
+<div class="home_features">
+    <ul class="home_features__list">
+        <li class="home_features__item home_features__item--autoloading">
+            <div class="center">
+                <div class="home_features__content">
+                    <h2 class="home_features__title">自动加载(Autoloading)</h2>
+                    <p class="home_features__description">自动加载器去除通过映射命名空间到文件系统路径来包含文件的复杂性.</p>
+                    <ul class="home_features__links">
+                        <li><a class="home_features__link" href="/psr/psr-4/">PSR-4: 改进的自动加载（Improved Autoloading）</a></li>
+                    </ul>
+                </div>
+                <div class="home_features__editor">
+                    <div class="home_features__chrome">
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                    </div>
+                    <div class="home_features__code">
+                        <pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>\<span class="hljs-title">ClassName</span>;
+
+$object = <span class="hljs-keyword">new</span> ClassName();
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="home_features__item home_features__item--interfaces">
+            <div class="center">
+                <div class="home_features__content">
+                    <h2 class="home_features__title">接口（Interfaces）</h2>
+                    <p class="home_features__description">接口通过遵循预期的契约简化了项目之间的代码共享。</p>
+                    <ul class="home_features__links">
+                        <li><a class="home_features__link" href="/psr/psr-3/">PSR-3: 日志接口（Logger Interface）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-6/">PSR-6: 缓存接口（Caching Interface）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-11/">PSR-11: 服务容器接口（Container Interface）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-13/">PSR-13: 超媒体链接（Hypermedia Links）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-14/">PSR-14: 事件调度程序（Event Dispatcher）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-16/">PSR-16: 简单缓存（Simple Cache）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-20/">PSR-20: 时钟（Clock）</a></li>
+                    </ul>
+                </div>
+                <div class="home_features__editor">
+                    <div class="home_features__chrome">
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                    </div>
+                    <div class="home_features__code">
+                        <pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Log</span>;
+
+<span class="hljs-comment">/**
+ * Describes a logger instance
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LoggerInterface</span>
+</span>{
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="home_features__item home_features__item--interfaces">
+            <div class="center">
+                <div class="home_features__content">
+                    <h2 class="home_features__title">HTTP</h2>
+                    <p class="home_features__description">可互操作的标准和接口, 在客户端和服务器端采用agnostic approach来处理 HTTP 请求和响应.</p>
+                    <ul class="home_features__links">
+                        <li><a class="home_features__link" href="/psr/psr-7/">PSR-7: HTTP消息接口（HTTP Message Interfaces）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-15/">PSR-15: HTTP处理程序（HTTP Handlers）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-17/">PSR-17: HTTP工厂（HTTP Factories）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-18/">PSR-18: HTTP客户端（HTTP Client）</a></li>
+                    </ul>
+                </div>
+                <div class="home_features__editor">
+                    <div class="home_features__chrome">
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                    </div>
+                    <div class="home_features__code">
+                        <pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>;
+
+<span class="hljs-comment">/**
+ * Representation of an outgoing, client-side request.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RequestInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MessageInterface</span>
+</span>{
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="home_features__item home_features__item--coding_styles">
+            <div class="center">
+                <div class="home_features__content">
+                    <h2 class="home_features__title">编码风格（Coding Styles）</h2>
+                    <p class="home_features__description">标准化格式减少了阅读其他作者的代码时的认知摩擦.</p>
+                    <ul class="home_features__links">
+                        <li><a class="home_features__link" href="/per/coding-style/">PER Coding Style</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-1/">PSR-1: 基础编码标准（Basic Coding Standard）</a></li>
+                        <li><a class="home_features__link" href="/psr/psr-12/">PSR-12: 扩展编码风格指南（Extended Coding Style Guide）</a></li>
+                    </ul>
+                </div>
+                <div class="home_features__editor">
+                    <div class="home_features__chrome">
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                        <div class="home_features__chrome_dot"></div>
+                    </div>
+                    <div class="home_features__code">
+                        <pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Vendor</span>\<span class="hljs-title">Package</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fooBarBaz</span><span class="hljs-params">($arg1, &amp;$arg2, $arg3 = [])</span>
+    </span>{
+        <span class="hljs-comment">// method body</span>
+    }
+}
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/phpfig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/phpfig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/phpfig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="Github Pages" href="https://www.github.com" target="_blank"><img class="platformsh-logo" src="https://img.alicdn.com/tfs/TB13DzOjXP7gK0jSZFjXXc5aXXa-212-48.png" alt="github.com logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://www.github.com" target="_blank">PHP PaaS</a></span>
+		<span class="site_footer__section">
+			<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+			<script>LA.init({id:"KkFwFaTZ24xN1EvE",ck:"KkFwFaTZ24xN1EvE",autoTrack:true,screenRecord:true})</script>
+			<a target="_blank" title="51la网站统计" href="https://v6.51.la/land/KkFwFaTZ24xN1EvE"><img src="https://sdk.51.la/icon/2-4.png"></a>
+			<script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/KkFwFaTZ24xN1EvE/quote.js?theme=3&f=12"></script>
+		</span>
+	</div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

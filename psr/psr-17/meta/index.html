@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-17 Meta Document - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-17 Meta Document - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-17 Meta Document - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-17 Meta Document
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Factories Meta<a id="http-factories-meta" href="#http-factories-meta" name="http-factories-meta" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<h2>1. Summary<a id="1-summary" href="#1-summary" name="1-summary" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The purpose of this PSR is to provide factory interfaces that define methods to
+create <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> objects.</p>
+<h2>2. Why Bother?<a id="2-why-bother" href="#2-why-bother" name="2-why-bother" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The current specification for PSR-7 allows for most objects to be modified by
+creating immutable copies. However, there are two notable exceptions:</p>
+<ul>
+<li>
+<code>StreamInterface</code> is a mutable object based on a resource that only allows
+the resource to be written to when the resource is writable.</li>
+<li>
+<code>UploadedFileInterface</code> is a read-only object based on a resource that offers
+no modification capabilities.</li>
+</ul>
+<p>The former is a significant pain point for PSR-7 middleware, as it can leave
+the response in an incomplete state. If the stream attached to the response body
+is not seekable or not writable, there is no way to recover from an error
+condition in which the body has already been written to.</p>
+<p>This scenario can be avoided by providing a factory to create new streams. Due to
+the lack of a formal standard for HTTP object factories, a developer must rely on
+a specific vendor implementation in order to create these objects.</p>
+<p>Another pain point is when writing re-usable middleware or request handlers. In
+such cases, package authors may need to create and return a response. However,
+creating discrete instances then ties the package to a specific PSR-7
+implementation. If these packages rely on the request factory interface instead,
+they can remain agnostic of the PSR-7 implementation.</p>
+<p>Creating a formal standard for factories will allow developers to avoid
+dependencies on specific implementations while having the ability to create new
+objects when necessary.</p>
+<h2>3. Scope<a id="3-scope" href="#3-scope" name="3-scope" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>3.1 Goals<a id="31-goals" href="#31-goals" name="31-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Provide a set of interfaces that define methods to create PSR-7 compatible objects.</li>
+</ul>
+<h3>3.2 Non-Goals<a id="32-non-goals" href="#32-non-goals" name="32-non-goals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>Provide a specific implementation of PSR-7 factories.</li>
+</ul>
+<h2>4. Approaches<a id="4-approaches" href="#4-approaches" name="4-approaches" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>4.1 Chosen Approach<a id="41-chosen-approach" href="#41-chosen-approach" name="41-chosen-approach" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The factory method definition has been chosen based on whether or not the object
+can be modified after instantiation. For interfaces that cannot be modified, all
+of the object properties must be defined at the time of instantiation.</p>
+<p>In the case of <code>UriInterface</code> a complete URI may be passed for convenience.</p>
+<p>The method names used will not conflict. This allows for a single class to
+implement multiple interfaces when appropriate.</p>
+<h3>4.2 Existing Implementations<a id="42-existing-implementations" href="#42-existing-implementations" name="42-existing-implementations" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>All of the current implementations of PSR-7 have defined their own requirements.
+In most cases, the required parameters are the same or less strict than the proposed
+factory methods.</p>
+<h4>4.2.1 Diactoros<a id="421-diactoros" href="#421-diactoros" name="421-diactoros" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p><a href="https://docs.zendframework.com/zend-diactoros/">Diactoros</a> was one of the first HTTP Messages implementations for
+server usage, and was developed parallel to the PSR-7 specification.</p>
+<ul>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/Request.php#L33"><code>Request</code></a> No required parameters, method and URI default to <code>null</code>.</li>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/Response.php#L114"><code>Response</code></a> No required parameters, status code defaults to <code>200</code>.</li>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/ServerRequest.php#L78-L89"><code>ServerRequest</code></a> No required parameters. Contains a separate
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/ServerRequestFactory.php#L52-L58"><code>ServerRequestFactory</code></a> for creating requests from globals.</li>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/Stream.php#L36"><code>Stream</code></a> Requires <code>string|resource $stream</code> for the body.</li>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/UploadedFile.php#L62"><code>UploadedFile</code></a> Requires <code>string|resource $streamOrFile</code>, <code>int $size</code>,
+<code>int $errorStatus</code>. Error status must be a PHP upload constant.</li>
+<li>
+<a href="https://github.com/zendframework/zend-diactoros/blob/b4e7758556c97b5bb9a5260d898e9788ee800538/src/Uri.php#L94"><code>Uri</code></a> No required parameters, <code>string $uri</code> is empty by default.</li>
+</ul>
+<p>Overall this approach is quite similar to the proposed factories. In some cases,
+more options are given by Diactoros which are not required for a valid object.
+The proposed uploaded file factory allows for size and error status to be optional.</p>
+<h4>4.2.2 Guzzle<a id="422-guzzle" href="#422-guzzle" name="422-guzzle" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p><a href="https://github.com/guzzle/psr7">Guzzle</a> is an HTTP Messages implementation that focuses on client usage.</p>
+<ul>
+<li>
+<a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/Request.php#L32-L38"><code>Request</code></a> Requires both <code>string $method</code> and <code>string|UriInterface $uri</code>.</li>
+<li>
+<a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/Response.php#L88-L94"><code>Response</code></a> No required parameters, status code defaults to <code>200</code>.</li>
+<li>
+<a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/Stream.php#L51"><code>Stream</code></a> Requires <code>resource $stream</code> for the body.</li>
+<li>
+<a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/Uri.php#L48"><code>Uri</code></a> No required parameters, <code>string $uri</code> is empty by default.</li>
+</ul>
+<p><em>Being geared towards client usage, Guzzle does not contain a <code>ServerRequest</code> or
+<code>UploadedFile</code> implementation.</em></p>
+<p>Overall this approach is also quite similar to the proposed factories. One notable
+difference is that Guzzle requires streams to be constructed with a resource and
+does not allow a string. However, it does contain a helper function <a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/functions.php#L78"><code>stream_for</code></a>
+that will create a stream from a string of content and a function <a href="https://github.com/guzzle/psr7/blob/58828615f7bb87013ce6365e9b1baa08580c7fc8/src/functions.php#L295"><code>try_fopen</code></a>
+that will create a resource from a file path.</p>
+<h4>4.2.3 Slim<a id="423-slim" href="#423-slim" name="423-slim" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h4>
+<p><a href="https://www.slimframework.com/">Slim</a> is a micro-framework that makes use of HTTP Messages from version
+3.0 forward.</p>
+<ul>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/30cfe3c07dac28ec1129c0577e64b90ba11a54c4/Slim/Http/Request.php#L170-L178"><code>Request</code></a> Requires <code>string $method</code>, <code>UriInterface $uri</code>,
+<code>HeadersInterface $headers</code>, <code>array $cookies</code>, <code>array $serverParams</code>, and
+<code>StreamInterface $body</code>. Contains a factory method <code>createFromEnvironment(Environment $environment)</code>
+that is framework specific but analogous to the proposed <code>createServerRequestFromArray</code>.</li>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/30cfe3c07dac28ec1129c0577e64b90ba11a54c4/Slim/Http/Response.php#L123"><code>Response</code></a> No required parameters, status code defaults to <code>200</code>.</li>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/30cfe3c07dac28ec1129c0577e64b90ba11a54c4/Slim/Http/Stream.php#L96"><code>Stream</code></a> Requires <code>resource $stream</code> for the body.</li>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/30cfe3c07dac28ec1129c0577e64b90ba11a54c4/Slim/Http/UploadedFile.php#L151"><code>UploadedFile</code></a> Requires <code>string $file</code> for the source file.
+Contains a factory method <code>parseUploadedFiles(array $uploadedFiles)</code> for creating
+an array of <code>UploadedFile</code> instances from <code>$_FILES</code> or similar format. Also contains
+a factory method <code>createFromEnvironment(Environment $env)</code> that is framework specific
+and makes use of <code>parseUploadedFiles</code>.</li>
+<li>
+<a href="https://github.com/slimphp/Slim/blob/30cfe3c07dac28ec1129c0577e64b90ba11a54c4/Slim/Http/Uri.php#L112-L121"><code>Uri</code></a> Requires <code>string $scheme</code> and <code>string $host</code>. Contains a factory
+method <code>createFromString($uri)</code> that can be used to create a <code>Uri</code> from a string.</li>
+</ul>
+<p><em>Being geared towards server usage only, Slim does not contain an implementation
+of <code>Request</code>. The implementation listed above is an implementation of <code>ServerRequest</code>.</em></p>
+<p>Of the compared approaches, Slim is most different from the proposed factories.
+Most notably, the <code>Request</code> implementation contains requirements specific
+to the framework that are not defined in HTTP Messages specification. The factory
+methods that are included are generally similar with the proposed factories.</p>
+<h3>4.3 Potential Issues<a id="43-potential-issues" href="#43-potential-issues" name="43-potential-issues" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The most difficult task in establishing this standard will be defining the
+method signatures for the interfaces. As there is no clear declaration in PSR-7
+as to what values are explicitly required, the properties that are read-only
+must be inferred based on whether the interfaces have methods to copy-and-modify
+the object.</p>
+<h2>5. Design Decisions<a id="5-design-decisions" href="#5-design-decisions" name="5-design-decisions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>5.1 Why PHP 7?<a id="51-why-php-7" href="#51-why-php-7" name="51-why-php-7" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>While PSR-7 does not target PHP 7, the authors of this specification note that,
+at the time of writing (April 2018), PHP 5.6 stopped receiving bugfixes 15
+months ago, and will no longer receive security patches in 8 months; PHP 7.0
+itself will stop receiving security fixes in 7 months (see the <a href="http://php.net/supported-versions.php">PHP supported
+versions document</a> for current support details). Since
+specifications are meant to be long-term, the authors feel the specification
+should target versions that will be supported for the foreseeable future; PHP 5
+will not. As such, from a security standpoint, targeting anything under PHP 7 is
+a disservice to users, as doing so would be tacit approval of usage of
+unsupported PHP versions.</p>
+<p>Additionally, and equally importantly, PHP 7 gives us the ability to provide
+return type hints to interfaces we define. This guarantees a strong,
+predicatable contract for end users, as they can assume that the values returned
+by implementations will be exactly what they expect.</p>
+<h3>5.2 Why multiple interfaces?<a id="52-why-multiple-interfaces" href="#52-why-multiple-interfaces" name="52-why-multiple-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>Each proposed interface is (primarily) responsible for producing one PSR-7 type.
+This allows consumers to typehint on exactly what they need: if they need a
+response, they typehint on <code>ResponseFactoryInterface</code>; if they need a URI, they
+typehint on <code>UriFactoryInterface</code>. In this way, users can be granular about what
+they need.</p>
+<p>Doing so also allows application developers to provide anonymous implementations
+based on the PSR-7 implementation they are using, producing only the instances
+they need for the specific context. This reduces boilerplate; developers do not
+need to write stubs for unused methods.</p>
+<h3>5.3 Why does the $reasonPhrase argument to the ResponseFactoryInterface exist?<a id="53-why-does-the-reasonphrase-argument-to-the-responsefactoryinterface-exist" href="#53-why-does-the-reasonphrase-argument-to-the-responsefactoryinterface-exist" name="53-why-does-the-reasonphrase-argument-to-the-responsefactoryinterface-exist" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p><code>ResponseFactoryInterface::createResponse()</code> includes an optional string
+argument, <code>$reasonPhrase</code>. In the PSR-7 specification, you can only provide a
+reason phrase at the same time you provide a status code, as the two are related
+pieces of data. The authors of this specification have chosen to mimic the PSR-7
+<code>ResponseInterface::withStatus()</code> signature to ensure both sets of data may be
+present in the response created.</p>
+<h3>5.4 Why does the $serverParams argument to the ServerRequestFactoryInterface exist?<a id="54-why-does-the-serverparams-argument-to-the-serverrequestfactoryinterface-exist" href="#54-why-does-the-serverparams-argument-to-the-serverrequestfactoryinterface-exist" name="54-why-does-the-serverparams-argument-to-the-serverrequestfactoryinterface-exist" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p><code>ServerRequestFactoryInterface::createServerRequest()</code> includes an optional
+<code>$serverParams</code> array argument. The reason this is provided is to ensure that an
+instance can be created with the server params populated. Of the data accessible
+via the <code>ServerRequestInterface</code>, the only data that does not have a mutator
+method is the one corresponding to the server params. As such, this data MUST be
+provided at initial creation. For this reason, it exists as an argument to the
+factory method.</p>
+<h3>5.5 Why is there no factory for creating a ServerRequestInterface from superglobals?<a id="55-why-is-there-no-factory-for-creating-a-serverrequestinterface-from-superglobals" href="#55-why-is-there-no-factory-for-creating-a-serverrequestinterface-from-superglobals" name="55-why-is-there-no-factory-for-creating-a-serverrequestinterface-from-superglobals" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The primary use case of <code>ServerRequestFactoryInterface</code> is for creating a new
+<code>ServerRequestInterface</code> instance from known data. Any solution around
+marshaling data from superglobals assumes that:</p>
+<ul>
+<li>superglobals are present</li>
+<li>superglobals follow a specific structure</li>
+</ul>
+<p>These two assumptions are not always true. When using asynchronous systems such
+as <a href="https://www.swoole.co.uk/">Swoole</a>, <a href="https://reactphp.org/">ReactPHP</a>, and others:</p>
+<ul>
+<li>will not populate standard superglobals such as <code>$_GET</code>, <code>$_POST</code>, <code>$_COOKIE</code>,
+and <code>$_FILES</code>
+</li>
+<li>will not populate <code>$_SERVER</code> with the same elements as a standard SAPI (such as
+mod_php, mod-cgi, and mod-fpm)</li>
+</ul>
+<p>Moreover, different standard SAPIs provide different information to <code>$_SERVER</code>
+and access to request headers, requiring different approaches for initial
+population of the request.</p>
+<p>As such, designing an interface for population of an instance from superglobals
+is out of scope of this specification, and should largely be
+implementation-specfic.</p>
+<h3>5.6 Why does RequestFactoryInterface::createRequest allow a string URI?<a id="56-why-does-requestfactoryinterfacecreaterequest-allow-a-string-uri" href="#56-why-does-requestfactoryinterfacecreaterequest-allow-a-string-uri" name="56-why-does-requestfactoryinterfacecreaterequest-allow-a-string-uri" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<p>The primary use case of <code>RequestFactoryInterface</code> is to create a request, and
+the only required values for any request are the request method and a URI. While
+<code>RequestFactoryInterface::createRequest()</code> can accept a <code>UriInterface</code> instance,
+it also allows a string.</p>
+<p>The rationale is two-fold. First, the majority use case is to create a request
+instance; creation of the URI instance is secondary. Requiring a <code>UriInterface</code>
+means users would either need to also have access to a <code>UriFactoryInterface</code>, or
+the <code>RequestFactoryInterface</code> would have a hard requirement on a
+<code>UriFactoryInterface</code>. The first complicates usage for consumers of the factory,
+the second complicates usage for either developers of the factory, or those
+creating the factory instance.</p>
+<p>Second, <code>UriFactoryInterface</code> provides exactly one way to create a
+<code>UriInterface</code> instance, and that is from a string URI. If creation of the URI
+is based on a string, there's no reason for the <code>RequestFactoryInterface</code> not to
+allow the same semantics. Additionally, every PSR-7 implementation surveyed at
+the time this proposal was developed allowed a string URI when creating a
+<code>RequestInterface</code> instance, as the value was then passed to whatever
+<code>UriInterface</code> implementation they provided. As such, accepting a string is
+expedient and follows existing semantics.</p>
+<h2>6. People<a id="6-people" href="#6-people" name="6-people" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>This PSR was produced by a FIG Working Group with the following members:</p>
+<ul>
+<li>Woody Gilk (editor), <a href="mailto:woody.gilk@gmail.com">woody.gilk@gmail.com</a>
+</li>
+<li>Matthew Weier O'Phinney (sponsor), <a href="mailto:mweierophinney@gmail.com">mweierophinney@gmail.com</a>
+</li>
+<li>Stefano Torresi</li>
+<li>Matthieu Napoli</li>
+<li>Korvin Szanto</li>
+<li>Glenn Eggleton</li>
+<li>Oscar Otero</li>
+<li>Tobias Nyholm</li>
+</ul>
+<p>The working group would also like to acknowledge the contributions of:</p>
+<ul>
+<li>Paul M. Jones, <a href="mailto:pmjones88@gmail.com">pmjones88@gmail.com</a>
+</li>
+<li>Rasmus Schultz, <a href="mailto:rasmus@mindplay.dk">rasmus@mindplay.dk</a>
+</li>
+<li>Roman Tsjupa, <a href="mailto:draconyster@gmail.com">draconyster@gmail.com</a>
+</li>
+</ul>
+<h2>7. Votes<a id="7-votes" href="#7-votes" name="7-votes" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<a href="https://groups.google.com/forum/#!topic/php-fig/6rZPZ8VglIM">Entrance Vote</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/A5mZYTn5Jm8/j0FN6eZtBAAJ">Working Group Formation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/OpUnkrnFhe0/y2dT7CakAQAJ">Review Period Initiation</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/M8PapGXXE1E/uBq2Dq-ZAwAJ">Acceptance Vote</a>
+</li>
+</ul>
+<h2>8. Relevant Links<a id="8-relevant-links" href="#8-relevant-links" name="8-relevant-links" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p><em><strong>Note:</strong> Order descending chronologically.</em></p>
+<ul>
+<li>
+<a href="https://github.com/php-fig/fig-standards/pull/755">PSR-7 Middleware Proposal</a>
+</li>
+<li>
+<a href="https://groups.google.com/forum/#!topic/php-fig/vTtGxdIuBX8">PHP-FIG mailing list discussion of middleware</a>
+</li>
+<li>
+<a href="http://blog.ircmaxell.com/2016/05/all-about-middleware.html">ircmaxwell All About Middleware</a>
+</li>
+<li>
+<a href="http://shadowhand.me/all-about-psr-7-middleware/">shadowhand All About PSR-7 Middleware</a>
+</li>
+<li>
+<a href="http://andrewcarteruk.github.io/programming/2016/05/22/psr-7-is-not-immutable.html">AndrewCarterUK PSR-7 Objects Are Not Immutable</a>
+</li>
+<li>
+<a href="http://shadowhand.me/dependency-inversion-and-psr-7-bodies/">shadowhand Dependency Inversion and PSR-7 Bodies</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/G5pgQfQ9fpA/UWeM1gm1CwAJ">PHP-FIG mailing list thread discussing factories</a>
+</li>
+<li>
+<a href="https://groups.google.com/d/msg/php-fig/piRtB2Z-AZs/8UIwY1RtDgAJ">PHP-FIG mailing list thread feedback on proposal</a>
+</li>
+</ul>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-17/">PSR-17: HTTP Factories</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-17 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

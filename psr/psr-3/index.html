@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-3: Logger Interface - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-3: Logger Interface - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-3: Logger Interface - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-3: Logger Interface
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>Logger Interface<a id="logger-interface" href="#logger-interface" name="logger-interface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>This document describes a common interface for logging libraries.</p>
+<p>The main goal is to allow libraries to receive a <code>Psr\Log\LoggerInterface</code>
+object and write logs to it in a simple and universal way. Frameworks
+and CMSs that have custom needs MAY extend the interface for their own
+purpose, but SHOULD remain compatible with this document. This ensures
+that the third-party libraries an application uses can write to the
+centralized application logs.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<p>The word <code>implementor</code> in this document is to be interpreted as someone
+implementing the <code>LoggerInterface</code> in a log-related library or framework.
+Users of loggers are referred to as <code>user</code>.</p>
+<h2>1. Specification<a id="1-specification" href="#1-specification" name="1-specification" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>1.1 Basics<a id="11-basics" href="#11-basics" name="11-basics" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<p>The <code>LoggerInterface</code> exposes eight methods to write logs to the eight
+<a href="http://tools.ietf.org/html/rfc5424">RFC 5424</a> levels (debug, info, notice, warning, error, critical, alert,
+emergency).</p>
+</li>
+<li>
+<p>A ninth method, <code>log</code>, accepts a log level as the first argument. Calling this
+method with one of the log level constants MUST have the same result as
+calling the level-specific method. Calling this method with a level not
+defined by this specification MUST throw a <code>Psr\Log\InvalidArgumentException</code>
+if the implementation does not know about the level. Users SHOULD NOT use a
+custom level without knowing for sure the current implementation supports it.</p>
+</li>
+</ul>
+<h3>1.2 Message<a id="12-message" href="#12-message" name="12-message" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<p>Every method accepts a string as the message, or an object with a
+<code>__toString()</code> method. Implementors MAY have special handling for the passed
+objects. If that is not the case, implementors MUST cast it to a string.</p>
+</li>
+<li>
+<p>The message MAY contain placeholders which implementors MAY replace with
+values from the context array.</p>
+<p>Placeholder names MUST correspond to keys in the context array.</p>
+<p>Placeholder names MUST be delimited with a single opening brace <code>{</code> and
+a single closing brace <code>}</code>. There MUST NOT be any whitespace between the
+delimiters and the placeholder name.</p>
+<p>Placeholder names SHOULD be composed only of the characters <code>A-Z</code>, <code>a-z</code>,
+<code>0-9</code>, underscore <code>_</code>, and period <code>.</code>. The use of other characters is
+reserved for future modifications of the placeholders specification.</p>
+<p>Implementors MAY use placeholders to implement various escaping strategies
+and translate logs for display. Users SHOULD NOT pre-escape placeholder
+values since they can not know in which context the data will be displayed.</p>
+<p>The following is an example implementation of placeholder interpolation
+provided for reference purposes only:</p>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-comment">/**
+ * Interpolates context values into the message placeholders.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">interpolate</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span>
+</span>{
+    <span class="hljs-comment">// build a replacement array with braces around the context keys</span>
+    $replace = <span class="hljs-keyword">array</span>();
+    <span class="hljs-keyword">foreach</span> ($context <span class="hljs-keyword">as</span> $key =&gt; $val) {
+        <span class="hljs-comment">// check that the value can be cast to string</span>
+        <span class="hljs-keyword">if</span> (!is_array($val) &amp;&amp; (!is_object($val) || method_exists($val, <span class="hljs-string">'__toString'</span>))) {
+            $replace[<span class="hljs-string">'{'</span> . $key . <span class="hljs-string">'}'</span>] = $val;
+        }
+    }
+
+    <span class="hljs-comment">// interpolate replacement values into the message and return</span>
+    <span class="hljs-keyword">return</span> strtr($message, $replace);
+}
+
+<span class="hljs-comment">// a message with brace-delimited placeholder names</span>
+$message = <span class="hljs-string">"User {username} created"</span>;
+
+<span class="hljs-comment">// a context array of placeholder names =&gt; replacement values</span>
+$context = <span class="hljs-keyword">array</span>(<span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'bolivar'</span>);
+
+<span class="hljs-comment">// echoes "User bolivar created"</span>
+<span class="hljs-keyword">echo</span> interpolate($message, $context);
+</code></pre>
+</li>
+</ul>
+<h3>1.3 Context<a id="13-context" href="#13-context" name="13-context" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<p>Every method accepts an array as context data. This is meant to hold any
+extraneous information that does not fit well in a string. The array can
+contain anything. Implementors MUST ensure they treat context data with
+as much lenience as possible. A given value in the context MUST NOT throw
+an exception nor raise any php error, warning or notice.</p>
+</li>
+<li>
+<p>If an <code>Exception</code> object is passed in the context data, it MUST be in the
+<code>'exception'</code> key. Logging exceptions is a common pattern and this allows
+implementors to extract a stack trace from the exception when the log
+backend supports it. Implementors MUST still verify that the <code>'exception'</code>
+key is actually an <code>Exception</code> before using it as such, as it MAY contain
+anything.</p>
+</li>
+</ul>
+<h3>1.4 Helper classes and interfaces<a id="14-helper-classes-and-interfaces" href="#14-helper-classes-and-interfaces" name="14-helper-classes-and-interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<ul>
+<li>
+<p>The <code>Psr\Log\AbstractLogger</code> class lets you implement the <code>LoggerInterface</code>
+very easily by extending it and implementing the generic <code>log</code> method.
+The other eight methods are forwarding the message and context to it.</p>
+</li>
+<li>
+<p>Similarly, using the <code>Psr\Log\LoggerTrait</code> only requires you to
+implement the generic <code>log</code> method. Note that since traits can not implement
+interfaces, in this case you still have to implement <code>LoggerInterface</code>.</p>
+</li>
+<li>
+<p>The <code>Psr\Log\NullLogger</code> is provided together with the interface. It MAY be
+used by users of the interface to provide a fall-back &quot;black hole&quot;
+implementation if no logger is given to them. However, conditional logging
+may be a better approach if context data creation is expensive.</p>
+</li>
+<li>
+<p>The <code>Psr\Log\LoggerAwareInterface</code> only contains a
+<code>setLogger(LoggerInterface $logger)</code> method and can be used by frameworks to
+auto-wire arbitrary instances with a logger.</p>
+</li>
+<li>
+<p>The <code>Psr\Log\LoggerAwareTrait</code> trait can be used to implement the equivalent
+interface easily in any class. It gives you access to <code>$this-&gt;logger</code>.</p>
+</li>
+<li>
+<p>The <code>Psr\Log\LogLevel</code> class holds constants for the eight log levels.</p>
+</li>
+</ul>
+<h2>2. Package<a id="2-package" href="#2-package" name="2-package" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The interfaces and classes described as well as relevant exception classes
+and a test suite to verify your implementation are provided as part of the
+<a href="https://packagist.org/packages/psr/log">psr/log</a> package.</p>
+<h2>3. <code>Psr\Log\LoggerInterface</code><a id="3-psrlogloggerinterface" href="#3-psrlogloggerinterface" name="3-psrlogloggerinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Log</span>;
+
+<span class="hljs-comment">/**
+ * Describes a logger instance.
+ *
+ * The message MUST be a string or object implementing __toString().
+ *
+ * The message MAY contain placeholders in the form: {foo} where foo
+ * will be replaced by the context data in key "foo".
+ *
+ * The context array can contain arbitrary data, the only assumption that
+ * can be made by implementors is that if an Exception instance is given
+ * to produce a stack trace, it MUST be in a key named "exception".
+ *
+ * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
+ * for the full interface specification.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LoggerInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * System is unusable.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emergency</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Action must be taken immediately.
+     *
+     * Example: Entire website down, database unavailable, etc. This should
+     * trigger the SMS alerts and wake you up.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">alert</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Critical conditions.
+     *
+     * Example: Application component unavailable, unexpected exception.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">critical</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Exceptional occurrences that are not errors.
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">warning</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Normal but significant events.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notice</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Interesting events.
+     *
+     * Example: User logs in, SQL logs.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">info</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Detailed debug information.
+     *
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debug</span><span class="hljs-params">($message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+
+    <span class="hljs-comment">/**
+     * Logs with an arbitrary level.
+     *
+     * <span class="hljs-doctag">@param</span> mixed $level
+     * <span class="hljs-doctag">@param</span> string $message
+     * <span class="hljs-doctag">@param</span> array $context
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span><span class="hljs-params">($level, $message, array $context = array<span class="hljs-params">()</span>)</span></span>;
+}
+</code></pre>
+<h2>4. <code>Psr\Log\LoggerAwareInterface</code><a id="4-psrlogloggerawareinterface" href="#4-psrlogloggerawareinterface" name="4-psrlogloggerawareinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Log</span>;
+
+<span class="hljs-comment">/**
+ * Describes a logger-aware instance.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LoggerAwareInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Sets a logger instance on the object.
+     *
+     * <span class="hljs-doctag">@param</span> LoggerInterface $logger
+     * <span class="hljs-doctag">@return</span> void
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLogger</span><span class="hljs-params">(LoggerInterface $logger)</span></span>;
+}
+</code></pre>
+<h2>5. <code>Psr\Log\LogLevel</code><a id="5-psrlogloglevel" href="#5-psrlogloglevel" name="5-psrlogloglevel" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Log</span>;
+
+<span class="hljs-comment">/**
+ * Describes log levels.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LogLevel</span>
+</span>{
+    <span class="hljs-keyword">const</span> EMERGENCY = <span class="hljs-string">'emergency'</span>;
+    <span class="hljs-keyword">const</span> ALERT     = <span class="hljs-string">'alert'</span>;
+    <span class="hljs-keyword">const</span> CRITICAL  = <span class="hljs-string">'critical'</span>;
+    <span class="hljs-keyword">const</span> ERROR     = <span class="hljs-string">'error'</span>;
+    <span class="hljs-keyword">const</span> WARNING   = <span class="hljs-string">'warning'</span>;
+    <span class="hljs-keyword">const</span> NOTICE    = <span class="hljs-string">'notice'</span>;
+    <span class="hljs-keyword">const</span> INFO      = <span class="hljs-string">'info'</span>;
+    <span class="hljs-keyword">const</span> DEBUG     = <span class="hljs-string">'debug'</span>;
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-3: Logger Interface</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-3/meta">PSR-3 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>

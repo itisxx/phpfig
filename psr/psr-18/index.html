@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>PSR-18: HTTP Client - PHP-FIG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="me" href="https://phpc.social/@phpfig">
+    <link rel="stylesheet" href="/css/all.css?">
+    <link rel="stylesheet" href="/css/hljs_default.css?">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Oswald|Source+Code+Pro">
+
+    <link rel="preconnect" href="https://ajax.googleapis.com" pr="1.0" />
+    <link rel="preconnect" href="https://ssl.google-analytics.com" pr="0.8" />
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="PHP-FIG Blog Feed" />
+
+    <meta name="og:title" content="PSR-18: HTTP Client - PHP-FIG" />
+
+    <meta name="twitter:title" content="PSR-18: HTTP Client - PHP-FIG" />
+    <meta name="twitter:site" content="@phpfig" />
+    <meta name="twitter:creator" content="@phpfig" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://www.php-fig.org/img/social-banner.png" />
+    <meta property="og:image" content="https://www.php-fig.org/img/social-banner.png" />
+
+    <meta property="og:type"  content="website" />
+
+    <meta name="description" content="We're a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together.">
+    <meta name="twitter:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+    <meta name="og:description" content="We&#039;re a group of established PHP projects whose goal is to talk about commonalities between our projects and find ways we can work better together." />
+
+</head>
+<body>
+
+<header class="site_header">
+    <div class="center">
+        <a class="site_logo" href="/">
+            <span class="site_logo__short_name">PHP-FIG</span>
+            <span class="site_logo__long_name">The PHP Framework Interop Group</span>
+        </a>
+        <nav class="site_menu">
+            <label class="site_menu__dropdown_button" for="site_menu__dropdown_checkbox">Menu</label>
+            <input class="site_menu__dropdown_checkbox" id="site_menu__dropdown_checkbox" type="checkbox">
+            <ul class="site_menu__list">
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/">Home</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/blog">Blog</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link site_menu__link--active" href="/psr">PSRs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/per">PERs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/personnel">Personnel</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/bylaws">Bylaws</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/faqs">FAQs</a>
+                </li>
+                <li class="site_menu__item">
+                    <a class="site_menu__link " href="/get-involved">Get Involved</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="page_content">
+    <div class="page_banner">
+    <div class="center">
+        <h1 class="page_banner__title">
+                        PSR-18: HTTP Client
+                    </h1>
+    </div>
+</div>
+
+<div class="center">
+    <div class="page_content__padding">
+                    <div class="columns">
+    <div class="columns__column columns__column--8">
+        <div class="markdown">
+                                            <h1>HTTP Client<a id="http-client" href="#http-client" name="http-client" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h1>
+<p>This document describes a common interface for sending HTTP requests and receiving HTTP responses.</p>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<h2>Goal<a id="goal" href="#goal" name="goal" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>The goal of this PSR is to allow developers to create libraries decoupled from HTTP client
+implementations. This will make libraries more reusable as it reduces the number of
+dependencies and lowers the likelihood of version conflicts.</p>
+<p>A second goal is that HTTP clients can be replaced as per the
+<a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a>. This means that all clients MUST behave in the
+same way when sending a request.</p>
+<h2>Definitions<a id="definitions" href="#definitions" name="definitions" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<ul>
+<li>
+<strong>Client</strong> - A Client is a library that implements this specification for the purposes of
+sending PSR-7-compatible HTTP Request messages and returning a PSR-7-compatible HTTP Response message to a Calling library.</li>
+<li>
+<strong>Calling Library</strong> - A Calling Library is any code that makes use of a Client.  It does not implement
+this specification's interfaces but consumes an object that implements them (a Client).</li>
+</ul>
+<h2>Client<a id="client" href="#client" name="client" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Client is an object implementing <code>ClientInterface</code>.</p>
+<p>A Client MAY:</p>
+<ul>
+<li>Choose to send an altered HTTP request from the one it was provided. For example, it could
+compress an outgoing message body.</li>
+<li>Choose to alter a received HTTP response before returning it to the calling library. For example, it could
+decompress an incoming message body.</li>
+</ul>
+<p>If a Client chooses to alter either the HTTP request or HTTP response, it MUST ensure that the
+object remains internally consistent.  For example, if a Client chooses to decompress the message
+body then it MUST also remove the <code>Content-Encoding</code> header and adjust the <code>Content-Length</code> header.</p>
+<p>Note that as a result, since <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-7-http-message-meta.md#why-value-objects">PSR-7 objects are immutable</a>,
+the Calling Library MUST NOT assume that the object passed to <code>ClientInterface::sendRequest()</code> will be the same PHP object
+that is actually sent. For example, the Request object that is returned by an exception MAY be a different object than
+the one passed to <code>sendRequest()</code>, so comparison by reference (===) is not possible.</p>
+<p>A Client MUST:</p>
+<ul>
+<li>Reassemble a multi-step HTTP 1xx response itself so that what is returned to the Calling Library is a valid HTTP response
+of status code 200 or higher.</li>
+</ul>
+<h2>Error handling<a id="error-handling" href="#error-handling" name="error-handling" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<p>A Client MUST NOT treat a well-formed HTTP request or HTTP response as an error condition. For example, response
+status codes in the 400 and 500 range MUST NOT cause an exception and MUST be returned to the Calling Library as normal.</p>
+<p>A Client MUST throw an instance of <code>Psr\Http\Client\ClientExceptionInterface</code> if and only if it is unable to send
+the HTTP request at all or if the HTTP response could not be parsed into a PSR-7 response object.</p>
+<p>If a request cannot be sent because the request message is not a well-formed HTTP request or is missing some critical
+piece of information (such as a Host or Method), the Client MUST throw an instance of <code>Psr\Http\Client\RequestExceptionInterface</code>.</p>
+<p>If the request cannot be sent due to a network failure of any kind, including a timeout, the Client MUST throw an
+instance of <code>Psr\Http\Client\NetworkExceptionInterface</code>.</p>
+<p>Clients MAY throw more specific exceptions than those defined here (a <code>TimeOutException</code> or <code>HostNotFoundException</code> for
+example), provided they implement the appropriate interface defined above.</p>
+<h2>Interfaces<a id="interfaces" href="#interfaces" name="interfaces" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h2>
+<h3>ClientInterface<a id="clientinterface" href="#clientinterface" name="clientinterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Client</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">RequestInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">ResponseInterface</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ClientInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Sends a PSR-7 request and returns a PSR-7 response.
+     *
+     * <span class="hljs-doctag">@param</span> RequestInterface $request
+     *
+     * <span class="hljs-doctag">@return</span> ResponseInterface
+     *
+     * <span class="hljs-doctag">@throws</span> \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendRequest</span><span class="hljs-params">(RequestInterface $request)</span>: <span class="hljs-title">ResponseInterface</span></span>;
+}
+</code></pre>
+<h3>ClientExceptionInterface<a id="clientexceptioninterface" href="#clientexceptioninterface" name="clientexceptioninterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Client</span>;
+
+<span class="hljs-comment">/**
+ * Every HTTP client related exception MUST implement this interface.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ClientExceptionInterface</span> <span class="hljs-keyword">extends</span> \<span class="hljs-title">Throwable</span>
+</span>{
+}
+</code></pre>
+<h3>RequestExceptionInterface<a id="requestexceptioninterface" href="#requestexceptioninterface" name="requestexceptioninterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Client</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">RequestInterface</span>;
+
+<span class="hljs-comment">/**
+ * Exception for when a request failed.
+ *
+ * Examples:
+ *      - Request is invalid (e.g. method is missing)
+ *      - Runtime request errors (e.g. the body stream is not seekable)
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">RequestExceptionInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ClientExceptionInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns the request.
+     *
+     * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
+     *
+     * <span class="hljs-doctag">@return</span> RequestInterface
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRequest</span><span class="hljs-params">()</span>: <span class="hljs-title">RequestInterface</span></span>;
+}
+</code></pre>
+<h3>NetworkExceptionInterface<a id="networkexceptioninterface" href="#networkexceptioninterface" name="networkexceptioninterface" class="heading-permalink" aria-hidden="true" title="Permalink">¶</a></h3>
+<pre><code class="language-php hljs php" data-lang="php"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Client</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Psr</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Message</span>\<span class="hljs-title">RequestInterface</span>;
+
+<span class="hljs-comment">/**
+ * Thrown when the request cannot be completed because of network issues.
+ *
+ * There is no response object as this exception is thrown when no response has been received.
+ *
+ * Example: the target host name can not be resolved or the connection failed.
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">NetworkExceptionInterface</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ClientExceptionInterface</span>
+</span>{
+    <span class="hljs-comment">/**
+     * Returns the request.
+     *
+     * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
+     *
+     * <span class="hljs-doctag">@return</span> RequestInterface
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRequest</span><span class="hljs-params">()</span>: <span class="hljs-title">RequestInterface</span></span>;
+}
+</code></pre>
+
+                    </div>
+    </div>
+        <div class="columns__column columns__column--4 columns__column--padding_left">
+        <nav class="sidebar">
+            <h2 class="sidebar__title">Additional Info:</h2>
+            <ul class="sidebar__list">
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link sidebar__link--active"
+                           href="">PSR-18: HTTP Client</a>
+                    </li>
+                                    <li class="sidebar__item">
+                        <a class="sidebar__link "
+                           href="/psr/psr-18/meta">PSR-18 Meta Document</a>
+                    </li>
+                            </ul>
+        </nav>
+    </div>
+    </div>
+
+            </div>
+</div>
+</div>
+
+<div class="site_footer_links">
+    <div class="center">
+        <div class="site_footer_links__content">
+            <ul class="site_footer_links__list">
+                <li class="site_footer_links__item site_footer_links__item--twitter">
+                    <a class="site_footer_links__link" href="https://twitter.com/phpfig">Follow us on Twitter</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--discord">
+                    <a class="site_footer_links__link" href="https://discord.gg/php-fig">Discuss on Discord</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--github">
+                    <a class="site_footer_links__link" href="https://github.com/php-fig">Contribute via GitHub</a>
+                </li>
+                <li class="site_footer_links__item site_footer_links__item--mailing_list">
+                    <a class="site_footer_links__link" href="https://groups.google.com/forum/?fromgroups#!forum/php-fig">Join our mailing list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="site_footer">
+    <div class="center">
+        <span class="site_footer__section">&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> PHP Framework Interop Group.</span>
+        <span class="site_footer__section">Site design by <a class="site_footer__link" href="https://twitter.com/reinink" target="_blank">Jonathan Reinink</a>.</span>
+        <span class="site_footer__section platform_sh_widget">Hosting sponsored by the <a title="platform.sh" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank"><img class="platformsh-logo" src="/img/platform-sh-logo.png" alt="platform.sh logo" style="padding: 0 3px 0 3px;height: 1.1em; vertical-align: text-bottom;"/></a> <a class="site_footer__link" href="https://platform.sh/?utm_campaign=sponsored_sites&utm_source=php_fig" target="_blank">PHP PaaS</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];_gaq.push(['_setAccount','UA-1997599-8']);_gaq.push(['_setDomainName','php-fig.org']);_gaq.push(['_trackPageview']);
+    (function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='https://ssl.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
+
+</body>
+</html>
